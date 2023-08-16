@@ -1,0 +1,32 @@
+<div class="container">
+<div class="form-container">
+  <h2>Agregar Cliente</h2>
+
+  <div class="form-box">
+    <!-- Contenido del formulario -->
+    <label>Nombre:</label>
+    <input type="text" [(ngModel)]="nuevoCliente.nombre">
+
+    <label>Nombre Fantasia:</label>
+    <input type="text" [(ngModel)]="nuevoCliente.nombre_fantasia">
+
+    <label>Direccion:</label>
+    <input type="text" [(ngModel)]="nuevoCliente.direccion">
+
+    <label>DNI:</label>
+    <input type="number" [(ngModel)]="nuevoCliente.dni">
+
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="nuevoCliente.email">
+
+    <label>Numero de Reparto:</label>
+    <input type="number" [(ngModel)]="nuevoCliente.nro_reparto">
+
+    <label>Telefono:</label>
+    <input type="number" [(ngModel)]="nuevoCliente.telefono">
+    <button mat-button (click)="crearNuevoCliente()">Crear Cliente</button>
+
+  </div>
+
+</div>
+</div>

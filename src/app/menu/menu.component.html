@@ -1,0 +1,13 @@
+<div class="navbar">
+  <div class="brand">Gestion de Clientes</div>
+  <div class="menu-toggle" (click)="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="menu" [ngClass]="{ 'open': isMenuOpen }">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/clientes">Clientes</a>
+    <a routerLink="/proveedores">Proveedores</a>
+  </div>
+</div>
