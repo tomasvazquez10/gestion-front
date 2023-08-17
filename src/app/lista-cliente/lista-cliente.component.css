@@ -1,6 +1,24 @@
 h2 {
   width: 80%;
   border-collapse: collapse;
-  margin: 20px auto;
+  margin-top: 30px;
+  margin: 40px auto;
   font-size: 20px;
+  margin-right: 20px;
+}
+.modern-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Color de fondo */
+  color: #ffffff; /* Color del texto */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modern-button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el cursor */
+  transform: scale(1.05); /* Efecto de escala al pasar el cursor */
 }

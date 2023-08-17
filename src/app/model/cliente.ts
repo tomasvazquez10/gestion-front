@@ -3,8 +3,8 @@ export interface Cliente {
   nombre: string;
   direccion: string;
   dni: string;
-  nombre_fantasia: string;
-  nro_reparto: string;
+  nombreFantasia: string;
+  nroReparto: string;
   telefono: string;
   email: string;
 }

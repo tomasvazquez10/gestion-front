@@ -11,6 +11,7 @@
   background-color: #fff;
   padding: 20px;
   flex-direction: column;
+  margin-top: 20px;
   align-content: center;
   gap: 10px;
   border-radius: 15px;
@@ -37,4 +38,22 @@
   margin-bottom: 10px; /* Espacio inferior para los inputs */
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.modern-button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Color de fondo */
+  color: #ffffff; /* Color del texto */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modern-button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el cursor */
+  transform: scale(1.05); /* Efecto de escala al pasar el cursor */
 }

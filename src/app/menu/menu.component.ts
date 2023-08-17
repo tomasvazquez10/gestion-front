@@ -7,8 +7,12 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
   isMenuOpen = false;
+  showClientesSubMenu = false;
+  showProveedoresSubMenu = false;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
+
+
 }

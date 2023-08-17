@@ -1,6 +1,4 @@
-<div class="container">
-  <h1>Proveedores</h1>
-</div>
+
 <button mat-button routerLink="/agregar-proveedor">Agregar Proveedor</button>
 <div class="container">
   <h2>Listado de Proveedores</h2>
@@ -19,7 +17,7 @@
   <tr *ngFor="let proveedor of proveedores">
     <td>{{ proveedor.id }}</td>
     <td>{{ proveedor.nombre }}</td>
-    <td>{{ proveedor.nombre_fantasia }}</td>
+    <td>{{ proveedor.nombreFantasia }}</td>
     <td>{{ proveedor.cuit }}</td>
     <td>{{ proveedor.direccion }}</td>
     <td>{{ proveedor.email }}</td>

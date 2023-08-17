@@ -12,6 +12,12 @@ import { MenuComponent } from './menu/menu.component';
 import { AgregarClienteComponent } from './agregar-cliente/agregar-cliente.component';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { ListaProveedorComponent } from './lista-proveedor/lista-proveedor.component';
+import {ProveedorService} from "./service/proveedor.service";
+import { CuentaComponent } from './cuenta/cuenta.component';
+import { AlertComponent } from './alert/alert.component';
+import { MatCardModule } from '@angular/material/card';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AgregarProveedorComponent } from './agregar-proveedor/agregar-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +27,20 @@ import { ListaProveedorComponent } from './lista-proveedor/lista-proveedor.compo
     MenuComponent,
     AgregarClienteComponent,
     ProveedorComponent,
-    ListaProveedorComponent
+    ListaProveedorComponent,
+    CuentaComponent,
+    AlertComponent,
+    AgregarProveedorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatCardModule
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, ProveedorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

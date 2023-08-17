@@ -1,5 +1,5 @@
 <style>
-  table {
+  table, label {
     width: 80%;
     border-collapse: collapse;
     margin: 20px auto;
@@ -22,12 +22,10 @@
   }
 </style>
 
+
 <div class="container">
-  <h1>Clientes</h1>
-</div>
-<button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
-<div class="container">
-  <h2>Listado de Clientes</h2>
+  <label>Listado de Clientes</label>
+  <button mat-button routerLink="/agregar-cliente" class="modern-button">Agregar Cliente</button>
 </div>
 
 <table>
@@ -41,14 +39,14 @@
     <th>Nro Reparto</th>
     <th>Teléfono</th>
   </tr>
-  <tr *ngFor="let cliente of clientes">
+  <tr *ngFor="let cliente of clientes" (click)="verDetalles(cliente.id)">
     <td>{{ cliente.id }}</td>
     <td>{{ cliente.nombre }}</td>
-    <td>{{ cliente.nombre_fantasia }}</td>
+    <td>{{ cliente.nombreFantasia }}</td>
     <td>{{ cliente.dni }}</td>
     <td>{{ cliente.direccion }}</td>
     <td>{{ cliente.email }}</td>
-    <td>{{ cliente.nro_reparto }}</td>
+    <td>{{ cliente.nroReparto }}</td>
     <td>{{ cliente.telefono }}</td>
   </tr>
 </table>

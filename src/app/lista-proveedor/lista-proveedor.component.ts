@@ -12,7 +12,7 @@ export class ListaProveedorComponent {
   constructor(private proveedorService: ProveedorService) {}
 
   proveedores: Proveedor[] = [];
-  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombre_fantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
+  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
 
   getProveedores(): void {
     this.proveedorService.getProveedores()

@@ -1,7 +1,7 @@
 export interface Proveedor {
   id: number;
   nombre: string;
-  nombre_fantasia: string;
+  nombreFantasia: string;
   direccion: string;
   cuit: string;
   telefono: string;
