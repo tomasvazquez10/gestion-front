@@ -12,6 +12,8 @@ export class ClienteComponent implements OnInit{
 
   clienteId: string = '';
   cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
+  camposEditables = false;
+  valoresEditados: { [key: string]: any } = {};
 
   constructor(private clienteService: ClienteService, private route: ActivatedRoute) {}
 
@@ -25,5 +27,16 @@ export class ClienteComponent implements OnInit{
       this.clienteId = params['id'];
       this.getCliente();
     });
+  }
+
+  habilitarEdicion() {
+    this.valoresEditados = { ...this.cliente };
+    this.camposEditables = true;
+  }
+
+  guardarEdicion() {
+    // Lógica para guardar los cambios editados
+    this.camposEditables = false;
+    this.valoresEditados = {};
   }
 }
