@@ -1,22 +1,64 @@
+<app-alert message="Cliente creado" *ngIf="mostrarPopup"></app-alert>
+
+
 <mat-card class="custom-card">
   <mat-card-header>
     <mat-card-title>Detalles del Cliente</mat-card-title>
   </mat-card-header>
   <mat-card-content class="custom-card-content">
-    <p>Nombre: {{ camposEditables ? valoresEditados['nombre'] : cliente['nombre'] }}</p>
-    <p>Nombre Fantasia: {{ camposEditables ? valoresEditados['nombreFantasia'] : cliente['nombreFantasia'] }}</p>
-    <p>Email: {{ camposEditables ? valoresEditados['email'] : cliente['email'] }}</p>
-    <p>DNI: {{ camposEditables ? valoresEditados['dni'] : cliente['dni'] }}</p>
-    <p>Telefono: {{ camposEditables ? valoresEditados['telefono'] : cliente['telefono'] }}</p>
-    <p>Nro Reparto: {{ camposEditables ? valoresEditados['nroReparto'] : cliente['nroReparto'] }}</p>
-    <p>Dirección: {{ camposEditables ? valoresEditados['direccion'] : cliente['direccion'] }}</p>
-    <!-- Otros campos del cliente -->
-    <div *ngIf="camposEditables; else confirmarEdicionTemplate">
-      <button mat-button (click)="guardarEdicion()">Guardar</button>
+    <div *ngIf="!camposEditables">
+      <p>Nombre: {{ cliente.nombre }}</p>
+      <p>Nombre Fantasia: {{ cliente.nombreFantasia }}</p>
+      <p>Email: {{ cliente.email }}</p>
+      <p>DNI: {{ cliente.dni }}</p>
+      <p>Telefono: {{ cliente.telefono }}</p>
+      <p>Nro Reparto: {{ cliente.nroReparto }}</p>
+      <p>Dirección: {{ cliente.direccion }}</p>
+      <div>
+        <button mat-button (click)="habilitarEdicion()">Editar</button>
+      </div>
     </div>
-    <ng-template #confirmarEdicionTemplate>
-      <button mat-button (click)="habilitarEdicion()">Editar</button>
-    </ng-template>
+    <div *ngIf="camposEditables">
+      <div class="input-container">
+        <label>Nombre:
+          <input [(ngModel)]="valoresEditados['nombre']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Nombre Fantasia:
+          <input [(ngModel)]="valoresEditados['nombreFantasia']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Email:
+          <input [(ngModel)]="valoresEditados['email']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>DNI:
+          <input [(ngModel)]="valoresEditados['dni']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Telefono:
+          <input [(ngModel)]="valoresEditados['telefono']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Nro Reparto:
+          <input [(ngModel)]="valoresEditados['nroReparto']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Dirección:
+          <input [(ngModel)]="valoresEditados['direccion']">
+        </label>
+      </div>
+      <button mat-button (click)="guardarEdicion()">Guardar</button>
+      <button mat-button (click)="desabilitarEdicion()">Cancelar</button>
+
+    </div>
+
   </mat-card-content>
 </mat-card>
 
