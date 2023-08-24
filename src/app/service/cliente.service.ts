@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from "../model/cliente";
 import { Observable, of} from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Cuenta} from "../model/cuenta";
 
 @Injectable({
@@ -15,6 +15,7 @@ export class ClienteService {
     {id: 3, nombre: 'Fede', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: '2', telefono: '1165487548' }
   ];
   private mostrarMensaje = false;
+  private colorMensaje = 'green';
 
   private apiUrl = 'http://localhost:8080/cliente';
   constructor(private http: HttpClient) { }
@@ -67,6 +68,20 @@ export class ClienteService {
 
   setMostrarMensaje(mostrarMensaje: boolean): void {
     this.mostrarMensaje = mostrarMensaje;
+  }
+
+  borrarCliente(id: string) : Observable<HttpResponse<any>> {
+
+    //return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
+    return of(new HttpResponse({status: 200, statusText: 'OK'}));
+  }
+
+  setColorMensaje(color: string) : void {
+    this.colorMensaje = color;
+  }
+
+  getColorMensaje() : string {
+    return this.colorMensaje;
   }
 
 }

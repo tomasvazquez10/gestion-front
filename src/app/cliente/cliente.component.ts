@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { ClienteService } from "../service/cliente.service";
 import {Cliente} from "../model/cliente";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-cliente',
@@ -14,9 +14,10 @@ export class ClienteComponent implements OnInit{
   cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
-  mostrarPopup = false;
+  mostrarPopup: boolean = false;
+  mostrarConfirmBorrar: boolean = false;
 
-  constructor(private clienteService: ClienteService, private route: ActivatedRoute) {}
+  constructor(private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
 
   getCliente(): void {
     this.clienteService.getCliente(this.clienteId)
@@ -43,6 +44,14 @@ export class ClienteComponent implements OnInit{
     this.camposEditables = false;
   }
 
+  mostrarConfirmPopup() {
+    this.mostrarConfirmBorrar = true;
+  }
+
+  ocultarConfirmPopup() {
+    this.mostrarConfirmBorrar = false;
+  }
+
   guardarEdicion() {
     // Lógica para guardar los cambios editados
     console.log('entro');
@@ -51,5 +60,28 @@ export class ClienteComponent implements OnInit{
     this.camposEditables = false;
     this.valoresEditados = {};
     console.log('sale');
+  }
+
+  borrarCliente() {
+    this.clienteService.borrarCliente(this.clienteId).subscribe(
+      (respuesta) => {
+        console.log(respuesta);
+        console.log(respuesta.status);
+        if (respuesta.status == 200){
+          //mostrar mensaje de cliente borrado
+          //redigir a pantalla clientes
+          this.clienteService.setMostrarMensaje(true);
+          this.clienteService.setColorMensaje('red');
+          this.router.navigate(['/clientes']);
+        }
+      },
+      (error) => {
+        console.error('Error al eliminar el cliente:', error);
+      }
+    );
+  }
+
+  cancelarBorrado() {
+    this.ocultarConfirmPopup();
   }
 }

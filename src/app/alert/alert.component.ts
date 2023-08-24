@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ClienteService} from "../service/cliente.service";
 
 @Component({
   selector: 'app-alert',
@@ -8,11 +9,15 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AlertComponent implements OnInit{
 
   @Input() message: string = '';
-  mostrarPopup = false;
-  constructor() {}
+  colorMensaje : string = 'green';
+  cambiarColor : boolean = false;
+  constructor(private clienteService: ClienteService) {}
 
   ngOnInit() {
-
+    this.colorMensaje = this.clienteService.getColorMensaje();
+    this.cambiarColor = (this.colorMensaje=='red');
   }
+
+
 
 }

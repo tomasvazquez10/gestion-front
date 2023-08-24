@@ -22,6 +22,8 @@
   }
 </style>
 
+<app-alert message="Cliente eliminado" *ngIf="mostrarPopup"></app-alert>
+
 <div class="container">
   <label>Listado de Clientes</label>
   <button mat-button routerLink="/agregar-cliente" class="modern-button">Agregar Cliente</button>

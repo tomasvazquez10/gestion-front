@@ -18,6 +18,7 @@ import { AlertComponent } from './alert/alert.component';
 import { MatCardModule } from '@angular/material/card';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AgregarProveedorComponent } from './agregar-proveedor/agregar-proveedor.component';
+import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AgregarProveedorComponent } from './agregar-proveedor/agregar-proveedor
     ListaProveedorComponent,
     CuentaComponent,
     AlertComponent,
-    AgregarProveedorComponent
+    AgregarProveedorComponent,
+    ConfirmPopupComponent
   ],
   imports: [
     BrowserModule,

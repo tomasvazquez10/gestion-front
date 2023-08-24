@@ -14,6 +14,7 @@ export class ListaClienteComponent {
 
   clientes: Cliente[] = [];
   nuevoCliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
+  mostrarPopup = false;
 
   getClientes(): void {
     this.clienteService.getClientes()
@@ -22,10 +23,23 @@ export class ListaClienteComponent {
 
   ngOnInit(): void {
     this.getClientes();
+    this.setMostrarMensaje();
+
   }
 
   verDetalles(id: number) : void {
     this.router.navigate(['/cliente/'+id]);
+  }
+
+  setMostrarMensaje() : void{
+    this.mostrarPopup = this.clienteService.getMostrarMensaje();
+    if(this.mostrarPopup){
+
+      setTimeout(() => {
+        this.mostrarPopup = false;
+      }, 1500);
+    }
+    this.clienteService.setMostrarMensaje(false);
   }
 
 
