@@ -1,1 +1,63 @@
-<p>proveedor works!</p>
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+    <mat-card-title>Detalles del Proveedor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="custom-card-content">
+    <div *ngIf="!camposEditables">
+      <p>Nombre: {{ proveedor.nombre }}</p>
+      <p>Nombre Fantasia: {{ proveedor.nombreFantasia }}</p>
+      <p>Email: {{ proveedor.email }}</p>
+      <p>CUIT: {{ proveedor.cuit }}</p>
+      <p>Telefono: {{ proveedor.telefono }}</p>
+      <p>Dirección: {{ proveedor.direccion }}</p>
+      <div>
+        <button mat-button (click)="habilitarEdicion()">Editar</button>
+       <!-- <button mat-button (click)="mostrarConfirmPopup()">Borrar</button> -->
+      </div>
+    </div>
+
+    <div *ngIf="camposEditables">
+      <div class="input-container">
+        <label>Nombre:
+          <input [(ngModel)]="valoresEditados['nombre']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Nombre Fantasia:
+          <input [(ngModel)]="valoresEditados['nombreFantasia']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Email:
+          <input [(ngModel)]="valoresEditados['email']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>DNI:
+          <input [(ngModel)]="valoresEditados['cuit']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Telefono:
+          <input [(ngModel)]="valoresEditados['telefono']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Dirección:
+          <input [(ngModel)]="valoresEditados['direccion']">
+        </label>
+      </div>
+      <button mat-button (click)="guardarEdicion()">Guardar</button>
+      <button mat-button (click)="desabilitarEdicion()">Cancelar</button>
+
+
+
+    </div>
+
+
+  </mat-card-content>
+</mat-card>
+
+<app-cuenta></app-cuenta>

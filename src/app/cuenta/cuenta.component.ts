@@ -36,8 +36,6 @@ export class CuentaComponent implements OnInit{
     this.nuevaCuenta.idUsuario = this.idUsuario;
     this.cuentaService.crearCuenta(this.nuevaCuenta).subscribe(response => {
       console.log('Cuenta creada:', response);
-      // Realizar acciones adicionales si es necesario
-      //this.router.navigate(['/clientes']);
       this.cuenta.id = response.id;
       this.cuenta.idUsuario = response.idUsuario;
       this.cuenta.saldo = response.saldo;

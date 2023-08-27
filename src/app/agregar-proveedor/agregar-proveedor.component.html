@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Agregar Proveedor</h2>
+
+    <div class="form-box">
+      <!-- Contenido del formulario -->
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="nuevoProveedor.nombre">
+
+      <label>Nombre Fantasia:</label>
+      <input type="text" [(ngModel)]="nuevoProveedor.nombreFantasia">
+
+      <label>Direccion:</label>
+      <input type="text" [(ngModel)]="nuevoProveedor.direccion">
+
+      <label>CUIT:</label>
+      <input type="number" [(ngModel)]="nuevoProveedor.cuit">
+
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="nuevoProveedor.email">
+
+      <label>Telefono:</label>
+      <input type="number" [(ngModel)]="nuevoProveedor.telefono">
+      <button mat-button class="modern-button" (click)="crearNuevoProveedor()">Crear Proveedor</button>
+      <button mat-button class="modern-button" (click)="volverProveedores()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>
+

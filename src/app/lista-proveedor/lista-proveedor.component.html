@@ -14,7 +14,7 @@
     <th>Email</th>
     <th>Teléfono</th>
   </tr>
-  <tr *ngFor="let proveedor of proveedores">
+  <tr *ngFor="let proveedor of proveedores" (click)="verDetalles(proveedor.id)">
     <td>{{ proveedor.id }}</td>
     <td>{{ proveedor.nombre }}</td>
     <td>{{ proveedor.nombreFantasia }}</td>

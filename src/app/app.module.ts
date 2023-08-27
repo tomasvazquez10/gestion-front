@@ -19,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AgregarProveedorComponent } from './agregar-proveedor/agregar-proveedor.component';
 import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
+import { HomeComponent } from './home/home.component';
+import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
     CuentaComponent,
     AlertComponent,
     AgregarProveedorComponent,
-    ConfirmPopupComponent
+    ConfirmPopupComponent,
+    HomeComponent,
+    EditarProveedorComponent
   ],
   imports: [
     BrowserModule,

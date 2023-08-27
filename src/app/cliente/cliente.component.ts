@@ -12,6 +12,7 @@ export class ClienteComponent implements OnInit{
 
   clienteId: string = '';
   cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
+  clienteEditado: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
   mostrarPopup: boolean = false;
@@ -55,11 +56,14 @@ export class ClienteComponent implements OnInit{
   guardarEdicion() {
     // Lógica para guardar los cambios editados
     console.log('entro');
-    var id: number = +this.clienteId;
-    this.clienteService.actualizarCliente(id, this.cliente);
-    this.camposEditables = false;
-    this.valoresEditados = {};
-    console.log('sale');
+    this.getClienteEditado();
+    this.clienteService.editarCliente(this.clienteEditado).subscribe(response => {
+      console.log('Cliente editado:', response);
+      this.camposEditables = false;
+      this.valoresEditados = {};
+      this.getCliente();
+    });
+
   }
 
   borrarCliente() {
@@ -83,5 +87,16 @@ export class ClienteComponent implements OnInit{
 
   cancelarBorrado() {
     this.ocultarConfirmPopup();
+  }
+
+  getClienteEditado(): void{
+    this.clienteEditado.id = this.valoresEditados['id'];
+    this.clienteEditado.nombre = this.valoresEditados['nombre'];
+    this.clienteEditado.nombreFantasia = this.valoresEditados['nombreFantasia'];
+    this.clienteEditado.dni = this.valoresEditados['dni'];
+    this.clienteEditado.direccion = this.valoresEditados['direccion'];
+    this.clienteEditado.email = this.valoresEditados['email'];
+    this.clienteEditado.nroReparto = this.valoresEditados['nroReparto'];
+    this.clienteEditado.telefono = this.valoresEditados['telefono'];
   }
 }

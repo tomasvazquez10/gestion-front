@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ProveedorService} from "../service/proveedor.service";
 import {Proveedor} from "../model/proveedor";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-lista-proveedor',
@@ -9,7 +10,7 @@ import {Proveedor} from "../model/proveedor";
 })
 export class ListaProveedorComponent {
 
-  constructor(private proveedorService: ProveedorService) {}
+  constructor(private proveedorService: ProveedorService, private router: Router) {}
 
   proveedores: Proveedor[] = [];
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
@@ -21,6 +22,10 @@ export class ListaProveedorComponent {
 
   ngOnInit(): void {
     this.getProveedores();
+  }
+
+  verDetalles(id: number) : void {
+    this.router.navigate(['/proveedor/'+id]);
   }
 
 }

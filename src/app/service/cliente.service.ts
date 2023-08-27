@@ -3,6 +3,7 @@ import { Cliente } from "../model/cliente";
 import { Observable, of} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Cuenta} from "../model/cuenta";
+import {Proveedor} from "../model/proveedor";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ClienteService {
   private colorMensaje = 'green';
 
   private apiUrl = 'http://localhost:8080/cliente';
+  private url = 'http://localhost:8080/cliente/edit';
   constructor(private http: HttpClient) { }
 
   getClientes() : Observable<Cliente[]> {
@@ -82,6 +84,11 @@ export class ClienteService {
 
   getColorMensaje() : string {
     return this.colorMensaje;
+  }
+
+  editarCliente(cliente: Cliente): Observable<any> {
+    console.log(cliente);
+    return this.http.post(`${this.url}`, cliente);
   }
 
 }
