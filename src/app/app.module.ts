@@ -22,6 +22,7 @@ import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
 import { HomeComponent } from './home/home.component';
 import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
 import {MatTableModule} from "@angular/material/table";
+import { AgregarPedidoComponent } from './agregar-pedido/agregar-pedido.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {MatTableModule} from "@angular/material/table";
     AgregarProveedorComponent,
     ConfirmPopupComponent,
     HomeComponent,
-    EditarProveedorComponent
+    EditarProveedorComponent,
+    AgregarPedidoComponent
   ],
   imports: [
     BrowserModule,
