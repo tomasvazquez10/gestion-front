@@ -1,1 +1,48 @@
-<p>agregar-pedido works!</p>
+<div class="container">
+  <div class="form-container">
+    <h2>Crear Pedido</h2>
+
+    <div class="form-box">
+      <!-- Contenido del formulario -->
+      <label>Cliente:</label>
+      <input type="text" [(ngModel)]="dniCliente" (input)="filtrarSugerencias()" placeholder="Escribe aquí">
+      <ul *ngIf="sugerenciasFiltradas.length > 0">
+        <li *ngFor="let sugerencia of sugerenciasFiltradas" (click)="seleccionarSugerencia(sugerencia)">{{ sugerencia }}</li>
+      </ul>
+
+      <label>Fecha:</label>
+      <input type="date" [(ngModel)]="nuevoPedido.fecha">
+
+      <label for="articuloCombo">Selecciona: </label>
+      <select id="articuloCombo" [(ngModel)]="articuloSelec" name="articuloCombo" (change)="onChangeSelec()">
+        <option [ngValue]="undefined">Seleccionar...</option>
+        <option *ngFor="let articulo of articulos" [ngValue]="articulo">{{ articulo.nombre }}</option>
+      </select>
+      <input type="number" [(ngModel)]="cantidadSelec">
+      <button (click)="agregarArticuloAProductos()">+</button>
+
+      <table>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let producto of productosSelec">
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>${{ producto.precio }}</td>
+          <td> <button (click)="borrarArticulo(producto.nroArticulo)">-</button></td>
+        </tr>
+      </table>
+
+      <label>Precio Final:</label>
+      <input type="text" readonly [(ngModel)]="'$'+precioTotal">
+
+      <button mat-button class="modern-button" (click)="crearNuevoPedido()">Crear Pedido</button>
+      <button mat-button class="modern-button" (click)="volverPedidos()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>

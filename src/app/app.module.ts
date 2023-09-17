@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
 import {MatTableModule} from "@angular/material/table";
 import { AgregarPedidoComponent } from './agregar-pedido/agregar-pedido.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AgregarPedidoComponent } from './agregar-pedido/agregar-pedido.componen
     ConfirmPopupComponent,
     HomeComponent,
     EditarProveedorComponent,
-    AgregarPedidoComponent
+    AgregarPedidoComponent,
+    ListaPedidosComponent
   ],
   imports: [
     BrowserModule,

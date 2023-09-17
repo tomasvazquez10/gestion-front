@@ -18,17 +18,23 @@ export class PedidoService {
     //return of(this.proveedores);
   }
 
-  crearProveedor(pedido: Pedido): Observable<any> {
+  crearPedido(pedido: Pedido): Observable<any> {
     return this.http.post(`${this.apiUrl}`, pedido);
   }
 
-  getProveedor(id: string) : Observable<Pedido> {
+  getPedido(id: string) : Observable<Pedido> {
     return  this.http.get<Pedido>(this.apiUrl+"/"+id);
     //return of({id: 2, nombre: 'CEBOLLA S.A', nombreFantasia: 'CEBOLLA', direccion: 'Belgrano 244', cuit: '30-45789698-1', telefono: '1156478996', email: 'arroz@gmail.com'});
   }
 
-  editarProveedor(pedido: Pedido): Observable<any> {
+  getPedidosByCliente(idCliente: string) : Observable<Pedido[]> {
+    return  this.http.get<Pedido[]>(this.apiUrl+"/cliente/"+idCliente);
+    //return of({id: 2, nombre: 'CEBOLLA S.A', nombreFantasia: 'CEBOLLA', direccion: 'Belgrano 244', cuit: '30-45789698-1', telefono: '1156478996', email: 'arroz@gmail.com'});
+  }
+
+  editarPedido(pedido: Pedido): Observable<any> {
     console.log(pedido);
     return this.http.post(`${this.url}`, pedido);
   }
+
 }
