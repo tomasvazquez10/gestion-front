@@ -44,7 +44,7 @@ export class ProductoService {
   constructor(private http: HttpClient) { }
 
   getArticulos() : Observable<Articulo[]> {
-    //return this.http.get<Articulo[]>(this.urlArticulo+"/all");
-    return of(this.alimentos);
+    return this.http.get<Articulo[]>(this.urlArticulo+"/all");
+    //return of(this.alimentos);
   }
 }

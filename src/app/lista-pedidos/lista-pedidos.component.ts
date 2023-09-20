@@ -15,6 +15,7 @@ export class ListaPedidosComponent {
   idCliente: string = '';
   pedidos: Pedido[] = [];
   cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: '', telefono: '' };
+  estadoPedido: string = '';
 
   constructor(private pedidoService: PedidoService, private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
 
@@ -29,10 +30,46 @@ export class ListaPedidosComponent {
     console.log(this.cliente.dni);
     this.pedidoService.getPedidosByCliente(this.idCliente)
       .subscribe( pedidos => this.pedidos = pedidos);
+    this.setPedidos();
+  }
+
+  setPedidos(): void {
+    console.log('ok');
+    const pedidosActualizados = this.pedidos.map(pedido => {
+      console.log('ok2');
+      switch (pedido.estado) {
+        case 0:
+          pedido.estadoPedido = 'Pedido Pendiente';
+          break;
+        case 1:
+          pedido.estadoPedido = 'Pedido Enviado';
+          break;
+        case 2:
+          pedido.estadoPedido = 'Pedido Entregado';
+          break;
+        default:
+          pedido.estadoPedido = 'Estado Desconocido';
+      }
+      return pedido;
+    });
+    console.log(pedidosActualizados);
   }
 
   verDetalles(id: number) : void {
     this.router.navigate(['/pedido/'+id]);
+  }
+
+  setEstado(estado: number) : string {
+    console.log(estado);
+    if (estado == 0){
+      return  'PENDIENTE';
+    }else if (estado == 1){
+      return 'ENTREGADO';
+    }else if (estado == 2){
+      return 'PAGO';
+    }else{
+      return 'error';
+    }
   }
 
 }

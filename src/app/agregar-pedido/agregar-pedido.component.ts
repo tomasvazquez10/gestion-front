@@ -14,7 +14,7 @@ import {ClienteService} from "../service/cliente.service";
 })
 export class AgregarPedidoComponent {
 
-  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, productos: []};
+  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoPedido: '', productos: []};
   productosSelec: Producto[] = [];
   articulos: Articulo[] = [];
   dniCliente: string = '';
@@ -33,16 +33,18 @@ export class AgregarPedidoComponent {
   }
 
   crearNuevoPedido() {
-    /*
+    this.nuevoPedido.dniCliente = this.dniCliente;
+    this.nuevoPedido.productos = this.productosSelec;
+    this.nuevoPedido.precioTotal = parseFloat(this.precioTotal.toFixed(2));
+
     this.service.crearPedido(this.nuevoPedido).subscribe(response => {
 
       console.log('Pedido creado:', response);
       //this.service.setMostrarMensaje(true);
       this.router.navigate(['/pedido/'+response.id]);
     });
-    */
-    this.nuevoPedido.productos = this.productosSelec;
-    this.nuevoPedido.precioTotal = this.precioTotal;
+
+
     console.log(this.nuevoPedido);
   }
 
@@ -57,7 +59,7 @@ export class AgregarPedidoComponent {
 
   agregarArticuloAProductos() : void {
     this.productosSelec.push({
-      nroArticulo : this.articuloSelec.nroArticulo,
+      nroArticulo : this.articuloSelec.id,
       nombre : this.articuloSelec.nombre,
       precio: this.articuloSelec.precio,
       cantidad: this.cantidadSelec});

@@ -37,7 +37,8 @@
       </table>
 
       <label>Precio Final:</label>
-      <input type="text" readonly [(ngModel)]="'$'+precioTotal">
+      <input type="text" readonly [ngModel]=" precioTotal | number: '1.2-2'">
+
 
       <button mat-button class="modern-button" (click)="crearNuevoPedido()">Crear Pedido</button>
       <button mat-button class="modern-button" (click)="volverPedidos()">Cancelar</button>
