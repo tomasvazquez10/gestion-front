@@ -1,0 +1,26 @@
+
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Articulos</h2>
+  <button mat-button routerLink="/agregar-articulo">Agregar Articulo</button>
+</div>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Numero Articulo</th>
+    <th>Descripcion</th>
+    <th>CUIT Proveedor</th>
+    <th>Stock</th>
+    <th>Precio</th>
+  </tr>
+  <tr *ngFor="let articulo of articulos" (click)="verDetalles(articulo.id)">
+    <td>{{ articulo.id }}</td>
+    <td>{{ articulo.nombre }}</td>
+    <td>{{ articulo.nroArticulo }}</td>
+    <td>{{ articulo.descripcion }}</td>
+    <td>{{ articulo.cuitProveedor }}</td>
+    <td>{{ articulo.stock }}</td>
+    <td>${{ articulo.precio }}</td>
+  </tr>
+</table>
