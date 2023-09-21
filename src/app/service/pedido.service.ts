@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {Observable, of} from "rxjs";
 import {Proveedor} from "../model/proveedor";
 import {Pedido} from "../model/pedido";
+import {Cliente} from "../model/cliente";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class PedidoService {
 
   private apiUrl = 'http://localhost:8080/pedido';
   private url = 'http://localhost:8080/pedido/edit';
+  private mostrarMensaje = false;
+  private colorMensaje = 'red';
+  private dniCliente = '';
+
   constructor(private http: HttpClient) { }
 
   getPedidos() : Observable<Pedido[]> {
@@ -32,9 +37,35 @@ export class PedidoService {
     //return of({id: 2, nombre: 'CEBOLLA S.A', nombreFantasia: 'CEBOLLA', direccion: 'Belgrano 244', cuit: '30-45789698-1', telefono: '1156478996', email: 'arroz@gmail.com'});
   }
 
+  getMostrarMensaje(): boolean {
+    return this.mostrarMensaje;
+  }
+
+  setMostrarMensaje(mostrarMensaje: boolean): void {
+    this.mostrarMensaje = mostrarMensaje;
+  }
+
+  setColorMensaje(color: string) : void {
+    this.colorMensaje = color;
+  }
+
+  getColorMensaje() : string {
+    return this.colorMensaje;
+  }
+
   editarPedido(pedido: Pedido): Observable<any> {
     console.log(pedido);
     return this.http.post(`${this.url}`, pedido);
+  }
+
+  getDniCliente(): string {
+    console.log("get dni");
+    return this.dniCliente;
+  }
+
+  setDniCliente(dni: string): void {
+    console.log("seteo dni");
+    this.dniCliente = dni;
   }
 
 }

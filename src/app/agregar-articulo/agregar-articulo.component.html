@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Agregar Articulo</h2>
+
+    <div class="form-box">
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="nuevoArticulo.nombre">
+
+      <label>Descripcion:</label>
+      <input type="text" [(ngModel)]="nuevoArticulo.descripcion">
+
+      <label>Numero Articulo:</label>
+      <input type="text" [(ngModel)]="nuevoArticulo.nroArticulo">
+
+      <label>CUIT Proveedor:</label>
+      <input type="number" [(ngModel)]="nuevoArticulo.cuitProveedor">
+
+      <label>Precio:</label>
+      <input type="email" [(ngModel)]="nuevoArticulo.precio">
+
+      <label>Stock:</label>
+      <input type="number" [(ngModel)]="nuevoArticulo.stock">
+      <button mat-button class="modern-button" (click)="crearNuevoArticulo()">Crear Articulo</button>
+      <button mat-button class="modern-button" (click)="volverArticulo()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>

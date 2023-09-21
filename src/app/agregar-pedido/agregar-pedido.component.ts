@@ -14,10 +14,10 @@ import {ClienteService} from "../service/cliente.service";
 })
 export class AgregarPedidoComponent {
 
-  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoPedido: '', productos: []};
+  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: []};
   productosSelec: Producto[] = [];
   articulos: Articulo[] = [];
-  dniCliente: string = '';
+  dniCliente: string = 'aaa';
   sugerenciasFiltradas: string[] = [];
   dniClientes: string[] = [];
   articuloSelec: Articulo = {id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0};
@@ -29,7 +29,9 @@ export class AgregarPedidoComponent {
   ngOnInit(): void {
     this.getArticulos();
     this.getClientes();
-    console.log(this.dniClientes);
+
+    this.dniCliente = this.service.getDniCliente();
+    console.log(this.dniCliente);
   }
 
   crearNuevoPedido() {
@@ -75,10 +77,15 @@ export class AgregarPedidoComponent {
   }
 
   borrarArticulo(nroArticulo: number) {
+    const primerProducto: Producto | undefined = this.productosSelec.filter(producto => producto.nroArticulo === nroArticulo).at(0);
+    console.log(primerProducto);
+    if (primerProducto !== undefined) {
+      const cantidad = primerProducto.cantidad;
+      const precio = primerProducto.precio;
+      this.precioTotal -= cantidad * precio;
+    }
     this.productosSelec = this.productosSelec.filter(producto => producto.nroArticulo !== nroArticulo);
-   //const productosEncontrados: Producto = this.productosSelec.filter(producto => producto.nroArticulo === nroArticulo).at(0);
-  //restar precio del producto seleccionado al precio total
-    this.precioTotal -= 0;
+
   }
 
   getClientes(): void {

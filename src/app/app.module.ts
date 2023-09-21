@@ -24,6 +24,9 @@ import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.co
 import {MatTableModule} from "@angular/material/table";
 import { AgregarPedidoComponent } from './agregar-pedido/agregar-pedido.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+import { PedidoComponent } from './pedido/pedido.component';
+import { ListaArticulosComponent } from './lista-articulos/lista-articulos.component';
+import { AgregarArticuloComponent } from './agregar-articulo/agregar-articulo.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
     HomeComponent,
     EditarProveedorComponent,
     AgregarPedidoComponent,
-    ListaPedidosComponent
+    ListaPedidosComponent,
+    PedidoComponent,
+    ListaArticulosComponent,
+    AgregarArticuloComponent
   ],
   imports: [
     BrowserModule,

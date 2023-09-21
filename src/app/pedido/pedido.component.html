@@ -1,0 +1,36 @@
+<app-alert message="Pedido cancelado" *ngIf="mostrarPopup"></app-alert>
+<app-confirm-popup *ngIf="mostrarConfirmCancelar" (aceptar)="cancelarPedido()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+    <mat-card-title>Detalles del Pedido</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="custom-card-content">
+    <div>
+      <p>Fecha: {{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
+      <p>Total: ${{ pedido.precioTotal }}</p>
+      <p>Estado: {{ pedido.estadoTexto }}</p>
+
+      <table>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+        </tr>
+        <tr *ngFor="let producto of pedido.productos">
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>${{ producto.precio }}</td>
+        </tr>
+      </table>
+
+      <div>
+        <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar</button>
+        <button mat-button *ngIf="pedido.estadoTexto === 'ENTREGADO'" (click)="crearPago()">Agregar Pago</button>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+

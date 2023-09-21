@@ -6,6 +6,6 @@ export interface Pedido {
   dniCliente: string;
   estado: number;
   precioTotal: number;
-  estadoPedido: string;
+  estadoTexto: string;
   productos: Producto[];
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ClienteService } from "../service/cliente.service";
 import {Cliente} from "../model/cliente";
 import {ActivatedRoute, Router} from "@angular/router";
+import {PedidoService} from "../service/pedido.service";
 
 @Component({
   selector: 'app-cliente',
@@ -18,7 +19,7 @@ export class ClienteComponent implements OnInit{
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private clienteService: ClienteService, private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
 
   getCliente(): void {
     this.clienteService.getCliente(this.clienteId)

@@ -1,4 +1,5 @@
-
+<app-alert message="Cliente creado" *ngIf="mostrarPopup"></app-alert>
+<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarProveedor()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
 
 <mat-card class="custom-card">
   <mat-card-header>
@@ -14,7 +15,7 @@
       <p>Dirección: {{ proveedor.direccion }}</p>
       <div>
         <button mat-button (click)="habilitarEdicion()">Editar</button>
-       <!-- <button mat-button (click)="mostrarConfirmPopup()">Borrar</button> -->
+        <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
       </div>
     </div>
 

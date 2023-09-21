@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Proveedor} from "../model/proveedor";
-import {ClienteService} from "../service/cliente.service";
 import {Router} from "@angular/router";
 import {ProveedorService} from "../service/proveedor.service";
 

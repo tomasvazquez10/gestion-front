@@ -17,9 +17,9 @@ export class ClienteService {
   ];
   private mostrarMensaje = false;
   private colorMensaje = 'green';
-
   private apiUrl = 'http://localhost:8080/cliente';
   private url = 'http://localhost:8080/cliente/edit';
+
   constructor(private http: HttpClient) { }
 
   getClientes() : Observable<Cliente[]> {
@@ -74,8 +74,8 @@ export class ClienteService {
 
   borrarCliente(id: string) : Observable<HttpResponse<any>> {
 
-    //return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
-    return of(new HttpResponse({status: 200, statusText: 'OK'}));
+    return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
+    //return of(new HttpResponse({status: 200, statusText: 'OK'}));
   }
 
   setColorMensaje(color: string) : void {

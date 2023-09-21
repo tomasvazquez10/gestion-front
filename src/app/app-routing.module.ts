@@ -11,6 +11,9 @@ import {HomeComponent} from "./home/home.component";
 import {ProveedorComponent} from "./proveedor/proveedor.component";
 import {EditarProveedorComponent} from "./editar-proveedor/editar-proveedor.component";
 import {AgregarPedidoComponent} from "./agregar-pedido/agregar-pedido.component";
+import {PedidoComponent} from "./pedido/pedido.component";
+import {ListaArticulosComponent} from "./lista-articulos/lista-articulos.component";
+import {AgregarArticuloComponent} from "./agregar-articulo/agregar-articulo.component";
 
 const routes: Routes = [
 
@@ -18,12 +21,15 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'agregar-cliente', component: AgregarClienteComponent},
   { path: 'agregar-proveedor', component: AgregarProveedorComponent},
+  { path: 'agregar-articulo', component: AgregarArticuloComponent},
   { path: 'crear-pedido', component: AgregarPedidoComponent},
   { path: 'proveedores', component: ListaProveedorComponent},
+  { path: 'articulos', component: ListaArticulosComponent},
   { path: 'cuenta', component: CuentaComponent},
   { path: 'mensaje-ok', component: AlertComponent},
   { path: 'cliente/:id', component: ClienteComponent},
   { path: 'proveedor/:id', component: ProveedorComponent},
+  { path: 'pedido/:id', component: PedidoComponent},
   { path: 'home', component: HomeComponent},
   { path: 'editar', component: EditarProveedorComponent}
 ];

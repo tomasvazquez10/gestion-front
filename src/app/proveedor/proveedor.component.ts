@@ -15,6 +15,8 @@ export class ProveedorComponent implements OnInit{
   proveedorEditado: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
   camposEditables: boolean = false;
   valoresEditados: { [key: string]: any } = {};
+  mostrarPopup: boolean = false;
+  mostrarConfirmBorrar: boolean = false;
 
   constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router) {}
 
@@ -60,6 +62,37 @@ export class ProveedorComponent implements OnInit{
     this.proveedorEditado.direccion = this.valoresEditados['direccion'];
     this.proveedorEditado.email = this.valoresEditados['email'];
     this.proveedorEditado.telefono = this.valoresEditados['telefono'];
+  }
+
+  mostrarConfirmPopup() {
+    this.mostrarConfirmBorrar = true;
+  }
+
+  ocultarConfirmPopup() {
+    this.mostrarConfirmBorrar = false;
+  }
+
+  cancelarBorrado() {
+    this.ocultarConfirmPopup();
+  }
+
+  borrarProveedor() {
+    this.service.borrarProveedor(this.proveedorId).subscribe(
+      (respuesta) => {
+        console.log(respuesta);
+        console.log(respuesta.status);
+        if (respuesta.status == 200){
+          //mostrar mensaje de cliente borrado
+          //redigir a pantalla clientes
+          this.service.setMostrarMensaje(true);
+          this.service.setColorMensaje('red');
+          this.router.navigate(['/proveedores']);
+        }
+      },
+      (error) => {
+        console.error('Error al eliminar el proveedor:', error);
+      }
+    );
   }
 
 }
