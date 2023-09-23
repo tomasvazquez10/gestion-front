@@ -61,4 +61,16 @@
   }
 }
 
+/* Elimina el subrayado */
+a {
+  text-decoration: none;
+}
+
+/* Cambia el color predeterminado de los enlaces */
+a {
+  color: #f9f9f9; /* Puedes establecer el color que desees aquí */
+}
+
+/* Cambia el color cuando el enlace se encuentra en estado 'hover' (sobre) */
+
 
