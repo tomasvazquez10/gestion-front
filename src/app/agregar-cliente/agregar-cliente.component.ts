@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { ClienteService } from "../service/cliente.service";
 import {Cliente} from "../model/cliente";
 import { Router } from '@angular/router';
-import {ClienteComponent} from "../cliente/cliente.component";
-
 
 @Component({
   selector: 'app-agregar-cliente',

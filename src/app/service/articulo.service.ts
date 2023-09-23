@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Articulo} from "../model/articulo";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {PrecioArticulo} from "../model/precioArticulo";
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class ArticuloService {
   private colorMensaje = 'green';
   private apiUrl = 'http://localhost:8080/articulo';
   private url = 'http://localhost:8080/articulo/edit';
+  private urlPrecio = 'http://localhost:8080/precio';
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +26,10 @@ export class ArticuloService {
 
   crearArticulo(articulo: Articulo): Observable<any> {
     return this.http.post(`${this.apiUrl}`, articulo);
+  }
+
+  crearPrecioArticulo(precioArticulo: PrecioArticulo): Observable<any> {
+    return this.http.post(`${this.urlPrecio}`, precioArticulo);
   }
 
   getArticulo(id: string) : Observable<Articulo> {

@@ -1,0 +1,60 @@
+<app-alert message="Articulo creado" *ngIf="mostrarPopup"></app-alert>
+<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarArticulo()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+    <mat-card-title>Detalles del Articulo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="custom-card-content">
+    <div *ngIf="!camposEditables">
+      <p>ID: {{ articulo.id }}</p>
+      <p>Numero Articulo: {{ articulo.nroArticulo }}</p>
+      <p>Nombre: {{ articulo.nombre }}</p>
+      <p>Descripcion: {{ articulo.descripcion }}</p>
+      <p>CUIT Proveedor: {{ articulo.cuitProveedor }}</p>
+      <p>Stock: {{ articulo.stock }}</p>
+      <p>Precio: ${{ articulo.precio }}</p>
+      <div>
+        <button mat-button (click)="habilitarEdicion()">Editar</button>
+        <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+      </div>
+    </div>
+    <div *ngIf="camposEditables">
+      <div class="input-container">
+        <label>Numero Articulo:
+          <input [(ngModel)]="valoresEditados['nroArticulo']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Nombre:
+          <input [(ngModel)]="valoresEditados['nombre']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Descripcion:
+          <input [(ngModel)]="valoresEditados['descripcion']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>CUIT Proveedor:
+          <input [(ngModel)]="valoresEditados['cuitProveedor']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Stock:
+          <input [(ngModel)]="valoresEditados['stock']">
+        </label>
+      </div>
+      <div class="input-container">
+        <label>Precio:
+          <input [(ngModel)]="valoresEditados['precio']">
+        </label>
+      </div>
+      <button mat-button (click)="guardarEdicion()">Guardar</button>
+      <button mat-button (click)="desabilitarEdicion()">Cancelar</button>
+
+    </div>
+
+  </mat-card-content>
+</mat-card>

@@ -21,12 +21,12 @@ import { AgregarProveedorComponent } from './agregar-proveedor/agregar-proveedor
 import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
 import { HomeComponent } from './home/home.component';
 import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
-import {MatTableModule} from "@angular/material/table";
 import { AgregarPedidoComponent } from './agregar-pedido/agregar-pedido.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ListaArticulosComponent } from './lista-articulos/lista-articulos.component';
 import { AgregarArticuloComponent } from './agregar-articulo/agregar-articulo.component';
+import { ArticuloComponent } from './articulo/articulo.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { AgregarArticuloComponent } from './agregar-articulo/agregar-articulo.co
     ListaPedidosComponent,
     PedidoComponent,
     ListaArticulosComponent,
-    AgregarArticuloComponent
+    AgregarArticuloComponent,
+    ArticuloComponent
   ],
   imports: [
     BrowserModule,

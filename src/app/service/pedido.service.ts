@@ -24,6 +24,8 @@ export class PedidoService {
   }
 
   crearPedido(pedido: Pedido): Observable<any> {
+    //resto total del pedido a la cuenta del cliente
+
     return this.http.post(`${this.apiUrl}`, pedido);
   }
 
