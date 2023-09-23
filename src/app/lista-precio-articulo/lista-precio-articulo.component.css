@@ -1,0 +1,78 @@
+h2 {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  margin: 40px auto;
+  font-size: 20px;
+  margin-right: 20px;
+}
+.modern-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: dimgrey; /* Color de fondo */
+  color: #ffffff; /* Color del texto */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modern-button:hover {
+  background-color: dimgrey; /* Color de fondo al pasar el cursor */
+  transform: scale(1.05); /* Efecto de escala al pasar el cursor */
+}
+
+.custom-card {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 40px; /* Separación del borde superior */
+  margin-left: 40px;
+  width: 90%; /* Ancho reducido */
+  display: flex;
+  justify-content: center;
+}
+
+.custom-card-content {
+  color: #333;
+  margin-top: 15px;
+}
+
+.mat-card-title {
+  margin-bottom: 10px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  margin-bottom: 5px;
+}
+
+
+table, label {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-size: 16px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}

@@ -13,7 +13,7 @@ import {PrecioArticuloService} from "../service/precio-articulo.service";
 export class ArticuloComponent {
   articuloId: string = '';
   articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, };
-  precioArticulo: PrecioArticulo = {idArticulo: 0, precio: 0};
+  precioArticulo: PrecioArticulo = {idArticulo: 0, precio: 0, fecha: new Date(),};
   articuloEditado: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, };
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};

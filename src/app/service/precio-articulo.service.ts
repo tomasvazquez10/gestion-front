@@ -13,8 +13,8 @@ export class PrecioArticuloService {
   constructor(private http: HttpClient) { }
 
 
-  getPrecios() : Observable<PrecioArticulo[]> {
-    return this.http.get<PrecioArticulo[]>(this.apiUrl+"/all");
+  getPreciosByIdArticulo(idArticulo: string) : Observable<PrecioArticulo[]> {
+    return this.http.get<PrecioArticulo[]>(this.apiUrl+"/historico/"+idArticulo);
     //return of(this.articuloes);
   }
 
