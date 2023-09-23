@@ -17,7 +17,7 @@ export class ArticuloService {
   private url = 'http://localhost:8080/articulo/edit';
   private urlPrecio = 'http://localhost:8080/precio';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getArticulos() : Observable<Articulo[]> {
     return this.http.get<Articulo[]>(this.apiUrl+"/all");

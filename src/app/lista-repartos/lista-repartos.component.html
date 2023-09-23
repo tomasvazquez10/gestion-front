@@ -1,0 +1,18 @@
+
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Repartos</h2>
+  <button mat-button routerLink="/agregar-reparto">Agregar Reparto</button>
+</div>
+
+<table>
+  <tr>
+    <th>Numero Reparto</th>
+    <th>Dia Semana</th>
+    <th>Zona de Entrega</th>
+  </tr>
+  <tr *ngFor="let reparto of repartos" (click)="verDetalles(reparto.id)">
+    <td>{{ reparto.nroReparto }}</td>
+    <td>{{ reparto.diaSemana }}</td>
+    <td>{{ reparto.zonaEntrega }}</td>
+  </tr>
+</table>
