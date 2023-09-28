@@ -16,6 +16,7 @@ import {ListaArticulosComponent} from "./lista-articulos/lista-articulos.compone
 import {AgregarArticuloComponent} from "./agregar-articulo/agregar-articulo.component";
 import {ArticuloComponent} from "./articulo/articulo.component";
 import {ListaRepartosComponent} from "./lista-repartos/lista-repartos.component";
+import {ListaComprasComponent} from "./lista-compras/lista-compras.component";
 
 const routes: Routes = [
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'proveedores', component: ListaProveedorComponent},
   { path: 'articulos', component: ListaArticulosComponent},
   { path: 'repartos', component: ListaRepartosComponent},
+  { path: 'compras', component: ListaComprasComponent},
   { path: 'cuenta', component: CuentaComponent},
   { path: 'mensaje-ok', component: AlertComponent},
   { path: 'cliente/:id', component: ClienteComponent},

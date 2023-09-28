@@ -1,7 +1,8 @@
 <app-alert message="Articulo creado" *ngIf="mostrarPopup"></app-alert>
 <app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarArticulo()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
 
-
+<div class="card-container">
+  <div>
 <mat-card class="custom-card">
   <mat-card-header>
     <mat-card-title>Detalles del Articulo</mat-card-title>
@@ -59,4 +60,9 @@
   </mat-card-content>
 </mat-card>
 
-<app-lista-precio-articulo></app-lista-precio-articulo>
+  </div>
+  <div>
+    <app-lista-precio-articulo></app-lista-precio-articulo>
+  </div>
+
+</div>

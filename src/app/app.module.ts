@@ -29,6 +29,7 @@ import { AgregarArticuloComponent } from './agregar-articulo/agregar-articulo.co
 import { ArticuloComponent } from './articulo/articulo.component';
 import { ListaPrecioArticuloComponent } from './lista-precio-articulo/lista-precio-articulo.component';
 import { ListaRepartosComponent } from './lista-repartos/lista-repartos.component';
+import { ListaComprasComponent } from './lista-compras/lista-compras.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ListaRepartosComponent } from './lista-repartos/lista-repartos.componen
     AgregarArticuloComponent,
     ArticuloComponent,
     ListaPrecioArticuloComponent,
-    ListaRepartosComponent
+    ListaRepartosComponent,
+    ListaComprasComponent
   ],
   imports: [
     BrowserModule,
