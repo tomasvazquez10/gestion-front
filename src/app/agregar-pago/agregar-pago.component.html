@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Agregar Pago</h2>
+
+    <div class="form-box">
+
+      <label>Fecha:</label>
+      <input type="date" [(ngModel)]="nuevoPago.fecha">
+
+      <label>Forma de Pago:</label>
+      <select [(ngModel)]="formaPagoSelec">
+        <option *ngFor="let formaPago of formaPagos" [value]="formaPago">{{ formaPago }}</option>
+      </select>
+
+      <label>Monto:</label>
+      <input type="number" [(ngModel)]="nuevoPago.monto">
+
+      <button mat-button class="modern-button" (click)="crearPago()">Crear Pago</button>
+      <button mat-button class="modern-button" (click)="volverPagos()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>
+

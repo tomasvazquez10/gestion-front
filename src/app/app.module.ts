@@ -30,6 +30,9 @@ import { ArticuloComponent } from './articulo/articulo.component';
 import { ListaPrecioArticuloComponent } from './lista-precio-articulo/lista-precio-articulo.component';
 import { ListaRepartosComponent } from './lista-repartos/lista-repartos.component';
 import { ListaComprasComponent } from './lista-compras/lista-compras.component';
+import { ListaVentasComponent } from './lista-ventas/lista-ventas.component';
+import { VentaComponent } from './venta/venta.component';
+import { AgregarPagoComponent } from './agregar-pago/agregar-pago.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import { ListaComprasComponent } from './lista-compras/lista-compras.component';
     ArticuloComponent,
     ListaPrecioArticuloComponent,
     ListaRepartosComponent,
-    ListaComprasComponent
+    ListaComprasComponent,
+    ListaVentasComponent,
+    VentaComponent,
+    AgregarPagoComponent
   ],
   imports: [
     BrowserModule,
