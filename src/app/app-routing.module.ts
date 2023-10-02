@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListaClienteComponent } from "./lista-cliente/lista-cliente.component";
-import {AgregarClienteComponent} from "./agregar-cliente/agregar-cliente.component";
-import {ListaProveedorComponent} from "./lista-proveedor/lista-proveedor.component";
-import {CuentaComponent} from "./cuenta/cuenta.component";
-import {AlertComponent} from "./alert/alert.component";
-import {ClienteComponent} from "./cliente/cliente.component";
-import {AgregarProveedorComponent} from "./agregar-proveedor/agregar-proveedor.component";
-import {HomeComponent} from "./home/home.component";
-import {ProveedorComponent} from "./proveedor/proveedor.component";
+import { ListaClienteComponent } from "./lists/lista-cliente/lista-cliente.component";
+import {AgregarClienteComponent} from "./creates/agregar-cliente/agregar-cliente.component";
+import {ListaProveedorComponent} from "./lists/lista-proveedor/lista-proveedor.component";
+import {CuentaComponent} from "./views/cuenta/cuenta.component";
+import {AlertComponent} from "./utils/alert/alert.component";
+import {ClienteComponent} from "./views/cliente/cliente.component";
+import {AgregarProveedorComponent} from "./creates/agregar-proveedor/agregar-proveedor.component";
+import {HomeComponent} from "./utils/home/home.component";
+import {ProveedorComponent} from "./views/proveedor/proveedor.component";
 import {EditarProveedorComponent} from "./editar-proveedor/editar-proveedor.component";
-import {AgregarPedidoComponent} from "./agregar-pedido/agregar-pedido.component";
-import {PedidoComponent} from "./pedido/pedido.component";
-import {ListaArticulosComponent} from "./lista-articulos/lista-articulos.component";
-import {AgregarArticuloComponent} from "./agregar-articulo/agregar-articulo.component";
-import {ArticuloComponent} from "./articulo/articulo.component";
-import {ListaRepartosComponent} from "./lista-repartos/lista-repartos.component";
-import {ListaComprasComponent} from "./lista-compras/lista-compras.component";
-import {ListaVentasComponent} from "./lista-ventas/lista-ventas.component";
-import {AgregarPagoComponent} from "./agregar-pago/agregar-pago.component";
+import {AgregarPedidoComponent} from "./creates/agregar-pedido/agregar-pedido.component";
+import {PedidoComponent} from "./views/pedido/pedido.component";
+import {ListaArticulosComponent} from "./lists/lista-articulos/lista-articulos.component";
+import {AgregarArticuloComponent} from "./creates/agregar-articulo/agregar-articulo.component";
+import {ArticuloComponent} from "./views/articulo/articulo.component";
+import {ListaRepartosComponent} from "./lists/lista-repartos/lista-repartos.component";
+import {ListaComprasComponent} from "./lists/lista-compras/lista-compras.component";
+import {ListaVentasComponent} from "./lists/lista-ventas/lista-ventas.component";
+import {AgregarPagoComponent} from "./creates/agregar-pago/agregar-pago.component";
+import {AgregarRepartoComponent} from "./creates/agregar-reparto/agregar-reparto.component";
 
 const routes: Routes = [
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'agregar-cliente', component: AgregarClienteComponent},
   { path: 'agregar-proveedor', component: AgregarProveedorComponent},
   { path: 'agregar-articulo', component: AgregarArticuloComponent},
+  { path: 'agregar-reparto', component: AgregarRepartoComponent},
   { path: 'agregar-pago/:id', component: AgregarPagoComponent},
   { path: 'crear-pedido', component: AgregarPedidoComponent},
   { path: 'proveedores', component: ListaProveedorComponent},
@@ -40,8 +42,7 @@ const routes: Routes = [
   { path: 'articulo/:id', component: ArticuloComponent},
   { path: 'proveedor/:id', component: ProveedorComponent},
   { path: 'pedido/:id', component: PedidoComponent},
-  { path: 'home', component: HomeComponent},
-  { path: 'editar', component: EditarProveedorComponent}
+  { path: 'home', component: HomeComponent}
 ];
 
 @NgModule({

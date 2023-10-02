@@ -21,6 +21,10 @@ export class RepartoService {
     return this.http.get<Reparto[]>(this.apiUrl+"/all");
   }
 
+  getNroRepartos() : Observable<number[]> {
+    return this.http.get<number[]>(this.apiUrl+"/numeros");
+  }
+
   crearReparto(reparto: Reparto): Observable<any> {
     return this.http.post(`${this.apiUrl}`, reparto);
   }

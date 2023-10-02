@@ -11,9 +11,9 @@ import {Proveedor} from "../model/proveedor";
 export class ClienteService {
 
   private clientes: Cliente[] = [
-    {id: 1, nombre: 'Tomas', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: '2', telefono: '1165487548' },
-    {id: 2, nombre: 'Juan', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: '2', telefono: '1165487548' },
-    {id: 3, nombre: 'Fede', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: '2', telefono: '1165487548' }
+    {id: 1, nombre: 'Tomas', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' },
+    {id: 2, nombre: 'Juan', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' },
+    {id: 3, nombre: 'Fede', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' }
   ];
   private mostrarMensaje = false;
   private colorMensaje = 'green';

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Agregar Reparto</h2>
+
+    <div class="form-box">
+      <label>Numero Reparto:</label>
+      <input type="number" [(ngModel)]="nuevoReparto.nroReparto">
+
+      <label>Dia de la semana:</label>
+      <select [(ngModel)]="diaSemanaSelec">
+        <option *ngFor="let diaSemana of diasSemana" [value]="diasSemana">{{ diaSemana }}</option>
+      </select>
+
+      <label>Zona de entrega:</label>
+      <input type="text" [(ngModel)]="nuevoReparto.zonaEntrega">
+
+      <button mat-button class="modern-button" (click)="crearReparto()">Crear Articulo</button>
+      <button mat-button class="modern-button" (click)="volverRepartos()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>
+

@@ -4,5 +4,5 @@ export interface Pago {
   formaPago: string;
   monto: number;
   descuento: number;
-  pedidoId: number;
+  idPedido: number;
 }
