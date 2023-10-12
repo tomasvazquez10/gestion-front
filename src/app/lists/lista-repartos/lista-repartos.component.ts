@@ -24,7 +24,7 @@ export class ListaRepartosComponent {
     this.getRepartos();
   }
 
-  verDetalles(id: number) : void {
-    this.router.navigate(['/reparto/'+id]);
+  verDetalles(nroReparto: number) : void {
+    this.router.navigate(['/reparto/'+nroReparto]);
   }
 }

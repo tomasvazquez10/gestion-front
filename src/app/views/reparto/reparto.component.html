@@ -1,0 +1,49 @@
+<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarReparto()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
+
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Repartos</h2>
+  <button mat-button routerLink="/agregar-reparto">Agregar Reparto</button>
+</div>
+
+<table>
+  <tr>
+    <th>Numero Reparto</th>
+    <th>Dia Semana</th>
+    <th>Zona de Entrega</th>
+    <th>Editar</th>
+    <th>Borrar</th>
+  </tr>
+  <tr *ngFor="let reparto of repartos; let i = index">
+    <td>{{ reparto.nroReparto }}</td>
+    <td>
+      <ng-container *ngIf="!reparto.editable; else editModeDiaSemana">
+        {{ reparto.diaSemana }}
+      </ng-container>
+      <ng-template #editModeDiaSemana>
+        <select [(ngModel)]="repartos[i].diaSemana">
+          <option *ngFor="let dia of diasSemanaDisp" [value]="dia">{{ dia }}</option>
+        </select>
+      </ng-template>
+    </td>
+    <td>
+      <span *ngIf="!reparto.editable">{{ reparto.zonaEntrega }}</span>
+      <input *ngIf="reparto.editable" [(ngModel)]="reparto.zonaEntrega" />
+    </td>
+    <td>
+      <button *ngIf="!reparto.editable" mat-icon-button (click)="habilitarEdit(reparto)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="reparto.editable" mat-icon-button (click)="guardarCambios(reparto)">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button *ngIf="reparto.editable" mat-icon-button (click)="cancelarEdit(reparto)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </td>
+    <td>
+      <button *ngIf="!reparto.editable" mat-icon-button (click)="confirmBorrar(reparto)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+</table>

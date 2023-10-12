@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Cuenta} from "../../model/cuenta";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CuentaService} from "../../service/cuenta.service";
 
 @Component({
@@ -12,12 +12,12 @@ export class CuentaComponent implements OnInit{
 
   idUsuario: string = '';
   idCuenta: string = '';
-  cuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0};
-  nuevaCuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0};
+  cuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0, pagos: [], gastos: []};
+  nuevaCuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0, pagos: [], gastos: []};
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
 
-  constructor(private cuentaService: CuentaService, private route: ActivatedRoute) {}
+  constructor(private cuentaService: CuentaService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,7 +27,7 @@ export class CuentaComponent implements OnInit{
   }
 
   getCuenta(): void {
-    this.cuentaService.getCuenta(this.idUsuario)
+    this.cuentaService.getCuentaByIdUsuario(this.idUsuario)
       .subscribe( cuenta => this.cuenta = cuenta);
   }
 
@@ -53,8 +53,8 @@ export class CuentaComponent implements OnInit{
     this.valoresEditados = {};
   }
 
-  verCuenta(){
-
+  verCuenta(id: number) : void {
+    this.router.navigate(['/cuenta-detalles/'+id]);
   }
 
 }

@@ -1,7 +1,7 @@
 
-
-
-
+  <div class="centered-container">
+    <app-search-bar></app-search-bar>
+  </div>
 
 <div class="card-container">
   <div>
@@ -10,7 +10,10 @@
         <mat-card-title>Clientes</mat-card-title>
       </mat-card-header>
       <mat-card-content class="custom-card-content">
+        <div class="button-container">
         <button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
+        <button mat-button routerLink="/clientes">Ver Clientes</button>
+        </div>
       </mat-card-content>
     </mat-card>
     <mat-card class="custom-card">
@@ -56,5 +59,22 @@
       </mat-card-content>
     </mat-card>
   </div>
-
+  <div>
+      <mat-card class="custom-card">
+        <mat-card-header>
+          <mat-card-title>Cuentas</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="custom-card-content">
+          <button mat-button routerLink="/cuentas">Ver Cuentas</button>
+        </mat-card-content>
+      </mat-card>
+    <mat-card class="custom-card">
+      <mat-card-header>
+        <mat-card-title>Compras</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="custom-card-content">
+        <button mat-button routerLink="/compras">Ver Compras</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

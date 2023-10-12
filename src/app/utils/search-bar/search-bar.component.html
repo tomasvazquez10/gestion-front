@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Busqueda</h2>
+<div class="barra-busqueda">
+  <select [(ngModel)]="seleccionComboBox1" (ngModelChange)="onComboBox1Change()">
+    <option *ngFor="let opcion of opcionesComboBox1">{{ opcion }}</option>
+  </select>
+
+  <select [(ngModel)]="seleccionComboBox2">
+    <option *ngFor="let opcion2 of opcionesComboBox2">{{ opcion2 }}</option>
+  </select>
+
+  <input type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
+  <button (click)="buscar()">Buscar</button>
+</div>
+  </div>
+</div>

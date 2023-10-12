@@ -17,9 +17,18 @@ export class CuentaService {
     return this.http.post(`${this.apiUrl}`, cuenta);
   }
 
-  getCuenta(idUsuario: string) : Observable<Cuenta> {
+  getCuentaByIdUsuario(idUsuario: string) : Observable<Cuenta> {
     return  this.http.get<Cuenta>(this.apiUrl+"/usuario/"+idUsuario);
     //return of({id: 1, idUsuario: 2, saldo: BigInt(1235) });
+  }
+
+  getCuenta(idCuenta: string) : Observable<Cuenta> {
+    return  this.http.get<Cuenta>(this.apiUrl+"/"+idCuenta);
+    //return of({id: 1, idUsuario: 2, saldo: BigInt(1235) });
+  }
+
+  getCuentas() : Observable<Cuenta[]> {
+    return this.http.get<Cuenta[]>(this.apiUrl+"/all");
   }
 
   updateCuenta(cuenta: Cuenta, id: number) : Observable<any> {

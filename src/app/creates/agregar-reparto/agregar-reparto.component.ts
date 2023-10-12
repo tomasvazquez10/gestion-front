@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AgregarRepartoComponent {
 
-  nuevoReparto: Reparto = { id: 0, nroReparto: 0, diaSemana: '', zonaEntrega: ''}
+  nuevoReparto: Reparto = { id: 0, nroReparto: 0, diaSemana: '', zonaEntrega: '', editable: false}
   diasSemana: string[] = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
   diaSemanaSelec = '';
 

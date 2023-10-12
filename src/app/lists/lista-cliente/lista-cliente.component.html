@@ -29,6 +29,13 @@
   <button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
 </div>
 
+<label>Buscar Clientes</label>
+<select [(ngModel)]="campoSelec">
+  <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
+</select>
+<input type="text" [(ngModel)]="valor">
+<button mat-button (click)="buscarClientes()">Buscar</button>
+
 <table>
   <tr>
     <th>ID</th>

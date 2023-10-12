@@ -34,6 +34,13 @@ import { ListaVentasComponent } from './lists/lista-ventas/lista-ventas.componen
 import { VentaComponent } from './views/venta/venta.component';
 import { AgregarPagoComponent } from './creates/agregar-pago/agregar-pago.component';
 import { AgregarRepartoComponent } from './creates/agregar-reparto/agregar-reparto.component';
+import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
+import { RepartoComponent } from './views/reparto/reparto.component';
+import {MatIconModule} from "@angular/material/icon";
+import { SearchBarComponent } from './utils/search-bar/search-bar.component';
+import { ListaCuentasComponent } from './lists/lista-cuentas/lista-cuentas.component';
+import { CuentaDetallesComponent } from './views/cuenta-detalles/cuenta-detalles.component';
+import { AgregarCompraComponent } from './creates/agregar-compra/agregar-compra.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +69,12 @@ import { AgregarRepartoComponent } from './creates/agregar-reparto/agregar-repar
     ListaVentasComponent,
     VentaComponent,
     AgregarPagoComponent,
-    AgregarRepartoComponent
+    AgregarRepartoComponent,
+    RepartoComponent,
+    SearchBarComponent,
+    ListaCuentasComponent,
+    CuentaDetallesComponent,
+    AgregarCompraComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +82,9 @@ import { AgregarRepartoComponent } from './creates/agregar-reparto/agregar-repar
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule
   ],
   providers: [ClienteService, ProveedorService],
   bootstrap: [AppComponent]

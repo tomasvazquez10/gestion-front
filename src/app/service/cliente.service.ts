@@ -10,11 +10,7 @@ import {Proveedor} from "../model/proveedor";
 })
 export class ClienteService {
 
-  private clientes: Cliente[] = [
-    {id: 1, nombre: 'Tomas', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' },
-    {id: 2, nombre: 'Juan', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' },
-    {id: 3, nombre: 'Fede', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: 2, telefono: '1165487548' }
-  ];
+  private clientes: Cliente[] = [];
   private mostrarMensaje = false;
   private colorMensaje = 'green';
   private apiUrl = 'http://localhost:8080/cliente';
@@ -23,8 +19,26 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   getClientes() : Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(this.apiUrl+"/all");
-   //return of(this.clientes);
+    console.log(this.clientes);
+    if (this.clientes.length === 0){
+      return this.http.get<Cliente[]>(this.apiUrl+"/all");
+    }else {
+      return of(this.clientes);
+    }
+  }
+
+  setClientes(clientes: Cliente[]) : void {
+    this.clientes = clientes;
+    console.log(this.clientes);
+  }
+
+  buscarClientes(campo: String, valor: String) : Observable<Cliente[]> {
+    //return this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
+    //return of(this.clientes);
+    let clients: Observable<Cliente[]> = this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
+    console.log('clientes: '+clients);
+    clients.subscribe(c => this.clientes = c);
+    return clients;
   }
 
   crearCliente(cliente: Cliente): Observable<any> {

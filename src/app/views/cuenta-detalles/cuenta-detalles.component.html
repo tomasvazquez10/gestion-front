@@ -1,0 +1,50 @@
+<div class="card-container">
+<mat-card class="custom-card">
+  <mat-card-header>
+    <mat-card-title>Cuenta</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="custom-card-content">
+    <div>
+      <p>ID: {{ cuenta.id }}</p>
+      <p>ID Usuario: {{ cuenta.idUsuario }}</p>
+      <p>Precio: ${{ cuenta.saldo }}</p>
+    </div>
+  </mat-card-content>
+
+    <mat-card-content class="custom-card-content">
+    <div>
+      <h3>Pagos</h3>
+      <table *ngIf="cuenta.pagos && cuenta.pagos.length > 0">
+        <tr>
+          <th>Fecha</th>
+          <th>Forma Pago</th>
+          <th>Monto</th>
+        </tr>
+        <tr *ngFor="let pago of cuenta.pagos" (click)="verDetallesPago(pago.id)">
+          <td>{{ pago.fecha | date:'dd/MM/yyyy'}}</td>
+          <td>{{ pago.formaPago }}</td>
+          <td>${{ pago.monto }}</td>
+        </tr>
+      </table>
+    </div>
+    </mat-card-content>
+
+    <mat-card-content class="custom-card-content">
+    <div>
+      <h3>Pedidos</h3>
+      <table *ngIf="cuenta.gastos && cuenta.gastos.length > 0">
+        <tr>
+          <th>Fecha</th>
+          <th>ID Pedido</th>
+          <th>Monto</th>
+        </tr>
+        <tr *ngFor="let pago of cuenta.gastos" (click)="verDetallesPedido(pago.idPedido)">
+          <td>{{ pago.fecha | date:'dd/MM/yyyy'}}</td>
+          <td>{{ pago.idPedido }}</td>
+          <td>${{ pago.monto }}</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
+</div>

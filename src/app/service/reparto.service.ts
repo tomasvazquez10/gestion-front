@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Reparto} from "../model/reparto";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Articulo} from "../model/articulo";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +20,16 @@ export class RepartoService {
     return this.http.get<Reparto[]>(this.apiUrl+"/all");
   }
 
+  getRepartosByNro(nroReparto: number) : Observable<Reparto[]> {
+    return this.http.get<Reparto[]>(this.apiUrl+"/numero/"+nroReparto);
+  }
+
   getNroRepartos() : Observable<number[]> {
     return this.http.get<number[]>(this.apiUrl+"/numeros");
+  }
+
+  getDiasSemanaDisponibles(nroReparto: number) : Observable<String[]> {
+    return this.http.get<String[]>(this.apiUrl+"/diaSemana/"+nroReparto);
   }
 
   crearReparto(reparto: Reparto): Observable<any> {
@@ -38,7 +45,7 @@ export class RepartoService {
     return this.http.post(`${this.url}`, reparto);
   }
 
-  borrarReparto(id: string) : Observable<HttpResponse<any>> {
+  borrarReparto(id: number) : Observable<HttpResponse<any>> {
     return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
   }
 

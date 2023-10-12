@@ -6,7 +6,7 @@
     <ng-container *ngIf="cuenta.id !== null; else cuentaSinId">
       <p> Saldo </p>
       <p class="saldo"> {{ "$" + cuenta.saldo }}</p>
-      <button mat-button (click)="verCuenta()">Ver detalles Cuenta</button>
+      <button mat-button (click)="verCuenta(cuenta.id)">Ver detalles Cuenta</button>
     </ng-container>
     <ng-template #cuentaSinId>
       <p>No tiene Cuenta.</p>

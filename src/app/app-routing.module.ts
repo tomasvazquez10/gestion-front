@@ -20,6 +20,10 @@ import {ListaComprasComponent} from "./lists/lista-compras/lista-compras.compone
 import {ListaVentasComponent} from "./lists/lista-ventas/lista-ventas.component";
 import {AgregarPagoComponent} from "./creates/agregar-pago/agregar-pago.component";
 import {AgregarRepartoComponent} from "./creates/agregar-reparto/agregar-reparto.component";
+import {RepartoComponent} from "./views/reparto/reparto.component";
+import {ListaCuentasComponent} from "./lists/lista-cuentas/lista-cuentas.component";
+import {CuentaDetallesComponent} from "./views/cuenta-detalles/cuenta-detalles.component";
+import {AgregarCompraComponent} from "./creates/agregar-compra/agregar-compra.component";
 
 const routes: Routes = [
 
@@ -29,6 +33,7 @@ const routes: Routes = [
   { path: 'agregar-proveedor', component: AgregarProveedorComponent},
   { path: 'agregar-articulo', component: AgregarArticuloComponent},
   { path: 'agregar-reparto', component: AgregarRepartoComponent},
+  { path: 'agregar-compra', component: AgregarCompraComponent},
   { path: 'agregar-pago/:id', component: AgregarPagoComponent},
   { path: 'crear-pedido', component: AgregarPedidoComponent},
   { path: 'proveedores', component: ListaProveedorComponent},
@@ -36,10 +41,13 @@ const routes: Routes = [
   { path: 'repartos', component: ListaRepartosComponent},
   { path: 'compras', component: ListaComprasComponent},
   { path: 'ventas', component: ListaVentasComponent},
+  { path: 'cuentas', component: ListaCuentasComponent},
   { path: 'cuenta', component: CuentaComponent},
   { path: 'mensaje-ok', component: AlertComponent},
   { path: 'cliente/:id', component: ClienteComponent},
   { path: 'articulo/:id', component: ArticuloComponent},
+  { path: 'cuenta-detalles/:id', component: CuentaDetallesComponent},
+  { path: 'reparto/:nroReparto', component: RepartoComponent},
   { path: 'proveedor/:id', component: ProveedorComponent},
   { path: 'pedido/:id', component: PedidoComponent},
   { path: 'home', component: HomeComponent}

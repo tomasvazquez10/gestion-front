@@ -1,0 +1,17 @@
+
+<div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Cuentas</h2>
+</div>
+
+<table>
+  <tr>
+    <th>ID Usuario</th>
+    <th>DNI / CUIT</th>
+    <th>Saldo</th>
+  </tr>
+  <tr *ngFor="let cuenta of cuentas" (click)="verDetalles(cuenta.id)">
+    <td>{{ cuenta.id }}</td>
+    <td>{{ cuenta.idUsuario }}</td>
+    <td>${{ cuenta.saldo }}</td>
+  </tr>
+</table>

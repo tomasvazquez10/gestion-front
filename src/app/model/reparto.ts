@@ -3,4 +3,5 @@ export interface Reparto {
   nroReparto: number,
   diaSemana: string;
   zonaEntrega: string;
+  editable: boolean;
 }

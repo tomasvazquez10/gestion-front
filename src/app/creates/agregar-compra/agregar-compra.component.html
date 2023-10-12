@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Agregar Compra</h2>
+
+    <div class="form-box">
+      <label for="articuloCombo">Articulo: </label>
+      <select id="articuloCombo" [(ngModel)]="articulo" name="articuloCombo">
+        <option [ngValue]="undefined">Seleccionar...</option>
+        <option *ngFor="let articulo of articulos" [ngValue]="articulo">{{ articulo.nombre }}</option>
+      </select>
+
+      <label>Fecha:</label>
+      <input type="date" [(ngModel)]="compra.fecha">
+
+      <label>Precio:</label>
+      <input type="number" [(ngModel)]="compra.precioUnidad">
+
+      <label>Cantidad:</label>
+      <input type="number" [(ngModel)]="compra.cantidad">
+      <button mat-button class="modern-button" (click)="crearNuevaCompra()">Crear Compra</button>
+      <button mat-button class="modern-button" (click)="volverCompras()">Cancelar</button>
+
+    </div>
+
+  </div>
+</div>

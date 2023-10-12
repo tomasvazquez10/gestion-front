@@ -10,7 +10,7 @@
     <th>Dia Semana</th>
     <th>Zona de Entrega</th>
   </tr>
-  <tr *ngFor="let reparto of repartos" (click)="verDetalles(reparto.id)">
+  <tr *ngFor="let reparto of repartos" (click)="verDetalles(reparto.nroReparto)">
     <td>{{ reparto.nroReparto }}</td>
     <td>{{ reparto.diaSemana }}</td>
     <td>{{ reparto.zonaEntrega }}</td>

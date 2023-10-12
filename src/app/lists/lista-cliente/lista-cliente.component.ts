@@ -15,9 +15,19 @@ export class ListaClienteComponent {
   clientes: Cliente[] = [];
   //nuevoCliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
   mostrarPopup = false;
+  valor: String = '';
+  campoSelec: String = '';
+  campos: String[] = ['nombre', 'dni'];
 
   getClientes(): void {
     this.clienteService.getClientes()
+      .subscribe( clientes => this.clientes = clientes);
+  }
+
+  buscarClientes(): void {
+    console.log(this.campoSelec);
+    console.log(this.valor);
+    this.clienteService.buscarClientes(this.campoSelec, this.valor)
       .subscribe( clientes => this.clientes = clientes);
   }
 
