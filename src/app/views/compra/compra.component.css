@@ -1,0 +1,42 @@
+.custom-card {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 40px; /* Separación del borde superior */
+  margin-left: 40px;
+  width: 90%; /* Ancho reducido */
+  display: flex;
+  justify-content: center;
+}
+
+.custom-card-content {
+  color: #333;
+  margin-top: 15px;
+}
+
+.mat-card-title {
+  margin-bottom: 10px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  margin-bottom: 5px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las filas se ajusten automáticamente a medida que se llenan */
+  justify-content: space-between; /* Espacio entre las columnas */
+}
+
+.card-container > div {
+  flex: 1; /* Las divisiones se expanden para llenar el espacio disponible */
+  max-width: calc(50% - 10px); /* Asegura que haya espacio entre las columnas */
+  margin-bottom: 20px; /* Espacio entre las filas */
+}

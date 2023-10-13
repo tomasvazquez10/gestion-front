@@ -7,6 +7,7 @@ import {PedidoService} from "../../service/pedido.service";
 import {Producto} from "../../model/producto";
 import {Proveedor} from "../../model/proveedor";
 import {Observable} from "rxjs";
+import {ConfirmPopupService} from "../../service/confirm-popup.service";
 
 @Component({
   selector: 'app-pedido',
@@ -19,8 +20,9 @@ export class PedidoComponent {
   pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
   mostrarPopup: boolean = false;
   mostrarConfirmCancelar: boolean = false;
+  mostrarConfirmEntrega: boolean = false;
 
-  constructor(private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private pedidoService: PedidoService, private popUpService: ConfirmPopupService, private route: ActivatedRoute, private router: Router) {}
 
   getPedido(): void {
     this.pedidoService.getPedido(this.pedidoId)
@@ -40,12 +42,21 @@ export class PedidoComponent {
      */
     console.log(this.pedido);
   }
+  mostrarEntrega() {
+    this.popUpService.setMensaje('¿Desea marcar el Pedido como entregado?');
+    this.mostrarConfirmEntrega = true;
+  }
 
   mostrarConfirmPopup() {
+    this.popUpService.setMensaje('¿Desea cancelar el Pedido?');
     this.mostrarConfirmCancelar = true;
   }
   ocultarConfirmPopup() {
     this.mostrarConfirmCancelar = false;
+  }
+
+  ocultarEntrega() {
+    this.mostrarConfirmEntrega = false;
   }
   cancelarBorrado() {
     this.ocultarConfirmPopup();
@@ -61,7 +72,7 @@ export class PedidoComponent {
           //redigir a pantalla clientes
           this.pedidoService.setMostrarMensaje(true);
           this.pedidoService.setColorMensaje('red');
-          this.router.navigate(['/clientes']);
+          this.router.navigate(['/pedido/'+this.pedidoId]);
         }
       },
       (error) => {
@@ -83,6 +94,8 @@ export class PedidoComponent {
   }
 
   cambiarEstado(){
-
+    this.pedido.estado = 1;
+    this.pedido.estadoTexto = 'ENTREGADO';
+    this.editarPedido();
   }
 }

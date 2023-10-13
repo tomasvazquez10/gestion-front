@@ -17,6 +17,7 @@ export class VentaComponent {
   pedido: Pedido = { id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] };
   venta: Venta = { id: 0, pedido: this.pedido, pagos: [] };
 
+
   constructor(private service: VentaService, private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
 
   getVenta(): void {

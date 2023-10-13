@@ -21,21 +21,16 @@ export class SearchBarComponent {
   }
 
   onComboBox1Change() {
-    // Aquí puedes definir la lógica para actualizar las opciones en ComboBox 2
-    // según la selección en ComboBox 1.
     if (this.seleccionComboBox1 === 'Cliente') {
       this.opcionesComboBox2 = ['', 'Nombre', 'Nombre fantasia', 'Numero de reparto', 'DNI'];
     } else if (this.seleccionComboBox1 === 'Articulo') {
-      this.opcionesComboBox2 = ['Subopción 2.1', 'Subopción 2.2', 'Subopción 2.3'];
+      this.opcionesComboBox2 = ['Nombre', 'Descripcion'];
     } else {
-      // Otras opciones para ComboBox 1
       this.opcionesComboBox2 = [];
     }
   }
 
   buscar(): void {
-    console.log(this.seleccionComboBox1);
-    console.log(this.seleccionComboBox2);
     if(this.seleccionComboBox1 === 'Cliente'){
       if (this.seleccionComboBox2 === 'Nombre'){
         this.clienteService.buscarClientes('nombre', this.textoBusqueda)

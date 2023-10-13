@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class ConfirmPopupService {
 
   private mensaje: string = '';
+  private mostrarCancelar: boolean = true;
 
   constructor() { }
 
@@ -15,5 +16,13 @@ export class ConfirmPopupService {
 
   getMensaje(): string {
     return this.mensaje;
+  }
+
+  getMostrarCancelar(): boolean {
+    return this.mostrarCancelar;
+  }
+
+  setMostrarCancelar(mostrar: boolean): void{
+    this.mostrarCancelar = mostrar;
   }
 }

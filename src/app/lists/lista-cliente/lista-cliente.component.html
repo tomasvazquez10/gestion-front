@@ -27,11 +27,12 @@
 <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Clientes</h2>
   <button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
+  <button mat-button (click)="getListadoPDF()">Descargar Listado</button>
 </div>
 
 <label>Buscar Clientes</label>
 <select [(ngModel)]="campoSelec">
-  <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
+  <option *ngFor="let campo of campos.keys()" [value]="campo">{{ campo }}</option>
 </select>
 <input type="text" [(ngModel)]="valor">
 <button mat-button (click)="buscarClientes()">Buscar</button>

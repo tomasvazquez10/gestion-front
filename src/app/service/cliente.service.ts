@@ -33,17 +33,16 @@ export class ClienteService {
   }
 
   buscarClientes(campo: String, valor: String) : Observable<Cliente[]> {
-    //return this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
-    //return of(this.clientes);
-    let clients: Observable<Cliente[]> = this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
-    console.log('clientes: '+clients);
-    clients.subscribe(c => this.clientes = c);
-    return clients;
+    return this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
   }
 
   crearCliente(cliente: Cliente): Observable<any> {
     console.log(cliente);
     return this.http.post(`${this.apiUrl}`, cliente);
+  }
+
+  getListadoPDF(clientes: Cliente[]): Observable<any> {
+    return this.http.post(this.apiUrl+"/pdf", clientes);
   }
 
   getCliente(id: string) : Observable<Cliente> {

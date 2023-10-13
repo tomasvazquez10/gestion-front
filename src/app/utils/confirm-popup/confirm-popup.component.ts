@@ -12,6 +12,8 @@ export class ConfirmPopupComponent implements OnInit{
   @Output() aceptar = new EventEmitter<void>();
   @Output() cancelar = new EventEmitter<void>();
 
+  mostrarCancelar: boolean = true;
+
   constructor(private service: ConfirmPopupService) {}
 
   confirm() {
@@ -27,5 +29,6 @@ export class ConfirmPopupComponent implements OnInit{
     if (mensajeService !== ''){
       this.mensaje = mensajeService;
     }
+    this.mostrarCancelar = this.service.getMostrarCancelar();
   }
 }

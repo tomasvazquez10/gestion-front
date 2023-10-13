@@ -1,0 +1,25 @@
+<app-alert message="Compra creada" *ngIf="mostrarPopup"></app-alert>
+<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarCompra()" (cancelar)="ocultarConfirmPopup()"></app-confirm-popup>
+<app-confirm-popup *ngIf="mostrarError" (aceptar)="mostrarError = false"></app-confirm-popup>
+<div class="card-container">
+  <div>
+    <mat-card class="custom-card">
+      <mat-card-header>
+        <mat-card-title>Detalles de la Compra</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="custom-card-content">
+        <div>
+          <p>ID: {{ compra.id }}</p>
+          <p>Articulo: {{ compra.articulo.nombre }}</p>
+          <p>Fecha: {{ compra.fecha | date:'dd/MM/yyyy' }}</p>
+          <p>Cantidad: {{ compra.cantidad }}</p>
+          <p>Precio Unitario: {{ compra.precioUnidad }}</p>
+        <div>
+          <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

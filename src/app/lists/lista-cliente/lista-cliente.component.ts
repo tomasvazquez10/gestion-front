@@ -13,11 +13,10 @@ export class ListaClienteComponent {
   constructor(private clienteService: ClienteService, private router: Router) {}
 
   clientes: Cliente[] = [];
-  //nuevoCliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
   mostrarPopup = false;
   valor: String = '';
   campoSelec: String = '';
-  campos: String[] = ['nombre', 'dni'];
+  campos = new Map();
 
   getClientes(): void {
     this.clienteService.getClientes()
@@ -27,14 +26,14 @@ export class ListaClienteComponent {
   buscarClientes(): void {
     console.log(this.campoSelec);
     console.log(this.valor);
-    this.clienteService.buscarClientes(this.campoSelec, this.valor)
+    this.clienteService.buscarClientes(this.campos.get(this.campoSelec), this.valor)
       .subscribe( clientes => this.clientes = clientes);
   }
 
   ngOnInit(): void {
     this.getClientes();
     this.setMostrarMensaje();
-
+    this.setCampos();
   }
 
   verDetalles(id: number) : void {
@@ -52,5 +51,16 @@ export class ListaClienteComponent {
     this.clienteService.setMostrarMensaje(false);
   }
 
+  setCampos() : void {
+    this.campos.set('Nombre','nombre');
+    this.campos.set('Nombre Fantasia','nombre_fantasia');
+    this.campos.set('DNI','dni');
+    this.campos.set('Numero de reparto','nro_reparto');
+  }
+
+  getListadoPDF() : void {
+    this.clienteService.getListadoPDF(this.clientes)
+      .subscribe();
+  }
 
 }

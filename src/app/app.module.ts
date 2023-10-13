@@ -41,6 +41,7 @@ import { SearchBarComponent } from './utils/search-bar/search-bar.component';
 import { ListaCuentasComponent } from './lists/lista-cuentas/lista-cuentas.component';
 import { CuentaDetallesComponent } from './views/cuenta-detalles/cuenta-detalles.component';
 import { AgregarCompraComponent } from './creates/agregar-compra/agregar-compra.component';
+import { CompraComponent } from './views/compra/compra.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { AgregarCompraComponent } from './creates/agregar-compra/agregar-compra.
     SearchBarComponent,
     ListaCuentasComponent,
     CuentaDetallesComponent,
-    AgregarCompraComponent
+    AgregarCompraComponent,
+    CompraComponent
   ],
   imports: [
     BrowserModule,
