@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {ClienteService} from "../../service/cliente.service";
 import {Router} from "@angular/router";
 import {Cliente} from "../../model/cliente";
+import {ArticuloService} from "../../service/articulo.service";
+import {ProveedorService} from "../../service/proveedor.service";
+import {RepartoService} from "../../service/reparto.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -10,21 +13,30 @@ import {Cliente} from "../../model/cliente";
 })
 export class SearchBarComponent {
 
-  opcionesComboBox1: string[] = ['Cliente', 'Proveedor', 'Articulo'];
+  opcionesComboBox1: string[] = ['Cliente', 'Proveedor', 'Articulo', 'Reparto'];
   opcionesComboBox2: string[] = [];
   seleccionComboBox1: string = '';
   seleccionComboBox2: string = '';
   textoBusqueda: string = '';
   clientes: Cliente[] = [];
 
-  constructor(private clienteService: ClienteService, private router: Router) {
+  constructor(private clienteService: ClienteService, private articuloSerivce: ArticuloService, private proveedorService: ProveedorService,
+              private repartoService: RepartoService, private router: Router) {
   }
 
   onComboBox1Change() {
     if (this.seleccionComboBox1 === 'Cliente') {
-      this.opcionesComboBox2 = ['', 'Nombre', 'Nombre fantasia', 'Numero de reparto', 'DNI'];
+      this.opcionesComboBox2 = ['', 'Nombre', 'Nombre Fantasia', 'Numero de reparto', 'DNI'];
+
     } else if (this.seleccionComboBox1 === 'Articulo') {
-      this.opcionesComboBox2 = ['Nombre', 'Descripcion'];
+      this.opcionesComboBox2 = ['','Nombre', 'CUIT Proveedor'];
+
+    } else if (this.seleccionComboBox1 === 'Proveedor') {
+      this.opcionesComboBox2 = ['','Nombre', 'CUIT', 'Nombre Fantasia'];
+
+    } else if (this.seleccionComboBox1 === 'Reparto') {
+      this.opcionesComboBox2 = ['','Numero', 'Dia Semana'];
+
     } else {
       this.opcionesComboBox2 = [];
     }
@@ -32,23 +44,22 @@ export class SearchBarComponent {
 
   buscar(): void {
     if(this.seleccionComboBox1 === 'Cliente'){
-      if (this.seleccionComboBox2 === 'Nombre'){
-        this.clienteService.buscarClientes('nombre', this.textoBusqueda)
-          .subscribe( clientes => this.clientes = clientes);
-        console.log(this.clientes);
-        //this.clienteService.setClientes(this.clientes);
-
-      }else if (this.seleccionComboBox2 === 'Nombre fantasia'){
-
-      }else if (this.seleccionComboBox2 === 'Numero de reparto'){
-
-      }else if (this.seleccionComboBox2 === 'DNI'){
-
-      }else{
-
-      }
+      this.clienteService.setCampoValor(this.seleccionComboBox2,this.textoBusqueda);
+      this.router.navigate(['/clientes']);
     }
-    this.router.navigate(['/clientes']);
+    if(this.seleccionComboBox1 === 'Articulo'){
+      this.articuloSerivce.setCampoValor(this.seleccionComboBox2,this.textoBusqueda);
+      this.router.navigate(['/articulos']);
+    }
+    if(this.seleccionComboBox1 === 'Proveedor'){
+      this.proveedorService.setCampoValor(this.seleccionComboBox2,this.textoBusqueda);
+      this.router.navigate(['/proveedores']);
+    }
+    if(this.seleccionComboBox1 === 'Reparto'){
+      this.repartoService.setCampoValor(this.seleccionComboBox2,this.textoBusqueda);
+      this.router.navigate(['/repartos']);
+
+    }
   }
 
 }

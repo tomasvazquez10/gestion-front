@@ -14,8 +14,8 @@ export class ListaClienteComponent {
 
   clientes: Cliente[] = [];
   mostrarPopup = false;
-  valor: String = '';
-  campoSelec: String = '';
+  valor: string = '';
+  campoSelec: string = '';
   campos = new Map();
 
   getClientes(): void {
@@ -31,9 +31,17 @@ export class ListaClienteComponent {
   }
 
   ngOnInit(): void {
-    this.getClientes();
-    this.setMostrarMensaje();
     this.setCampos();
+    this.campoSelec = this.clienteService.getCampo();
+    this.valor = this.clienteService.getValor();
+    if(this.clienteService.getCampo() !== ''){
+      console.log("busco "+this.valor+" - "+this.campoSelec);
+       this.buscarClientes();
+    }else{
+      this.getClientes();
+    }
+    this.setMostrarMensaje();
+
   }
 
   verDetalles(id: number) : void {

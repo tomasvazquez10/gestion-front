@@ -12,6 +12,9 @@ import {RepartoService} from "../../service/reparto.service";
 export class ListaRepartosComponent {
 
   repartos: Reparto[] = [];
+  valor: string = '';
+  campoSelec: string = '';
+  campos: string[] = [];
 
   constructor(private service: RepartoService, private router: Router) {}
 
@@ -20,11 +23,25 @@ export class ListaRepartosComponent {
       .subscribe( repartos => this.repartos = repartos);
   }
 
+  buscarRepartos(): void {
+    console.log(this.campoSelec);
+    console.log(this.valor);
+    this.service.buscarReparto(this.campoSelec, this.valor)
+      .subscribe( repartos => this.repartos = repartos);
+  }
+
   ngOnInit(): void {
-    this.getRepartos();
+    this.campoSelec = this.service.getCampo();
+    this.valor = this.service.getValor();
+    if(this.campoSelec === ''){
+      this.getRepartos();
+    }else{
+      this.buscarRepartos();
+    }
   }
 
   verDetalles(nroReparto: number) : void {
     this.router.navigate(['/reparto/'+nroReparto]);
   }
+
 }

@@ -10,7 +10,17 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
 }
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las filas se ajusten automáticamente a medida que se llenan */
+  justify-content: space-between; /* Espacio entre las columnas */
+}
 
+.card-container > div {
+  flex: 1; /* Las divisiones se expanden para llenar el espacio disponible */
+  max-width: calc(50% - 10px); /* Asegura que haya espacio entre las columnas */
+  margin-bottom: 20px; /* Espacio entre las filas */
+}
 .popup-message {
   font-size: 18px;
 }

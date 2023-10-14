@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Cliente } from "../model/cliente";
 import { Observable, of} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Cuenta} from "../model/cuenta";
-import {Proveedor} from "../model/proveedor";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +13,8 @@ export class ClienteService {
   private colorMensaje = 'green';
   private apiUrl = 'http://localhost:8080/cliente';
   private url = 'http://localhost:8080/cliente/edit';
+  private campo: string = '';
+  private valor: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -32,8 +32,22 @@ export class ClienteService {
     console.log(this.clientes);
   }
 
-  buscarClientes(campo: String, valor: String) : Observable<Cliente[]> {
+  buscarClientes(campo: string, valor: string) : Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
+  }
+
+  setCampoValor(campo: string, valor: string) : void{
+    console.log(campo+" - "+valor);
+    this.campo = campo;
+    this.valor = valor;
+  }
+
+  getCampo(): string {
+    return this.campo;
+  }
+
+  getValor(): string {
+    return this.valor;
   }
 
   crearCliente(cliente: Cliente): Observable<any> {

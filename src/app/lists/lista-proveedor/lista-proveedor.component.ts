@@ -14,18 +14,40 @@ export class ListaProveedorComponent {
 
   proveedores: Proveedor[] = [];
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
+  valor: string = '';
+  campoSelec: String = '';
+  campos = new Map();
 
   getProveedores(): void {
     this.proveedorService.getProveedores()
       .subscribe( proveedores => this.proveedores = proveedores);
   }
 
+  buscarProveedores(): void {
+    console.log(this.campoSelec);
+    console.log(this.valor);
+    this.proveedorService.buscarProveedores(this.campos.get(this.campoSelec), this.valor)
+      .subscribe( proveedores => this.proveedores = proveedores);
+  }
+
   ngOnInit(): void {
-    this.getProveedores();
+    this.setCampos();
+    this.campoSelec = this.proveedorService.getCampo();
+    this.valor = this.proveedorService.getValor();
+    if(this.campoSelec === ''){
+      this.getProveedores();
+    }else{
+      this.buscarProveedores()
+    }
   }
 
   verDetalles(id: number) : void {
     this.router.navigate(['/proveedor/'+id]);
   }
 
+  setCampos() : void {
+    this.campos.set('Nombre','nombre');
+    this.campos.set('Nombre Fantasia','nombre_fantasia');
+    this.campos.set('CUIT','cuit');
+  }
 }
