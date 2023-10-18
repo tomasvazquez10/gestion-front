@@ -34,6 +34,10 @@ export class ArticuloService {
     return this.http.get<Articulo[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
   }
 
+  getArticuloByNro(numero: number) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/numero/"+numero, {observe: 'response'});
+  }
+
   crearPrecioArticulo(precioArticulo: PrecioArticulo): Observable<any> {
     return this.http.post(`${this.urlPrecio}`, precioArticulo);
   }
@@ -78,5 +82,25 @@ export class ArticuloService {
 
   getValor(): string {
     return this.valor;
+  }
+
+  existeNroArticulo(nroArticulo: number): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getArticuloByNro(nroArticulo).subscribe(
+        (respuesta) => {
+          console.log(respuesta);
+          console.log(respuesta.status);
+          if (respuesta.status === 200) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error al buscar Articulo:', error);
+          reject(error);
+        }
+      );
+    });
   }
 }

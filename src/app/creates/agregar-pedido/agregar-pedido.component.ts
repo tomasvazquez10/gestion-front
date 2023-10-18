@@ -20,7 +20,7 @@ export class AgregarPedidoComponent {
   nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: []};
   productosSelec: Producto[] = [];
   articulos: Articulo[] = [];
-  dniCliente: string = 'aaa';
+  dniCliente: string = '';
   sugerenciasFiltradas: string[] = [];
   dniClientes: string[] = [];
   articuloSelec: Articulo = {id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0};

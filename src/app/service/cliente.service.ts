@@ -36,6 +36,10 @@ export class ClienteService {
     return this.http.get<Cliente[]>(this.apiUrl+"/buscar/"+campo+"/"+valor);
   }
 
+  getClienteByDNI(dni: string) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/dni/"+dni, {observe: 'response'});
+  }
+
   setCampoValor(campo: string, valor: string) : void{
     console.log(campo+" - "+valor);
     this.campo = campo;
@@ -61,12 +65,9 @@ export class ClienteService {
 
   getCliente(id: string) : Observable<Cliente> {
     return  this.http.get<Cliente>(this.apiUrl+"/"+id);
-    //return of({id: 1, nombre: 'Tomas', nombreFantasia: 'TOM', dni: '12345876', direccion: 'avenida san martin 123', email: 'tomas@mail.com', nroReparto: '2', telefono: '1165487548' });
   }
 
   updateCliente(cliente: any, id: string) : Observable<any> {
-    //private url = this.apiUrl+'';
-    console.log('id'+id);
     return this.http.put(this.apiUrl+"/"+id, cliente);
   }
 
@@ -100,9 +101,7 @@ export class ClienteService {
   }
 
   borrarCliente(id: string) : Observable<HttpResponse<any>> {
-
     return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
-    //return of(new HttpResponse({status: 200, statusText: 'OK'}));
   }
 
   setColorMensaje(color: string) : void {
@@ -118,4 +117,22 @@ export class ClienteService {
     return this.http.post(`${this.url}`, cliente);
   }
 
+  existeDNI(dni: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getClienteByDNI(dni).subscribe(
+        (respuesta) => {
+          console.log(respuesta);
+          console.log(respuesta.status);
+          if (respuesta.status === 200) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error al buscar DNI:', error);
+        }
+      );
+    });
+  }
 }

@@ -20,18 +20,74 @@ export class AgregarClienteComponent implements OnInit{
   constructor(private clientesService: ClienteService,private repartoService: RepartoService, private router: Router) {}
 
   crearNuevoCliente() {
-    // Enviar datos del nuevo cliente a la API
-    this.nuevoCliente.nroReparto = this.nroReparto;
-    this.clientesService.crearCliente(this.nuevoCliente).subscribe(response => {
+    if(this.datosCorrectos()){
+      this.clientesService.existeDNI(this.nuevoCliente.dni).then((existe) => {
+        if (!existe) {
+          this.nuevoCliente.nroReparto = this.nroReparto;
+          this.clientesService.crearCliente(this.nuevoCliente).subscribe(response => {
 
-      console.log('Cliente creado:', response);
-      this.clientesService.setMostrarMensaje(true);
-      this.router.navigate(['/cliente/'+response.id]);
-    });
+            console.log('Cliente creado:', response);
+            this.clientesService.setMostrarMensaje(true);
+            this.router.navigate(['/cliente/'+response.id]);
+          });
+        } else {
+          alert('El DNI ingresado ya existe');
+        }
+      }).catch((error) => {
+        console.error('Error al verificar DNI:', error);
+      });
+    }
   }
 
   volverClientes(){
     this.router.navigate(['/clientes']);
+  }
+
+  datosCorrectos() : boolean {
+    console.log();
+    if (this.nuevoCliente.nombre === ''){
+      alert('Debe completar el campo Nombre');
+      return false;
+    }else if (this.nuevoCliente.nombreFantasia === ''){
+      alert('Debe completar el campo Nombre Fantasia');
+      return false;
+    }else if (this.nuevoCliente.direccion === ''){
+      alert('Debe completar el campo Direccion');
+      return false;
+    }else if (this.nuevoCliente.dni === ''){
+      alert('Debe completar el campo DNI');
+      return false;
+    }else if (!this.validarDNI((this.nuevoCliente.dni).toString().length)){
+      alert('Debe ingresar un formato correcto de DNI');
+      return false;
+    }else if (this.nuevoCliente.email === ''){
+      alert('Debe completar el campo Email');
+      return false;
+    }else if (!this.validarEmail(this.nuevoCliente.email)){
+      alert('Debe ingresar un formato correcto de Email');
+      return false;
+    }else if (this.nroReparto === 0){
+      alert('Debe completar el campo Numero de Reparto');
+      return false;
+    }else if (!this.validarNumero((this.nuevoCliente.telefono).toString().length)){
+      alert('Debe ingresar un formato correcto de Telefono');
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  validarEmail(email: string): boolean {
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailRegex.test(email);
+  }
+
+  validarDNI(dni: number): boolean {
+    return dni >= 7 && dni <= 8;
+  }
+
+  validarNumero(numero: number): boolean {
+    return numero >= 10;
   }
 
   ngOnInit(): void {

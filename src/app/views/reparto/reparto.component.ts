@@ -84,4 +84,8 @@ export class RepartoComponent implements OnInit{
   cancelarBorrado(): void {
     this.mostrarConfirmBorrar = false;
   }
+
+  crearDiaReparto() : void {
+    this.router.navigate(['/agregar-dia-reparto/'+this.nroReparto]);
+  }
 }

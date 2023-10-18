@@ -14,7 +14,7 @@
     <input type="text" [(ngModel)]="nuevoCliente.direccion">
 
     <label>DNI:</label>
-    <input type="number" [(ngModel)]="nuevoCliente.dni">
+    <input type="number" maxlength="8" minlength="7" [(ngModel)]="nuevoCliente.dni">
 
     <label>Email:</label>
     <input type="email" [(ngModel)]="nuevoCliente.email">

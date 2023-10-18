@@ -17,6 +17,8 @@ export class SearchBarComponent {
   opcionesComboBox2: string[] = [];
   seleccionComboBox1: string = '';
   seleccionComboBox2: string = '';
+  diaSemanaSelec: string = '';
+  diasSemana: string[] = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
   textoBusqueda: string = '';
   clientes: Cliente[] = [];
 
@@ -56,9 +58,11 @@ export class SearchBarComponent {
       this.router.navigate(['/proveedores']);
     }
     if(this.seleccionComboBox1 === 'Reparto'){
+      if(this.seleccionComboBox2 === 'Dia Semana'){
+        this.textoBusqueda = this.diaSemanaSelec;
+      }
       this.repartoService.setCampoValor(this.seleccionComboBox2,this.textoBusqueda);
       this.router.navigate(['/repartos']);
-
     }
   }
 

@@ -25,6 +25,7 @@ import {ListaCuentasComponent} from "./lists/lista-cuentas/lista-cuentas.compone
 import {CuentaDetallesComponent} from "./views/cuenta-detalles/cuenta-detalles.component";
 import {AgregarCompraComponent} from "./creates/agregar-compra/agregar-compra.component";
 import {CompraComponent} from "./views/compra/compra.component";
+import {AgregarDiaRepartoComponent} from "./creates/agregar-dia-reparto/agregar-dia-reparto.component";
 
 const routes: Routes = [
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'agregar-proveedor', component: AgregarProveedorComponent},
   { path: 'agregar-articulo', component: AgregarArticuloComponent},
   { path: 'agregar-reparto', component: AgregarRepartoComponent},
+  { path: 'agregar-dia-reparto/:id', component: AgregarDiaRepartoComponent},
   { path: 'agregar-compra', component: AgregarCompraComponent},
   { path: 'agregar-pago/:id', component: AgregarPagoComponent},
   { path: 'crear-pedido', component: AgregarPedidoComponent},

@@ -42,6 +42,7 @@ import { ListaCuentasComponent } from './lists/lista-cuentas/lista-cuentas.compo
 import { CuentaDetallesComponent } from './views/cuenta-detalles/cuenta-detalles.component';
 import { AgregarCompraComponent } from './creates/agregar-compra/agregar-compra.component';
 import { CompraComponent } from './views/compra/compra.component';
+import { AgregarDiaRepartoComponent } from './creates/agregar-dia-reparto/agregar-dia-reparto.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { CompraComponent } from './views/compra/compra.component';
     ListaCuentasComponent,
     CuentaDetallesComponent,
     AgregarCompraComponent,
-    CompraComponent
+    CompraComponent,
+    AgregarDiaRepartoComponent
   ],
   imports: [
     BrowserModule,

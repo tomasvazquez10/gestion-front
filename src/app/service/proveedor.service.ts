@@ -33,6 +33,10 @@ export class ProveedorService {
     return  this.http.get<Proveedor>(this.apiUrl+"/"+id);
   }
 
+  getProveedorByCuit(cuit: string) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/cuit/"+cuit, {observe: 'response'});
+  }
+
   editarProveedor(proveedor: Proveedor): Observable<any> {
     console.log(proveedor);
     return this.http.post(`${this.url}`, proveedor);
@@ -72,5 +76,25 @@ export class ProveedorService {
 
   getValor(): string {
     return this.valor;
+  }
+
+  existeCUIT(cuit: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getProveedorByCuit(cuit).subscribe(
+        (respuesta) => {
+          console.log(respuesta);
+          console.log(respuesta.status);
+          if (respuesta.status === 200) {
+            resolve(true); // CUIT existe
+          } else {
+            resolve(false); // CUIT no existe
+          }
+        },
+        (error) => {
+          console.error('Error al buscar CUIT:', error);
+          reject(error); // Rechazar la promesa en caso de error
+        }
+      );
+    });
   }
 }

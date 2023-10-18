@@ -35,6 +35,10 @@ export class RepartoService {
     return this.http.get<Reparto[]>(this.apiUrl+"/numero/"+nroReparto);
   }
 
+  getRepartoByNro(nroReparto: number) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/numero/"+nroReparto, {observe: 'response'});
+  }
+
   getRepartosdDiaSemana(dia: string) : Observable<Reparto[]> {
     return this.http.get<Reparto[]>(this.apiUrl+"/dia_semana/"+dia);
   }
@@ -92,5 +96,24 @@ export class RepartoService {
 
   getValor(): string {
     return this.valor;
+  }
+
+  existeNroReparto(nroReparto: number): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getRepartoByNro(nroReparto).subscribe(
+        (respuesta) => {
+          console.log(respuesta);
+          console.log(respuesta.status);
+          if (respuesta.status === 200) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error al buscar Reparto:', error);
+        }
+      );
+    });
   }
 }

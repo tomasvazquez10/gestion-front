@@ -10,7 +10,11 @@
     <option *ngFor="let opcion2 of opcionesComboBox2">{{ opcion2 }}</option>
   </select>
 
-  <input type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
+  <select *ngIf="seleccionComboBox2 === 'Dia Semana'" [(ngModel)]="diaSemanaSelec">
+    <option *ngFor="let dia of diasSemana">{{ dia }}</option>
+  </select>
+
+  <input *ngIf="seleccionComboBox2 !== 'Dia Semana'" type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
   <button (click)="buscar()">Buscar</button>
 </div>
   </div>

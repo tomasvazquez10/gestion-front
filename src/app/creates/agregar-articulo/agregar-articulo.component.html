@@ -13,7 +13,10 @@
       <input type="text" [(ngModel)]="nuevoArticulo.nroArticulo">
 
       <label>CUIT Proveedor:</label>
-      <input type="number" [(ngModel)]="nuevoArticulo.cuitProveedor">
+      <input type="text" [(ngModel)]="nuevoArticulo.cuitProveedor" (input)="filtrarSugerencias()" placeholder="CUIT Proveedor">
+      <ul *ngIf="sugerenciasFiltradas.length > 0">
+        <li *ngFor="let sugerencia of sugerenciasFiltradas" (click)="seleccionarSugerencia(sugerencia)">{{ sugerencia }}</li>
+      </ul>
 
       <label>Precio:</label>
       <input type="email" [(ngModel)]="nuevoArticulo.precio">
