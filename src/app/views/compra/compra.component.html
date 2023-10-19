@@ -2,7 +2,7 @@
 <app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarCompra()" (cancelar)="ocultarConfirmPopup()"></app-confirm-popup>
 <app-confirm-popup *ngIf="mostrarError" (aceptar)="mostrarError = false"></app-confirm-popup>
 <div class="card-container">
-  <div>
+
     <mat-card class="custom-card">
       <mat-card-header>
         <mat-card-title>Detalles de la Compra</mat-card-title>
@@ -21,5 +21,5 @@
       </mat-card-content>
     </mat-card>
 
-  </div>
+
 </div>

@@ -39,27 +39,51 @@ export class AgregarPedidoComponent {
   }
 
   crearNuevoPedido() {
-    this.nuevoPedido.dniCliente = this.dniCliente;
-    this.nuevoPedido.productos = this.productosSelec;
-    this.nuevoPedido.precioTotal = parseFloat(this.precioTotal.toFixed(2));
+    if(this.datosCorrectos()){
+      this.clienteService.existeDNI(this.dniCliente).then((existe) => {
+        if (existe) {
+          this.nuevoPedido.dniCliente = this.dniCliente;
+          this.nuevoPedido.productos = this.productosSelec;
+          this.nuevoPedido.precioTotal = parseFloat(this.precioTotal.toFixed(2));
 
-    this.service.crearPedido(this.nuevoPedido).subscribe(response => {
+          this.service.crearPedido(this.nuevoPedido).subscribe(response => {
+            console.log('Pedido creado:', response);
+            console.log(response.body);
+              //creo venta vinculada al pedido
+              this.nuevoPedido.id = response.id;
+              this.venta.pedido = response;
+              console.log(this.venta);
+              this.ventaService.crearVenta(this.venta).subscribe(response2 => {
+                this.router.navigate(['/pedido/'+response.id]);
+              });
+          });
+              } else {
+                alert('El DNI ingresado no existe');
+              }
+            }).catch((error) => {
+              console.error('Error al verificar DNI:', error);
+            });
+    }
+  }
 
-      console.log('Pedido creado:', response);
-      console.log(response.body);
-        //creo venta vinculada al pedido
-        this.nuevoPedido.id = response.id;
-        this.venta.pedido = response;
-        console.log(this.venta);
-        this.ventaService.crearVenta(this.venta).subscribe(response2 => {
-          this.router.navigate(['/pedido/'+response.id]);
-        });
+  datosCorrectos() : boolean {
+    console.log();
+    if (this.dniCliente === ''){
+      alert('Debe ingresar un DNI Cliente');
+      return false;
+    }else if (!this.validarDNI((this.dniCliente).toString().length)){
+      alert('Debe ingresar un formato correcto de DNI');
+      return false;
+    }else if (this.productosSelec.length === 0){
+      alert('Debe ingresar al menos un Producto');
+      return false;
+    }else {
+      return true;
+    }
+  }
 
-
-    });
-
-
-    console.log(this.nuevoPedido);
+  validarDNI(dni: number): boolean {
+    return dni >= 7 && dni <= 8;
   }
 
   volverPedidos(){
@@ -72,16 +96,19 @@ export class AgregarPedidoComponent {
   }
 
   agregarArticuloAProductos() : void {
-    this.productosSelec.push({
-      nroArticulo : this.articuloSelec.id,
-      nombre : this.articuloSelec.nombre,
-      precio: this.articuloSelec.precio,
-      cantidad: this.cantidadSelec});
+    if((this.articuloSelec.nombre !== '') && (this.articuloSelec.nombre !== 'Seleccionar...') && (this.cantidadSelec > 0)){
+      this.productosSelec.push({
+        nroArticulo : this.articuloSelec.id,
+        nombre : this.articuloSelec.nombre,
+        precio: this.articuloSelec.precio,
+        cantidad: this.cantidadSelec});
 
-    this.articuloSelec.nombre = '';
-    this.precioTotal += (this.articuloSelec.precio * this.cantidadSelec);
-    this.cantidadSelec = 0;
-    console.log(this.productosSelec);
+      this.articuloSelec.nombre = '';
+      this.precioTotal += (this.articuloSelec.precio * this.cantidadSelec);
+      this.cantidadSelec = 0;
+      console.log(this.productosSelec);
+    }
+
   }
 
   onChangeSelec() : void {

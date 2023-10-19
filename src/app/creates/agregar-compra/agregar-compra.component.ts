@@ -20,6 +20,8 @@ export class AgregarCompraComponent implements OnInit{
 
   ngOnInit(): void {
     this.getArticulos();
+    const nuevaFecha = new Date();
+
   }
 
   getArticulos(): void {
@@ -28,16 +30,38 @@ export class AgregarCompraComponent implements OnInit{
   }
 
   crearNuevaCompra() {
-    this.compra.articulo = this.articulo;
-    console.log(this.compra);
-    this.service.crearCompra(this.compra).subscribe(response => {
+    if (this.datosCorrectos()){
+      this.compra.articulo = this.articulo;
+      console.log(this.compra);
+      this.service.crearCompra(this.compra).subscribe(response => {
 
-      console.log('Compra creada:', response);
-      this.router.navigate(['/compras']);
-    });
+        console.log('Compra creada:', response);
+        this.router.navigate(['/compras']);
+      });
+    }
   }
 
   volverCompras() {
     this.router.navigate(['/compras']);
+  }
+
+  datosCorrectos() : boolean {
+    console.log(this.compra.fecha);
+    if (this.articulo.nombre === ''){
+      alert('Debe seleccionar un Articulo');
+      return false;
+    }else if (!this.validarNumero(this.compra.precioUnidad)){
+      alert('Debe ingresar un valor en Precio Unidad');
+      return false;
+    }else if (!this.validarNumero(this.compra.cantidad)){
+      alert('Debe ingresar un valor en Cantidad');
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  validarNumero(numero: number) : boolean {
+    return numero > 0;
   }
 }

@@ -52,7 +52,6 @@ export class AgregarArticuloComponent implements OnInit{
   }
 
   datosCorrectos() : boolean {
-    console.log();
     if (this.nuevoArticulo.nombre === ''){
       alert('Debe completar el campo Nombre');
       return false;
@@ -75,6 +74,7 @@ export class AgregarArticuloComponent implements OnInit{
       return true;
     }
   }
+
   validarCUIT(cuit: number): boolean {
     return cuit == 11;
   }
