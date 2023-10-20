@@ -12,8 +12,8 @@ export class CuentaComponent implements OnInit{
 
   idUsuario: string = '';
   idCuenta: string = '';
-  cuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0, pagos: [], gastos: []};
-  nuevaCuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0, pagos: [], gastos: []};
+  cuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
+  nuevaCuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
 

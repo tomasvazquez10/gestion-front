@@ -11,7 +11,7 @@
   </tr>
   <tr *ngFor="let cuenta of cuentas" (click)="verDetalles(cuenta.id)">
     <td>{{ cuenta.id }}</td>
-    <td>{{ cuenta.idUsuario }}</td>
+    <td>{{ cuenta.dniCliente }}</td>
     <td>${{ cuenta.saldo }}</td>
   </tr>
 </table>

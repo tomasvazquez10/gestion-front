@@ -12,7 +12,7 @@ export class CuentaDetallesComponent {
 
   idUsuario: string = '';
   idCuenta: string = '';
-  cuenta: Cuenta = {id: 0, idUsuario: "0", saldo: 0, pagos: [], gastos: []};
+  cuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
 
   constructor(private service: CuentaService, private route: ActivatedRoute, private router: Router) {}
 

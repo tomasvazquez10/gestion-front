@@ -25,7 +25,7 @@ export class PagoService {
     return  this.http.get<Pago>(this.apiUrl+"/"+id);
   }
 
-  /*getPagosBy(id: string) : Observable<Pago[]> {
-    return this.http.get<Pago[]>(this.apiUrl+"/articulo/"+id);
-  }*/
+  getSaldoPendiente(idPedido: number) : Observable<number> {
+    return  this.http.get<number>(this.apiUrl+"/saldoPendiente/"+idPedido);
+  }
 }

@@ -8,6 +8,7 @@
   </mat-card-header>
   <mat-card-content class="custom-card-content">
     <div>
+      <p>Numero: {{ pedido.id }}</p>
       <p>Fecha: {{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
       <p>Total: ${{ pedido.precioTotal }}</p>
       <p>Estado: {{ pedido.estadoTexto }}</p>
@@ -28,7 +29,6 @@
       <div>
         <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar</button>
         <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarEntrega()">Confirmar Entrega</button>
-        <button mat-button *ngIf="pedido.estadoTexto === 'ENTREGADO'" (click)="crearPago()">Agregar Pago</button>
       </div>
     </div>
 
