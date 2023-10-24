@@ -43,6 +43,7 @@ import { CuentaDetallesComponent } from './views/cuenta-detalles/cuenta-detalles
 import { AgregarCompraComponent } from './creates/agregar-compra/agregar-compra.component';
 import { CompraComponent } from './views/compra/compra.component';
 import { AgregarDiaRepartoComponent } from './creates/agregar-dia-reparto/agregar-dia-reparto.component';
+import { ReportesComponent } from './views/reportes/reportes.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AgregarDiaRepartoComponent } from './creates/agregar-dia-reparto/agrega
     CuentaDetallesComponent,
     AgregarCompraComponent,
     CompraComponent,
-    AgregarDiaRepartoComponent
+    AgregarDiaRepartoComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,

@@ -66,9 +66,18 @@ export class ListaClienteComponent {
     this.campos.set('Numero de reparto','nro_reparto');
   }
 
-  getListadoPDF() : void {
-    this.clienteService.getListadoPDF(this.clientes)
-      .subscribe();
+  descargarPDF(): void {
+    this.clienteService.downloadPDF(this.clientes).subscribe((pdfBlob: Blob) => {
+      const blobURL = window.URL.createObjectURL(pdfBlob);
+
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'Listado_clientes.pdf'; // Nombre del archivo PDF
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobURL);
+    });
   }
 
 }

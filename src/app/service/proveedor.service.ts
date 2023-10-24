@@ -97,4 +97,47 @@ export class ProveedorService {
       );
     });
   }
+
+  datosCorrectos(nuevoProveedor: Proveedor) : boolean {
+    if (nuevoProveedor.nombre === ''){
+      alert('Debe completar el campo Nombre');
+      return false;
+    }else if (nuevoProveedor.nombreFantasia === ''){
+      alert('Debe completar el campo Nombre Fantasia');
+      return false;
+    }else if (nuevoProveedor.direccion === ''){
+      alert('Debe completar el campo Direccion');
+      return false;
+    }else if (nuevoProveedor.cuit === ''){
+      alert('Debe completar el campo CUIT');
+      return false;
+    }else if (!this.validarCUIT((nuevoProveedor.cuit).toString().length)){
+      alert('Debe ingresar un formato correcto de CUIT');
+      return false;
+    }else if (nuevoProveedor.email === ''){
+      alert('Debe completar el campo Email');
+      return false;
+    }else if (!this.validarEmail(nuevoProveedor.email)){
+      alert('Debe ingresar un formato correcto de Email');
+      return false;
+    }else if (!this.validarNumero((nuevoProveedor.telefono).toString().length)){
+      alert('Debe ingresar un formato correcto de Telefono');
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  validarEmail(email: string): boolean {
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailRegex.test(email);
+  }
+
+  validarCUIT(cuit: number): boolean {
+    return cuit == 11;
+  }
+
+  validarNumero(numero: number): boolean {
+    return numero >= 10;
+  }
 }

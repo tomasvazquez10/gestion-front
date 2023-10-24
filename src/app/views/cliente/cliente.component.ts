@@ -58,13 +58,23 @@ export class ClienteComponent implements OnInit{
     // Lógica para guardar los cambios editados
     console.log('entro');
     this.getClienteEditado();
-    this.clienteService.editarCliente(this.clienteEditado).subscribe(response => {
-      console.log('Cliente editado:', response);
-      this.camposEditables = false;
-      this.valoresEditados = {};
-      this.getCliente();
-    });
-
+    if(this.clienteService.datosCorrectos(this.clienteEditado)){
+      this.clienteService.existeDNI(this.clienteEditado.dni).then((existe) => {
+        if ((this.clienteEditado.dni === this.cliente.dni) || !existe) {
+          console.log('todo OK');
+          this.clienteService.editarCliente(this.clienteEditado).subscribe(response => {
+          console.log('Cliente editado:', response);
+          this.camposEditables = false;
+          this.valoresEditados = {};
+          this.getCliente();
+        });
+        } else {
+          alert('El DNI ingresado ya existe');
+        }
+      }).catch((error) => {
+        console.error('Error al verificar DNI:', error);
+      });
+    }
   }
 
   borrarCliente() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from "../model/cliente";
 import { Observable, of} from "rxjs";
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +61,16 @@ export class ClienteService {
 
   getListadoPDF(clientes: Cliente[]): Observable<any> {
     return this.http.post(this.apiUrl+"/pdf", clientes);
+  }
+
+  downloadPDF(clientes: Cliente[]): Observable<Blob> {
+    const url = 'http://localhost:8080/cliente/pdf';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(url, clientes, {
+      responseType: 'blob',
+      headers: headers
+    });
   }
 
   getCliente(id: string) : Observable<Cliente> {
@@ -134,5 +144,52 @@ export class ClienteService {
         }
       );
     });
+  }
+
+  datosCorrectos(nuevoCliente: Cliente) : boolean {
+    console.log();
+    if (nuevoCliente.nombre === ''){
+      alert('Debe completar el campo Nombre');
+      return false;
+    }else if (nuevoCliente.nombreFantasia === ''){
+      alert('Debe completar el campo Nombre Fantasia');
+      return false;
+    }else if (nuevoCliente.direccion === ''){
+      alert('Debe completar el campo Direccion');
+      return false;
+    }else if (nuevoCliente.dni === ''){
+      alert('Debe completar el campo DNI');
+      return false;
+    }else if (!this.validarDNI((nuevoCliente.dni).toString().length)){
+      alert('Debe ingresar un formato correcto de DNI');
+      return false;
+    }else if (nuevoCliente.email === ''){
+      alert('Debe completar el campo Email');
+      return false;
+    }else if (!this.validarEmail(nuevoCliente.email)){
+      alert('Debe ingresar un formato correcto de Email');
+      return false;
+    }else if (nuevoCliente.nroReparto === 0){
+      alert('Debe completar el campo Numero de Reparto');
+      return false;
+    }else if (!this.validarNumero((nuevoCliente.telefono).toString().length)){
+      alert('Debe ingresar un formato correcto de Telefono');
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  validarEmail(email: string): boolean {
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailRegex.test(email);
+  }
+
+  validarDNI(dni: number): boolean {
+    return dni >= 7 && dni <= 8;
+  }
+
+  validarNumero(numero: number): boolean {
+    return numero >= 10;
   }
 }

@@ -1,0 +1,44 @@
+
+<div class="container">
+  <div class="form-container">
+    <h2>Busqueda de Reportes</h2>
+    <div class="barra-busqueda">
+      <select [(ngModel)]="seleccionComboBox1" (ngModelChange)="onComboBox1Change()">
+        <option *ngFor="let opcion of opcionesComboBox1">{{ opcion }}</option>
+      </select>
+
+      <select [(ngModel)]="seleccionComboBox2">
+        <option *ngFor="let opcion2 of opcionesComboBox2">{{ opcion2 }}</option>
+      </select>
+
+      <select *ngIf="seleccionComboBox2 === 'Dia Semana'" [(ngModel)]="diaSemanaSelec">
+        <option *ngFor="let dia of diasSemana">{{ dia }}</option>
+      </select>
+
+      <input *ngIf="seleccionComboBox2 !== 'Dia Semana'" type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
+      <button (click)="buscar()">Buscar</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="pagos && pagos.length > 0" class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Pagos</h2>
+  <button (click)="descargarPagos()">Descargar Listado</button>
+</div>
+
+<table *ngIf="pagos && pagos.length > 0">
+  <tr>
+    <th>Fecha</th>
+    <th>Forma Pago</th>
+    <th>Monto</th>
+    <th>ID Pedido</th>
+    <th>DNI Cliente</th>
+  </tr>
+  <tr *ngFor="let pago of pagos">
+    <td>{{ pago.fecha | date:'dd/MM/yyyy'}}</td>
+    <td>{{ pago.formaPago }}</td>
+    <td>${{ pago.monto }}</td>
+    <td>{{ pago.idPedido }}</td>
+    <td>{{ pago.dniCliente }}</td>
+  </tr>
+</table>

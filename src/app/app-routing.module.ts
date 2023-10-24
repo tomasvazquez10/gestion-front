@@ -26,6 +26,7 @@ import {CuentaDetallesComponent} from "./views/cuenta-detalles/cuenta-detalles.c
 import {AgregarCompraComponent} from "./creates/agregar-compra/agregar-compra.component";
 import {CompraComponent} from "./views/compra/compra.component";
 import {AgregarDiaRepartoComponent} from "./creates/agregar-dia-reparto/agregar-dia-reparto.component";
+import {ReportesComponent} from "./views/reportes/reportes.component";
 
 const routes: Routes = [
 
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'proveedores', component: ListaProveedorComponent},
   { path: 'articulos', component: ListaArticulosComponent},
   { path: 'repartos', component: ListaRepartosComponent},
+  { path: 'reportes', component: ReportesComponent},
   { path: 'compras', component: ListaComprasComponent},
   { path: 'ventas', component: ListaVentasComponent},
   { path: 'cuentas', component: ListaCuentasComponent},

@@ -42,9 +42,10 @@ export class RepartoComponent implements OnInit{
     console.log(reparto);
     this.service.editarReparto(reparto).subscribe(response => {
       console.log('Reparto editado:', response);
+      this.getDiasSemanaDisp();
     });
     reparto.editable = false;
-    this.getDiasSemanaDisp();
+
   }
 
   confirmBorrar(reparto: Reparto): void {

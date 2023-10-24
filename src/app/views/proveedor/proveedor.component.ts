@@ -42,16 +42,23 @@ export class ProveedorComponent implements OnInit{
   }
 
   guardarEdicion() {
-    // Lógica para guardar los cambios editados
-    console.log('entro');
     this.getProveedorEditado();
-    this.service.editarProveedor(this.proveedorEditado).subscribe(response => {
-      console.log('Proveedor editado:', response);
-      this.camposEditables = false;
-      this.valoresEditados = {};
-      this.getProveedor();
-    });
-
+    if (this.service.datosCorrectos(this.proveedorEditado)) {
+      this.service.existeCUIT(this.proveedorEditado.cuit).then((existe) => {
+        if ((this.proveedor.cuit === this.proveedorEditado.cuit) || !existe) {
+          this.service.editarProveedor(this.proveedorEditado).subscribe(response => {
+            console.log('Proveedor editado:', response);
+            this.camposEditables = false;
+            this.valoresEditados = {};
+            this.getProveedor();
+          });
+        } else {
+          alert('El CUIT ingresado ya existe');
+        }
+      }).catch((error) => {
+        console.error('Error al verificar CUIT:', error);
+      });
+    }
   }
 
   getProveedorEditado(): void{

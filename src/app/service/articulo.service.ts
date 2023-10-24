@@ -103,4 +103,40 @@ export class ArticuloService {
       );
     });
   }
+
+  datosCorrectos(nuevoArticulo: Articulo) : boolean {
+    if (nuevoArticulo.nombre === ''){
+      alert('Debe completar el campo Nombre');
+      return false;
+    }else if (nuevoArticulo.descripcion === ''){
+      alert('Debe completar el campo Descripcion');
+      return false;
+    }else if (!this.validarNumero(nuevoArticulo.nroArticulo)){
+      alert('Debe ingresar un valor en Numero Articulo');
+      return false;
+    }else if (nuevoArticulo.cuitProveedor === ''){
+      alert('Debe completar el campo CUIT');
+      return false;
+    }else if (!this.validarCUIT((nuevoArticulo.cuitProveedor).toString().length)){
+      alert('Debe ingresar un formato correcto de CUIT');
+      return false;
+    }else if (!this.validarNumero(nuevoArticulo.precio)){
+      alert('Debe ingresar un valor en Precio');
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  validarCUIT(cuit: number): boolean {
+    return cuit == 11;
+  }
+
+  validarNumero(numero: number) : boolean {
+    return numero > 0;
+  }
+
+  validarNumeroArticulo(numero : number) : boolean {
+    return true;
+  }
 }

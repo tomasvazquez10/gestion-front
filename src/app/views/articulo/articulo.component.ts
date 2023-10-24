@@ -4,6 +4,7 @@ import {ArticuloService} from "../../service/articulo.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PrecioArticulo} from "../../model/precioArticulo";
 import {PrecioArticuloService} from "../../service/precio-articulo.service";
+import {ProveedorService} from "../../service/proveedor.service";
 
 @Component({
   selector: 'app-articulo',
@@ -20,7 +21,7 @@ export class ArticuloComponent {
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ArticuloService, private precioService: PrecioArticuloService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService, private route: ActivatedRoute, private router: Router) {}
 
   getArticulo(): void {
     this.service.getArticulo(this.articuloId)
@@ -56,19 +57,37 @@ export class ArticuloComponent {
   }
 
   guardarEdicion() {
-    // Lógica para guardar los cambios editados
-    console.log('entro');
-    this.getArticuloEditado();
-    if (this.articulo.precio !== this.articuloEditado.precio){
-      this.actualizarPrecio();
-    }
-    this.service.editarArticulo(this.articuloEditado).subscribe(response => {
-      console.log('Cliente editado:', response);
-      this.camposEditables = false;
-      this.valoresEditados = {};
-      this.getArticulo();
-    });
 
+    this.getArticuloEditado();
+    if(this.service.datosCorrectos(this.articuloEditado)){
+      console.log("editado: "+this.articuloEditado.nroArticulo);
+      console.log("articulo: "+this.articulo.nroArticulo);
+      this.service.existeNroArticulo(this.articuloEditado.nroArticulo).then((existeArt) => {
+        if ((this.articulo.nroArticulo === this.articuloEditado.nroArticulo) || !existeArt) {
+          this.provService.existeCUIT(this.articuloEditado.cuitProveedor).then((existe) => {
+            if (existe) {
+              if (this.articulo.precio !== this.articuloEditado.precio && this.articuloEditado.precio !== 0){
+                this.actualizarPrecio();
+              }
+              this.service.editarArticulo(this.articuloEditado).subscribe(response => {
+                console.log('Cliente editado:', response);
+                this.camposEditables = false;
+                this.valoresEditados = {};
+                this.getArticulo();
+              });
+            } else {
+              alert('El CUIT no existe, debe dar de alta el Proveedor');
+            }
+          }).catch((error) => {
+            console.error('Error al verificar CUIT:', error);
+          });
+        } else {
+          alert('El Numero Articulo ingresado ya existe');
+        }
+      }).catch((error) => {
+        console.error('Error al verificar Articulo:', error);
+      });
+    }
   }
 
   actualizarPrecio() {

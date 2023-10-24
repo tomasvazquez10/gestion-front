@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Pago} from "../../model/pago";
 import {PagoService} from "../../service/pago.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Venta} from "../../model/venta";
+import {Pedido} from "../../model/pedido";
 
 @Component({
   selector: 'app-agregar-pago',
@@ -9,8 +11,8 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./agregar-pago.component.css']
 })
 export class AgregarPagoComponent implements OnInit{
-
-  nuevoPago: Pago = { id: 0, fecha: new Date(), formaPago: '', monto: 0, descuento: 0, idPedido: 0};
+  venta = {} as Venta;
+  nuevoPago: Pago = { id: 0, fecha: new Date(), formaPago: '', monto: 0, descuento: 0, idPedido: 0, dniCliente: ''};
   pedidoId: number = 0;
   formaPagos: string[] = ['EFECTIVO','TRANSFERENCIA','TARJETA'];
   formaPagoSelec: string = '';
