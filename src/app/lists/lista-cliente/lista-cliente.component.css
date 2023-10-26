@@ -23,4 +23,8 @@ h2 {
   transform: scale(1.05); /* Efecto de escala al pasar el cursor */
 }
 
+.button-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}
 

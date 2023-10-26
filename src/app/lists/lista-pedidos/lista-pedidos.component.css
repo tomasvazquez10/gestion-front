@@ -76,3 +76,7 @@ th {
 tr:hover {
   background-color: #f9f9f9;
 }
+.button-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}

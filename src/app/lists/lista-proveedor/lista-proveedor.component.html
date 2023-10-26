@@ -1,11 +1,12 @@
 
 
 <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
-  <h2>Listado de Proveedores</h2>
+  <h2 style="margin-left: 150px;">Listado de Proveedores</h2>
   <button mat-button routerLink="/agregar-proveedor">Agregar Proveedor</button>
+  <button mat-button (click)="volverAtras()" style="margin-left: auto">Volver Atras</button>
 </div>
 
-<table>
+<table *ngIf="(proveedores && proveedores.length >0)">
   <tr>
     <th>ID</th>
     <th>Nombre</th>
@@ -26,3 +27,4 @@
   </tr>
 </table>
 
+<h2 *ngIf="!(proveedores && proveedores.length >0)">No se encontraron resultados. </h2>

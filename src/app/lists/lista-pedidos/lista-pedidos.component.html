@@ -1,18 +1,24 @@
 <mat-card class="custom-card">
   <mat-card-header>
     <mat-card-title>Pedidos</mat-card-title>
+    <div class="button-container" style="margin-left: auto;">
+      <button mat-button routerLink="/crear-pedido">Crear Pedido</button>
+      <button mat-button (click)="volverAtras()" *ngIf="!idCliente">Volver Atras</button>
+    </div>
   </mat-card-header>
   <mat-card-content class="custom-card-content">
 
-    <button mat-button routerLink="/crear-pedido">Crear Pedido</button>
+
 
     <table *ngIf="pedidos && pedidos.length > 0">
       <tr>
+        <th>Numero</th>
         <th>Fecha</th>
         <th>Estado</th>
         <th>Total</th>
       </tr>
       <tr *ngFor="let pedido of pedidos" (click)="verDetalles(pedido.id)">
+        <td>{{ pedido.id}}</td>
         <td>{{ pedido.fecha | date:'dd/MM/yyyy'}}</td>
         <td>{{ pedido.estadoTexto }}</td>
         <td>${{ pedido.precioTotal }}</td>

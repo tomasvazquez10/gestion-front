@@ -15,6 +15,7 @@ export class ReportesComponent {
 
   pagos: Pago[] = [];
   pedidos: Pedido[] = [];
+  pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
   opcionesComboBox1: string[] = ['Articulo', 'Pago', 'Pedido', 'Factura'];
   opcionesComboBox2: string[] = [];
   seleccionComboBox1: string = '';
@@ -82,9 +83,7 @@ export class ReportesComponent {
         console.log(this.textoBusqueda);
         this.pedidoService.existePedido(this.textoBusqueda).then((existe) => {
           if (existe) {
-            this.descargarFactura();
-          } else {
-            alert('El Pedido ingresado no existe');
+            this.pedidoService.getPedido(this.textoBusqueda).subscribe( pedido => this.pedido = pedido);
           }
           }).catch((error) => {
             console.error('Error al verificar Pedido:', error);

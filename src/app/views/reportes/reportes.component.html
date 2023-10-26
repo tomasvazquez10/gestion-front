@@ -1,7 +1,12 @@
 
 <div class="container">
   <div class="form-container">
-    <h2>Busqueda de Reportes y Facturas</h2>
+    <!--
+    <div class="button-container" style="margin-left: 500px;">
+      <button mat-button (click)="volverAtras()">Volver Atras</button>
+    </div>
+    -->
+    <h2 style="margin-left: 150px;">Busqueda de Reportes y Facturas</h2>
 
     <div class="barra-busqueda">
       <select [(ngModel)]="seleccionComboBox1" (ngModelChange)="onComboBox1Change()">
@@ -22,18 +27,21 @@
 
       <input *ngIf="seleccionComboBox2 === 'Entre dos fechas'" type="date" [(ngModel)]="fecha2">
 
-      <button (click)="buscar()">Buscar</button>
+        <button (click)="buscar()">Buscar</button>
     </div>
 
-    <button mat-button (click)="volverAtras()" style="margin-left: auto;">Volver Atras</button>
+
+
   </div>
+
 </div>
 
-<div *ngIf="pagos && pagos.length > 0" class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
+
+
+<div *ngIf="pagos && pagos.length > 0" class="container" style="display: flex; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Pagos</h2>
-  <button (click)="descargarPagos()">Descargar Listado</button>
+  <button (click)="descargarPagos()" style="margin-left: auto;">Descargar Listado</button>
 </div>
-
 <table *ngIf="pagos && pagos.length > 0">
   <tr>
     <th>Fecha</th>
@@ -51,8 +59,38 @@
   </tr>
 </table>
 
-<div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0)">
+<mat-card class="custom-card" *ngIf="pedido.id !==0">
+<mat-card-header>
+  <mat-card-title>Detalles del Pedido</mat-card-title>
+  <button mat-button (click)="descargarFactura()" style="margin-left: auto;">Descargar Factura</button>
+</mat-card-header>
+<mat-card-content class="custom-card-content">
+<div>
+  <p>Numero: {{ pedido.id }}</p>
+  <p>Fecha: {{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
+  <p>Total: ${{ pedido.precioTotal }}</p>
+  <p>Estado: {{ pedido.estadoTexto }}</p>
+
+  <table>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+    <tr *ngFor="let producto of pedido.productos">
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.cantidad }}</td>
+      <td>${{ producto.precio }}</td>
+    </tr>
+  </table>
+</div>
+</mat-card-content>
+</mat-card>
+
+<div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0) && (pedido.id ===0)">
   <div class="form-container">
     <h2>No se encontraron resultados.</h2>
   </div>
 </div>
+
+

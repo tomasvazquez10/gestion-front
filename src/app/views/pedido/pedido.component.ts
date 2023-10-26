@@ -69,6 +69,7 @@ export class PedidoComponent {
           //redigir a pantalla clientes
           this.pedidoService.setMostrarMensaje(true);
           this.pedidoService.setColorMensaje('red');
+          this.mostrarConfirmEntrega = false;
           this.router.navigate(['/pedido/'+this.pedidoId]);
         }
       },
@@ -94,5 +95,21 @@ export class PedidoComponent {
 
   volverAtras() {
     this.location.back();
+  }
+
+  descargarFactura(): void {
+    console.log('descargar factura');
+    console.log(this.pedidoId);
+    this.pedidoService.descargarFacturaPDF(this.pedidoId).subscribe((pdfBlob: Blob) => {
+      const blobURL = window.URL.createObjectURL(pdfBlob);
+
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'Factura.pdf';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobURL);
+    });
   }
 }

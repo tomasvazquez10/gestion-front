@@ -46,4 +46,7 @@ th {
   background-color: #f2f2f2;
   font-weight: bold;
 }
-
+.button-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}

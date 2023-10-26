@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Cuenta} from "../../model/cuenta";
 import {CuentaService} from "../../service/cuenta.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-cuentas',
@@ -12,7 +13,7 @@ export class ListaCuentasComponent implements OnInit{
 
   cuentas: Cuenta[] = [];
 
-  constructor(private service: CuentaService, private router: Router) {}
+  constructor(private service: CuentaService, private router: Router, private location: Location) {}
 
   getCuentas(): void {
     this.service.getCuentas()
@@ -25,6 +26,10 @@ export class ListaCuentasComponent implements OnInit{
 
   verDetalles(id: number) : void {
     this.router.navigate(['/cuenta-detalles/'+id]);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

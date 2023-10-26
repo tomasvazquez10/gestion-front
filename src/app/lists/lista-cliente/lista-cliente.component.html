@@ -24,20 +24,16 @@
 
 <app-alert message="Cliente eliminado" *ngIf="mostrarPopup"></app-alert>
 
-<div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
-  <h2>Listado de Clientes</h2>
-  <button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
-  <button mat-button (click)="descargarPDF()">Descargar Listado</button>
+<div class="container" style=" display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent; width: 90%">
+  <h2 style="margin-left: 150px;">Listado de Clientes</h2>
+  <div class="button-container">
+    <button mat-button routerLink="/agregar-cliente">Agregar Cliente</button>
+    <button mat-button (click)="descargarPDF()" *ngIf="(clientes && clientes.length >0)">Descargar Listado</button>
+    <button mat-button (click)="volverAtras()" style="margin-left: auto">Volver Atras</button>
+  </div>
 </div>
 
-<label>Buscar Clientes</label>
-<select [(ngModel)]="campoSelec">
-  <option *ngFor="let campo of campos.keys()" [value]="campo">{{ campo }}</option>
-</select>
-<input type="text" [(ngModel)]="valor">
-<button mat-button (click)="buscarClientes()">Buscar</button>
-
-<table>
+<table *ngIf="(clientes && clientes.length >0)">
   <tr>
     <th>ID</th>
     <th>Nombre</th>
@@ -59,3 +55,5 @@
     <td>{{ cliente.telefono }}</td>
   </tr>
 </table>
+
+<h2 *ngIf="!(clientes && clientes.length >0)">No se encontraron resultados. </h2>

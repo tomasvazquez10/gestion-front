@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Cliente} from "../../model/cliente";
 import {ClienteService} from "../../service/cliente.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-cliente',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class ListaClienteComponent {
 
-  constructor(private clienteService: ClienteService, private router: Router) {}
+  constructor(private clienteService: ClienteService, private router: Router, private location: Location) {}
 
   clientes: Cliente[] = [];
   mostrarPopup = false;
@@ -41,7 +42,6 @@ export class ListaClienteComponent {
       this.getClientes();
     }
     this.setMostrarMensaje();
-
   }
 
   verDetalles(id: number) : void {
@@ -79,5 +79,7 @@ export class ListaClienteComponent {
       window.URL.revokeObjectURL(blobURL);
     });
   }
-
+  volverAtras() {
+    this.location.back();
+  }
 }

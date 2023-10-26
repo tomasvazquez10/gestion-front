@@ -4,6 +4,7 @@ import {PedidoService} from "../../service/pedido.service";
 import {Pedido} from "../../model/pedido";
 import {ClienteService} from "../../service/cliente.service";
 import {Cliente} from "../../model/cliente";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-pedidos',
@@ -17,7 +18,8 @@ export class ListaPedidosComponent {
   cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
   estadoPedido: string = '';
 
-  constructor(private pedidoService: PedidoService, private clienteService: ClienteService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private pedidoService: PedidoService, private clienteService: ClienteService,
+              private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,14 +29,24 @@ export class ListaPedidosComponent {
   }
 
   getPedidos(): void {
-    console.log(this.cliente.dni);
-    this.pedidoService.getPedidosByCliente(this.idCliente)
-      .subscribe( pedidos => this.pedidos = pedidos);
+    console.log(this.idCliente);
+    if(this.idCliente){
+      this.pedidoService.getPedidosByCliente(this.idCliente)
+        .subscribe( pedidos => this.pedidos = pedidos);
+    }else {
+      this.pedidoService.getPedidos()
+        .subscribe(pedidos => this.pedidos = pedidos);
+    }
+
   }
 
 
   verDetalles(id: number) : void {
     this.router.navigate(['/pedido/'+id]);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

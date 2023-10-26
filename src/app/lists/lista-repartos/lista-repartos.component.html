@@ -1,10 +1,11 @@
 
 <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
-  <h2>Listado de Repartos</h2>
+  <h2 style="margin-left: 150px;">Listado de Repartos</h2>
   <button mat-button routerLink="/agregar-reparto">Agregar Reparto</button>
+  <button mat-button (click)="volverAtras()" style="margin-left: auto">Volver Atras</button>
 </div>
 
-<table>
+<table *ngIf="(repartos && repartos.length >0)">
   <tr>
     <th>Numero Reparto</th>
     <th>Dia Semana</th>
@@ -16,3 +17,5 @@
     <td>{{ reparto.zonaEntrega }}</td>
   </tr>
 </table>
+
+<h2 *ngIf="!(repartos && repartos.length >0)">No se encontraron resultados. </h2>

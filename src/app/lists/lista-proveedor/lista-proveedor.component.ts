@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {ProveedorService} from "../../service/proveedor.service";
 import {Proveedor} from "../../model/proveedor";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-proveedor',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class ListaProveedorComponent {
 
-  constructor(private proveedorService: ProveedorService, private router: Router) {}
+  constructor(private proveedorService: ProveedorService, private router: Router, private location: Location) {}
 
   proveedores: Proveedor[] = [];
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
@@ -49,5 +50,9 @@ export class ListaProveedorComponent {
     this.campos.set('Nombre','nombre');
     this.campos.set('Nombre Fantasia','nombre_fantasia');
     this.campos.set('CUIT','cuit');
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

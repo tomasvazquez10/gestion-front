@@ -3,6 +3,7 @@ import {Compra} from "../../model/compra";
 import {RepartoService} from "../../service/reparto.service";
 import {Router} from "@angular/router";
 import {CompraService} from "../../service/compra.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-compras',
@@ -13,7 +14,7 @@ export class ListaComprasComponent {
 
   compras: Compra[] = [];
 
-  constructor(private service: CompraService, private router: Router) {}
+  constructor(private service: CompraService, private router: Router, private location: Location) {}
 
   getCompras(): void {
     this.service.getCompras()
@@ -28,5 +29,7 @@ export class ListaComprasComponent {
     this.router.navigate(['/compra/'+id]);
   }
 
-
+  volverAtras() {
+    this.location.back();
+  }
 }

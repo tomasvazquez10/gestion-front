@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Reparto} from "../../model/reparto";
-import {ArticuloService} from "../../service/articulo.service";
 import {Router} from "@angular/router";
 import {RepartoService} from "../../service/reparto.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-lista-repartos',
@@ -16,7 +16,7 @@ export class ListaRepartosComponent {
   campoSelec: string = '';
   campos: string[] = [];
 
-  constructor(private service: RepartoService, private router: Router) {}
+  constructor(private service: RepartoService, private router: Router, private location: Location) {}
 
   getRepartos(): void {
     this.service.getRepartos()
@@ -42,6 +42,10 @@ export class ListaRepartosComponent {
 
   verDetalles(nroReparto: number) : void {
     this.router.navigate(['/reparto/'+nroReparto]);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }
