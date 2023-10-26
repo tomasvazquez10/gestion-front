@@ -3,7 +3,7 @@ import {Pago} from "../../model/pago";
 import {PagoService} from "../../service/pago.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Venta} from "../../model/venta";
-import {Pedido} from "../../model/pedido";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-agregar-pago',
@@ -18,7 +18,7 @@ export class AgregarPagoComponent implements OnInit{
   formaPagoSelec: string = '';
   saldoPendiente: number = 0;
 
-  constructor(private service: PagoService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private service: PagoService, private router: Router, private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -62,5 +62,9 @@ export class AgregarPagoComponent implements OnInit{
 
   volverPagos(){
     this.router.navigate(['/pedido/'+this.pedidoId]);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

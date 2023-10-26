@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Proveedor} from "../model/proveedor";
 import {Pedido} from "../model/pedido";
 import {Cliente} from "../model/cliente";
+import {Pago} from "../model/pago";
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,43 @@ export class PedidoService {
 
   getPedido(id: string) : Observable<Pedido> {
     return  this.http.get<Pedido>(this.apiUrl+"/"+id);
-    //return of({id: 2, nombre: 'CEBOLLA S.A', nombreFantasia: 'CEBOLLA', direccion: 'Belgrano 244', cuit: '30-45789698-1', telefono: '1156478996', email: 'arroz@gmail.com'});
+  }
+
+  getPedidoById(id: string) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/"+id, {observe: 'response'} );
   }
 
   getPedidosByCliente(idCliente: string) : Observable<Pedido[]> {
     return  this.http.get<Pedido[]>(this.apiUrl+"/cliente/"+idCliente);
-    //return of({id: 2, nombre: 'CEBOLLA S.A', nombreFantasia: 'CEBOLLA', direccion: 'Belgrano 244', cuit: '30-45789698-1', telefono: '1156478996', email: 'arroz@gmail.com'});
+  }
+
+  descargarFacturaPDF(idPedido: string): Observable<Blob> {
+    const url = 'http://localhost:8080/pedido/factura/'+idPedido;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.get(url, {
+      responseType: 'blob',
+      headers: headers
+    });
+  }
+
+  existePedido(id: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getPedidoById(id).subscribe(
+        (respuesta) => {
+          console.log(respuesta);
+          console.log(respuesta.status);
+          if (respuesta.status === 200) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        },
+        (error) => {
+          console.error('Error al buscar Pedido:', error);
+        }
+      );
+    });
   }
 
   getMostrarMensaje(): boolean {

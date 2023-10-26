@@ -9,7 +9,6 @@ import {ClienteComponent} from "./views/cliente/cliente.component";
 import {AgregarProveedorComponent} from "./creates/agregar-proveedor/agregar-proveedor.component";
 import {HomeComponent} from "./utils/home/home.component";
 import {ProveedorComponent} from "./views/proveedor/proveedor.component";
-import {EditarProveedorComponent} from "./editar-proveedor/editar-proveedor.component";
 import {AgregarPedidoComponent} from "./creates/agregar-pedido/agregar-pedido.component";
 import {PedidoComponent} from "./views/pedido/pedido.component";
 import {ListaArticulosComponent} from "./lists/lista-articulos/lista-articulos.component";
@@ -44,7 +43,6 @@ const routes: Routes = [
   { path: 'proveedores', component: ListaProveedorComponent},
   { path: 'articulos', component: ListaArticulosComponent},
   { path: 'repartos', component: ListaRepartosComponent},
-  { path: 'reportes', component: ReportesComponent},
   { path: 'compras', component: ListaComprasComponent},
   { path: 'ventas', component: ListaVentasComponent},
   { path: 'cuentas', component: ListaCuentasComponent},
@@ -58,6 +56,8 @@ const routes: Routes = [
   { path: 'proveedor/:id', component: ProveedorComponent},
   { path: 'pedido/:id', component: PedidoComponent},
   { path: 'compra/:id', component: CompraComponent},
+  { path: 'reportes', component: ReportesComponent},
+
   { path: 'home', component: HomeComponent}
 ];
 

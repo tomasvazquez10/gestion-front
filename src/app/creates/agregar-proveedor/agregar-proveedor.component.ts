@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Proveedor} from "../../model/proveedor";
 import {Router} from "@angular/router";
 import {ProveedorService} from "../../service/proveedor.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-agregar-proveedor',
@@ -12,7 +13,7 @@ export class AgregarProveedorComponent {
 
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
 
-  constructor(private service: ProveedorService, private router: Router) {}
+  constructor(private service: ProveedorService, private router: Router, private location: Location) {}
 
 
   crearNuevoProveedor() {
@@ -34,6 +35,10 @@ export class AgregarProveedorComponent {
 
   volverProveedores(){
     this.router.navigate(['/proveedores']);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

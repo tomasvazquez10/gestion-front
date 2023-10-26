@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from "@angular/common";
 import {Articulo} from "../../model/articulo";
 import {Router} from "@angular/router";
 import {ArticuloService} from "../../service/articulo.service";
@@ -16,7 +17,7 @@ export class AgregarArticuloComponent implements OnInit{
   sugerenciasFiltradas: string[] = [];
   cuitSelec: string = '';
 
-  constructor(private service: ArticuloService, private proveedorService: ProveedorService, private router: Router) {}
+  constructor(private service: ArticuloService, private proveedorService: ProveedorService, private router: Router, private location: Location) {}
 
   getProveedores(): void {
     this.proveedorService.getProveedores()
@@ -68,6 +69,10 @@ export class AgregarArticuloComponent implements OnInit{
 
   ngOnInit(): void {
     this.getProveedores();
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Pago} from "../model/pago";
 import {Cliente} from "../model/cliente";
+import {Pedido} from "../model/pedido";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,14 @@ export class ReporteService {
 
   getPagosByNroReparto(nroReparto: string) : Observable<Pago[]> {
     return this.http.get<Pago[]>(this.apiUrl+"/pagos/reparto/"+nroReparto);
+  }
+
+  getPedidosByFecha(fecha: string) : Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(this.apiUrl+"/pedidos/fecha/"+fecha);
+  }
+
+  getPedidosEntreFechas(fechaDesde: string, fechaHasta: string) : Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(this.apiUrl+"/pedidos/desde/"+fechaDesde+"/hasta/"+fechaHasta);
   }
 
   downloadPagosPDF(pagos: Pago[]): Observable<Blob> {

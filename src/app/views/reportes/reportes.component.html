@@ -1,13 +1,13 @@
 
 <div class="container">
   <div class="form-container">
-    <h2>Busqueda de Reportes</h2>
+    <h2>Busqueda de Reportes y Facturas</h2>
     <div class="barra-busqueda">
       <select [(ngModel)]="seleccionComboBox1" (ngModelChange)="onComboBox1Change()">
         <option *ngFor="let opcion of opcionesComboBox1">{{ opcion }}</option>
       </select>
 
-      <select [(ngModel)]="seleccionComboBox2">
+      <select [(ngModel)]="seleccionComboBox2" (ngModelChange)="onComboBox2Change()">
         <option *ngFor="let opcion2 of opcionesComboBox2">{{ opcion2 }}</option>
       </select>
 
@@ -15,7 +15,12 @@
         <option *ngFor="let dia of diasSemana">{{ dia }}</option>
       </select>
 
-      <input *ngIf="seleccionComboBox2 !== 'Dia Semana'" type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
+      <input *ngIf="mostrarTexto" type="text" [(ngModel)]="textoBusqueda" placeholder="Buscar...">
+
+      <input *ngIf="mostrarFecha1" type="date" [(ngModel)]="fecha1">
+
+      <input *ngIf="seleccionComboBox2 === 'Entre dos fechas'" type="date" [(ngModel)]="fecha2">
+
       <button (click)="buscar()">Buscar</button>
     </div>
   </div>

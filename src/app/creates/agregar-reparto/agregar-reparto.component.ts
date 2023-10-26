@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Reparto} from "../../model/reparto";
 import {RepartoService} from "../../service/reparto.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-agregar-reparto',
@@ -14,7 +15,7 @@ export class AgregarRepartoComponent {
   diasSemana: string[] = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
   diaSemanaSelec = '';
 
-  constructor(private service: RepartoService, private router: Router) {}
+  constructor(private service: RepartoService, private router: Router, private location: Location) {}
 
   crearReparto() {
     if (this.datosCorrectos()) {
@@ -56,6 +57,10 @@ export class AgregarRepartoComponent {
 
   volverRepartos(){
     this.router.navigate(['/repartos']);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

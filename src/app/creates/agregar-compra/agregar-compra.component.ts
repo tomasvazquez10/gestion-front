@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from "@angular/common";
 import {Compra} from "../../model/compra";
 import {CompraService} from "../../service/compra.service";
 import {Router} from "@angular/router";
@@ -16,7 +17,7 @@ export class AgregarCompraComponent implements OnInit{
   compra: Compra = { id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
   articulos: Articulo[] = [];
 
-  constructor(private service: CompraService, private articuloService: ArticuloService, private router: Router) {}
+  constructor(private service: CompraService, private articuloService: ArticuloService, private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.getArticulos();
@@ -63,5 +64,9 @@ export class AgregarCompraComponent implements OnInit{
 
   validarNumero(numero: number) : boolean {
     return numero > 0;
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

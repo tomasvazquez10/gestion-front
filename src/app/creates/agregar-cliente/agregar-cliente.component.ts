@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Location } from "@angular/common";
 import { ClienteService } from "../../service/cliente.service";
 import {Cliente} from "../../model/cliente";
 import { Router } from '@angular/router';
@@ -17,7 +18,7 @@ export class AgregarClienteComponent implements OnInit{
   nroRepartos: number[] = [];
   nroReparto: number = 0;
 
-  constructor(private clientesService: ClienteService,private repartoService: RepartoService, private router: Router) {}
+  constructor(private clientesService: ClienteService,private repartoService: RepartoService, private router: Router, private location: Location) {}
 
   crearNuevoCliente() {
     this.nuevoCliente.nroReparto = this.nroReparto;
@@ -46,5 +47,9 @@ export class AgregarClienteComponent implements OnInit{
   ngOnInit(): void {
     this.repartoService.getNroRepartos()
       .subscribe(nroRep => this.nroRepartos = nroRep);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

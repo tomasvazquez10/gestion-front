@@ -8,7 +8,7 @@ import {Articulo} from "../../model/articulo";
 import {ClienteService} from "../../service/cliente.service";
 import {VentaService} from "../../service/venta.service";
 import {Venta} from "../../model/venta";
-import {HttpResponse, HttpStatusCode} from "@angular/common/http";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-agregar-pedido',
@@ -28,7 +28,8 @@ export class AgregarPedidoComponent {
   precioTotal: number = 0;
   venta: Venta = { id: 0, pedido: this.nuevoPedido, pagos: []};
 
-  constructor(private service: PedidoService, private productoService: ProductoService, private clienteService: ClienteService, private ventaService: VentaService, private router: Router) {}
+  constructor(private service: PedidoService, private productoService: ProductoService, private clienteService: ClienteService
+              , private ventaService: VentaService, private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.getArticulos();
@@ -143,5 +144,9 @@ export class AgregarPedidoComponent {
   seleccionarSugerencia(sugerencia: string) {
     this.dniCliente = sugerencia;
     this.sugerenciasFiltradas = [];
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

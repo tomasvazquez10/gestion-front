@@ -20,7 +20,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AgregarProveedorComponent } from './creates/agregar-proveedor/agregar-proveedor.component';
 import { ConfirmPopupComponent } from './utils/confirm-popup/confirm-popup.component';
 import { HomeComponent } from './utils/home/home.component';
-import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
 import { AgregarPedidoComponent } from './creates/agregar-pedido/agregar-pedido.component';
 import { ListaPedidosComponent } from './lists/lista-pedidos/lista-pedidos.component';
 import { PedidoComponent } from './views/pedido/pedido.component';
@@ -59,7 +58,6 @@ import { ReportesComponent } from './views/reportes/reportes.component';
     AgregarProveedorComponent,
     ConfirmPopupComponent,
     HomeComponent,
-    EditarProveedorComponent,
     AgregarPedidoComponent,
     ListaPedidosComponent,
     PedidoComponent,

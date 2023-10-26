@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from "@angular/common";
 import {Articulo} from "../../model/articulo";
 import {Router} from "@angular/router";
 import {ArticuloService} from "../../service/articulo.service";
@@ -15,7 +16,7 @@ export class ListaArticulosComponent {
   campoSelec: String = '';
   campos = new Map();
 
-  constructor(private service: ArticuloService, private router: Router) {}
+  constructor(private service: ArticuloService, private router: Router, private location: Location) {}
 
   getArticulos(): void {
     this.service.getArticulos()
@@ -45,5 +46,9 @@ export class ListaArticulosComponent {
   setCampos() : void {
     this.campos.set('Nombre','nombre');
     this.campos.set('CUIT Proveedor','cuit');
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }
