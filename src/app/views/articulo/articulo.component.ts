@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PrecioArticulo} from "../../model/precioArticulo";
 import {PrecioArticuloService} from "../../service/precio-articulo.service";
 import {ProveedorService} from "../../service/proveedor.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-articulo',
@@ -21,7 +22,8 @@ export class ArticuloComponent {
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService
+              , private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getArticulo(): void {
     this.service.getArticulo(this.articuloId)
@@ -131,5 +133,9 @@ export class ArticuloComponent {
     this.articuloEditado.cuitProveedor = this.valoresEditados['cuitProveedor'];
     this.articuloEditado.stock = this.valoresEditados['stock'];
     this.articuloEditado.precio = this.valoresEditados['precio'];
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

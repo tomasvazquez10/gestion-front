@@ -2,6 +2,7 @@
 <div class="container">
   <div class="form-container">
     <h2>Busqueda de Reportes y Facturas</h2>
+
     <div class="barra-busqueda">
       <select [(ngModel)]="seleccionComboBox1" (ngModelChange)="onComboBox1Change()">
         <option *ngFor="let opcion of opcionesComboBox1">{{ opcion }}</option>
@@ -23,6 +24,8 @@
 
       <button (click)="buscar()">Buscar</button>
     </div>
+
+    <button mat-button (click)="volverAtras()" style="margin-left: auto;">Volver Atras</button>
   </div>
 </div>
 
@@ -47,3 +50,9 @@
     <td>{{ pago.dniCliente }}</td>
   </tr>
 </table>
+
+<div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0)">
+  <div class="form-container">
+    <h2>No se encontraron resultados.</h2>
+  </div>
+</div>

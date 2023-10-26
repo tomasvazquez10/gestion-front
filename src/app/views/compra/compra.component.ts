@@ -4,6 +4,7 @@ import {Articulo} from "../../model/articulo";
 import {CompraService} from "../../service/compra.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-compra',
@@ -19,7 +20,8 @@ export class CompraComponent implements OnInit{
   mostrarConfirmBorrar: boolean = false;
   mostrarError: boolean = false;
 
-  constructor(private service: CompraService,private popUpService: ConfirmPopupService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: CompraService,private popUpService: ConfirmPopupService,
+              private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCompra(): void {
     this.service.getCompra(this.compraId)
@@ -62,6 +64,10 @@ export class CompraComponent implements OnInit{
         console.error('Error al eliminar el articulo:', error);
       }
     );
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

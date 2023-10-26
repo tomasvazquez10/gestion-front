@@ -35,6 +35,7 @@ export class AgregarArticuloComponent implements OnInit{
               this.service.crearArticulo(this.nuevoArticulo).subscribe(response => {
 
                 console.log('Articulo creado:', response);
+                this.service.setMostrarMensaje(true);
                 this.router.navigate(['/articulo/'+response.id]);
               });
             } else {

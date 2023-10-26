@@ -3,6 +3,7 @@ import { ClienteService } from "../../service/cliente.service";
 import {Cliente} from "../../model/cliente";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PedidoService} from "../../service/pedido.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-cliente',
@@ -19,7 +20,8 @@ export class ClienteComponent implements OnInit{
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private clienteService: ClienteService, private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private clienteService: ClienteService, private pedidoService: PedidoService,
+              private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCliente(): void {
     this.clienteService.getCliente(this.clienteId)
@@ -109,5 +111,9 @@ export class ClienteComponent implements OnInit{
     this.clienteEditado.email = this.valoresEditados['email'];
     this.clienteEditado.nroReparto = this.valoresEditados['nroReparto'];
     this.clienteEditado.telefono = this.valoresEditados['telefono'];
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

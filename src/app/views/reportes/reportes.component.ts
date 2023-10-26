@@ -4,6 +4,7 @@ import {ReporteService} from "../../service/reporte.service";
 import {Router} from "@angular/router";
 import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-reportes',
@@ -25,8 +26,9 @@ export class ReportesComponent {
   textoBusqueda: string = '';
   mostrarTexto: boolean = false;
   mostrarFecha1: boolean = false;
+  mostrarSinResultados: boolean = false;
 
-  constructor(private service: ReporteService, private pedidoService: PedidoService, private router: Router) {}
+  constructor(private service: ReporteService, private pedidoService: PedidoService, private location: Location) {}
 
   onComboBox1Change() {
     if (this.seleccionComboBox1 === 'Pedido') {
@@ -52,6 +54,10 @@ export class ReportesComponent {
                           || this.seleccionComboBox2 === 'Numero de pedido');
 
     this.mostrarFecha1 = (this.seleccionComboBox2 === 'Fecha' || this.seleccionComboBox2 === 'Entre dos fechas');
+  }
+
+  setMostrarSinResultados() {
+    this.mostrarSinResultados = true;
   }
 
   buscar(): void {
@@ -85,7 +91,7 @@ export class ReportesComponent {
           });
       }
     }
-    console.log(this.pagos);
+    this.setMostrarSinResultados();
   }
 
   descargarPagos(): void {
@@ -116,6 +122,10 @@ export class ReportesComponent {
       a.click();
       window.URL.revokeObjectURL(blobURL);
     });
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
 }

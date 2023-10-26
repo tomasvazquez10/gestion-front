@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import {Cliente} from "../../model/cliente";
-import {ClienteService} from "../../service/cliente.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
-import {Producto} from "../../model/producto";
-import {Proveedor} from "../../model/proveedor";
-import {Observable} from "rxjs";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-pedido',
@@ -22,7 +18,8 @@ export class PedidoComponent {
   mostrarConfirmCancelar: boolean = false;
   mostrarConfirmEntrega: boolean = false;
 
-  constructor(private pedidoService: PedidoService, private popUpService: ConfirmPopupService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private pedidoService: PedidoService, private popUpService: ConfirmPopupService,
+              private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getPedido(): void {
     this.pedidoService.getPedido(this.pedidoId)
@@ -89,13 +86,13 @@ export class PedidoComponent {
     }
   }
 
-  crearPago(){
-
-  }
-
   cambiarEstado(){
     this.pedido.estado = 1;
     this.pedido.estadoTexto = 'ENTREGADO';
     this.editarPedido();
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

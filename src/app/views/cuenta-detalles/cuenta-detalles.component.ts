@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Cuenta} from "../../model/cuenta";
 import {CuentaService} from "../../service/cuenta.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-cuenta-detalles',
@@ -14,7 +15,8 @@ export class CuentaDetallesComponent {
   idCuenta: string = '';
   cuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
 
-  constructor(private service: CuentaService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: CuentaService, private route: ActivatedRoute, private router: Router,
+     private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -36,4 +38,7 @@ export class CuentaDetallesComponent {
     this.router.navigate(['/pago/'+id]);
   }
 
+  volverAtras() {
+    this.location.back();
+  }
 }

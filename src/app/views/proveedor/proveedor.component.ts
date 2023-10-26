@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProveedorService} from "../../service/proveedor.service";
 import {Proveedor} from "../../model/proveedor";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-proveedor',
@@ -18,7 +19,8 @@ export class ProveedorComponent implements OnInit{
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router
+    , private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -102,4 +104,7 @@ export class ProveedorComponent implements OnInit{
     );
   }
 
+  volverAtras() {
+    this.location.back();
+  }
 }

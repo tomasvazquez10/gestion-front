@@ -5,6 +5,7 @@
 <mat-card class="custom-card">
   <mat-card-header>
     <mat-card-title>Detalles del Pedido</mat-card-title>
+    <button mat-button (click)="volverAtras()" style="margin-left: auto;">Volver Atras</button>
   </mat-card-header>
   <mat-card-content class="custom-card-content">
     <div>
@@ -27,9 +28,11 @@
       </table>
 
       <div>
-        <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar</button>
+        <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar Pedido</button>
         <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarEntrega()">Confirmar Entrega</button>
       </div>
+
+
     </div>
 
   </mat-card-content>

@@ -3,6 +3,7 @@ import {Reparto} from "../../model/reparto";
 import {RepartoService} from "../../service/reparto.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-reparto',
@@ -18,7 +19,8 @@ export class RepartoComponent implements OnInit{
   mostrarConfirmBorrar: boolean = false;
   idReparto: number = 0;
 
-  constructor(private service: RepartoService, private popupService: ConfirmPopupService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: RepartoService, private popupService: ConfirmPopupService,
+              private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getRepartosByNro() {
     this.service.getRepartosByNro(this.nroReparto)
@@ -88,5 +90,9 @@ export class RepartoComponent implements OnInit{
 
   crearDiaReparto() : void {
     this.router.navigate(['/agregar-dia-reparto/'+this.nroReparto]);
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 }

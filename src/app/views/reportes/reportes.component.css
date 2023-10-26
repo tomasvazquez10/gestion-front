@@ -1,6 +1,6 @@
 /* Estilos para el contenedor centrado */
 .container {
-  display: flex;
+  display: inline;
   flex-direction: column;
   align-items: center;
 }
