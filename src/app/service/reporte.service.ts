@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Pago} from "../model/pago";
 import {Cliente} from "../model/cliente";
 import {Pedido} from "../model/pedido";
+import {Articulo} from "../model/articulo";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,15 @@ export class ReporteService {
   }
 
   getPedidosEntreFechas(fechaDesde: string, fechaHasta: string) : Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(this.apiUrl+"/pedidos/desde/"+fechaDesde+"/hasta/"+fechaHasta);
+    return this.http.get<Pedido[]>(this.apiUrl+"/pedidos/fechas/"+fechaDesde+"/"+fechaHasta);
+  }
+
+  getArticulosMasVendidos() : Observable<Articulo[]> {
+    return this.http.get<Articulo[]>(this.apiUrl+"/articulos/masVendidos");
+  }
+
+  getArticulosMasVendidosEntre(fechaDesde: string, fechaHasta: string) : Observable<Articulo[]> {
+    return this.http.get<Articulo[]>(this.apiUrl+"/articulos/masVentas/"+fechaDesde+"/"+fechaHasta);
   }
 
   downloadPagosPDF(pagos: Pago[]): Observable<Blob> {

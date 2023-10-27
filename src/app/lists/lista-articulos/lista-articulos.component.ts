@@ -48,6 +48,20 @@ export class ListaArticulosComponent {
     this.campos.set('CUIT Proveedor','cuit');
   }
 
+  descargarPDF(): void {
+    this.service.downloadPDF(this.articulos).subscribe((pdfBlob: Blob) => {
+      const blobURL = window.URL.createObjectURL(pdfBlob);
+
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'Listado_articulos.pdf';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobURL);
+    });
+  }
+
   volverAtras() {
     this.location.back();
   }

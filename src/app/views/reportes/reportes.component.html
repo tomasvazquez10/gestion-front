@@ -25,18 +25,12 @@
 
       <input *ngIf="mostrarFecha1" type="date" [(ngModel)]="fecha1">
 
-      <input *ngIf="seleccionComboBox2 === 'Entre dos fechas'" type="date" [(ngModel)]="fecha2">
+      <input *ngIf="mostrarFecha2" type="date" [(ngModel)]="fecha2">
 
         <button (click)="buscar()">Buscar</button>
     </div>
-
-
-
   </div>
-
 </div>
-
-
 
 <div *ngIf="pagos && pagos.length > 0" class="container" style="display: flex; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Pagos</h2>
@@ -59,10 +53,29 @@
   </tr>
 </table>
 
+<div *ngIf="pedidos && pedidos.length > 0" class="container" style="display: flex; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Pedidos</h2>
+  <button mat-button (click)="descargarFactura(textoBusqueda)" style="margin-left: auto;">Descargar Factura</button>
+</div>
+<table *ngIf="pedidos && pedidos.length > 0">
+  <tr>
+    <th>Numero</th>
+    <th>Fecha</th>
+    <th>Estado</th>
+    <th>Total</th>
+  </tr>
+  <tr *ngFor="let pedido of pedidos">
+    <td>{{ pedido.id }}</td>
+    <td>{{ pedido.fecha | date:'dd/MM/yyyy'}}</td>
+    <td>{{ pedido.estadoTexto }}</td>
+    <td>${{ pedido.precioTotal }}</td>
+  </tr>
+</table>
+
 <mat-card class="custom-card" *ngIf="pedido.id !==0">
 <mat-card-header>
   <mat-card-title>Detalles del Pedido</mat-card-title>
-  <button mat-button (click)="descargarFactura()" style="margin-left: auto;">Descargar Factura</button>
+  <button mat-button (click)="descargarFactura(textoBusqueda)" style="margin-left: auto;">Descargar Factura</button>
 </mat-card-header>
 <mat-card-content class="custom-card-content">
 <div>
@@ -87,7 +100,8 @@
 </mat-card-content>
 </mat-card>
 
-<div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0) && (pedido.id ===0)">
+<div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0) && !(pedidos && pedidos.length > 0)
+                                        && !(articulos && articulos.length > 0) && (pedido.id ===0)">
   <div class="form-container">
     <h2>No se encontraron resultados.</h2>
   </div>

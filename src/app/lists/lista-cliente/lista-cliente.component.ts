@@ -72,7 +72,7 @@ export class ListaClienteComponent {
 
       const a = document.createElement('a');
       a.href = blobURL;
-      a.download = 'Listado_clientes.pdf'; // Nombre del archivo PDF
+      a.download = 'Listado_clientes.pdf';
       a.style.display = 'none';
       document.body.appendChild(a);
       a.click();

@@ -17,7 +17,7 @@ import {Location} from "@angular/common";
 })
 export class AgregarPedidoComponent {
 
-  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: []};
+  nuevoPedido: Pedido = {id: 0, fecha: new Date(), dniCliente: '', fechaStr: '',estado: 0, precioTotal: 0, estadoTexto: '', productos: []};
   productosSelec: Producto[] = [];
   articulos: Articulo[] = [];
   dniCliente: string = '';
@@ -43,6 +43,8 @@ export class AgregarPedidoComponent {
     if(this.datosCorrectos()){
       this.clienteService.existeDNI(this.dniCliente).then((existe) => {
         if (existe) {
+          console.log('fecha: '+this.nuevoPedido.fecha);
+          this.nuevoPedido.fechaStr = this.nuevoPedido.fecha.toString();
           this.nuevoPedido.dniCliente = this.dniCliente;
           this.nuevoPedido.productos = this.productosSelec;
           this.nuevoPedido.precioTotal = parseFloat(this.precioTotal.toFixed(2));

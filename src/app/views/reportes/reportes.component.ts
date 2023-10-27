@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
 import {Location} from "@angular/common";
+import {Articulo} from "../../model/articulo";
 
 @Component({
   selector: 'app-reportes',
@@ -15,7 +16,8 @@ export class ReportesComponent {
 
   pagos: Pago[] = [];
   pedidos: Pedido[] = [];
-  pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
+  articulos: Articulo[] = [];
+  pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', fechaStr: '',estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
   opcionesComboBox1: string[] = ['Articulo', 'Pago', 'Pedido', 'Factura'];
   opcionesComboBox2: string[] = [];
   seleccionComboBox1: string = '';
@@ -27,6 +29,7 @@ export class ReportesComponent {
   textoBusqueda: string = '';
   mostrarTexto: boolean = false;
   mostrarFecha1: boolean = false;
+  mostrarFecha2: boolean = false;
   mostrarSinResultados: boolean = false;
 
   constructor(private service: ReporteService, private pedidoService: PedidoService, private location: Location) {}
@@ -47,6 +50,9 @@ export class ReportesComponent {
     } else {
       this.opcionesComboBox2 = [];
     }
+    this.mostrarTexto = false;
+    this.mostrarFecha1 = false;
+    this.mostrarFecha2 = false;
   }
 
   onComboBox2Change(){
@@ -54,7 +60,12 @@ export class ReportesComponent {
                           || this.seleccionComboBox2 === 'Numero de reparto'
                           || this.seleccionComboBox2 === 'Numero de pedido');
 
-    this.mostrarFecha1 = (this.seleccionComboBox2 === 'Fecha' || this.seleccionComboBox2 === 'Entre dos fechas');
+    this.mostrarFecha1 = (this.seleccionComboBox2 === 'Fecha'
+                          || this.seleccionComboBox2 === 'Entre dos fechas'
+                          || this.seleccionComboBox2 === 'Mas ventas entre');
+
+    this.mostrarFecha2 = (this.seleccionComboBox2 === 'Entre dos fechas'
+                          || this.seleccionComboBox2 === 'Mas ventas entre')
   }
 
   setMostrarSinResultados() {
@@ -63,6 +74,9 @@ export class ReportesComponent {
 
   buscar(): void {
     console.log(this.seleccionComboBox1 +" - "+this.seleccionComboBox2);
+    this.pedido.id = 0;
+    this.pedidos = [];
+    this.pagos = [];
     if(this.seleccionComboBox1 === 'Pago'){
       if(this.seleccionComboBox2 === 'Numero de reparto'){
         this.service.getPagosByNroReparto(this.textoBusqueda).subscribe( pagos => this.pagos = pagos);
@@ -71,12 +85,9 @@ export class ReportesComponent {
       }
     }else if(this.seleccionComboBox1 === 'Pedido'){
       if(this.seleccionComboBox2 === 'Fecha'){
-        const fechaStr = this.fecha1.getDay()+"/"+this.fecha1.getMonth()+"/"+this.fecha1.getFullYear();
-        this.service.getPedidosByFecha(fechaStr).subscribe( pedidos => this.pedidos = pedidos);
+        this.service.getPedidosByFecha(this.fecha1.toString()).subscribe( pedidos => this.pedidos = pedidos);
       } else if(this.seleccionComboBox2 === 'Entre dos fechas'){
-        const fechaStr1 = this.fecha1.getDay()+"/"+this.fecha1.getMonth()+"/"+this.fecha1.getFullYear();
-        const fechaStr2 = this.fecha2.getDay()+"/"+this.fecha2.getMonth()+"/"+this.fecha2.getFullYear();
-        this.service.getPedidosEntreFechas(fechaStr1, fechaStr2).subscribe( pedidos => this.pedidos = pedidos);
+        this.service.getPedidosEntreFechas(this.fecha1.toString(), this.fecha2.toString()).subscribe( pedidos => this.pedidos = pedidos);
       }
     }else if(this.seleccionComboBox1 === 'Factura'){
       if(this.seleccionComboBox2 === 'Numero de pedido'){
@@ -88,6 +99,12 @@ export class ReportesComponent {
           }).catch((error) => {
             console.error('Error al verificar Pedido:', error);
           });
+      }
+    }else if(this.seleccionComboBox1 === 'Articulo'){
+      if(this.seleccionComboBox2 === 'Mas ventas'){
+        this.service.getArticulosMasVendidos().subscribe( articulos => this.articulos = articulos);
+      }else if(this.seleccionComboBox2 === 'Mas ventas entre'){
+        this.service.getArticulosMasVendidosEntre(this.fecha1.toString(), this.fecha2.toString()).subscribe( articulos => this.articulos = articulos);
       }
     }
     this.setMostrarSinResultados();
@@ -107,10 +124,9 @@ export class ReportesComponent {
     });
   }
 
-  descargarFactura(): void {
+  descargarFactura(id: string): void {
     console.log('descargar factura');
-    console.log(this.textoBusqueda);
-    this.pedidoService.descargarFacturaPDF(this.textoBusqueda).subscribe((pdfBlob: Blob) => {
+    this.pedidoService.descargarFacturaPDF(id).subscribe((pdfBlob: Blob) => {
       const blobURL = window.URL.createObjectURL(pdfBlob);
 
       const a = document.createElement('a');

@@ -25,6 +25,6 @@ h2 {
 
 .button-container {
   display: flex;
-  gap: 10px; /* Espacio entre los botones */
+  gap: 10px;
 }
 

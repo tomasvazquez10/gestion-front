@@ -13,7 +13,7 @@ import {Location} from "@angular/common";
 export class PedidoComponent {
 
   pedidoId: string = '';
-  pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
+  pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', fechaStr: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
   mostrarPopup: boolean = false;
   mostrarConfirmCancelar: boolean = false;
   mostrarConfirmEntrega: boolean = false;

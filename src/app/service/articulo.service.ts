@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Articulo} from "../model/articulo";
-import {HttpClient, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PrecioArticulo} from "../model/precioArticulo";
 import {Cliente} from "../model/cliente";
@@ -138,5 +138,15 @@ export class ArticuloService {
 
   validarNumeroArticulo(numero : number) : boolean {
     return true;
+  }
+
+  downloadPDF(articulos: Articulo[]): Observable<Blob> {
+    const url = 'http://localhost:8080/articulo/pdf';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(url, articulos, {
+      responseType: 'blob',
+      headers: headers
+    });
   }
 }
