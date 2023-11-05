@@ -14,7 +14,7 @@ import {Reparto} from "../../model/reparto";
 
 export class AgregarClienteComponent implements OnInit{
 
-  nuevoCliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
+  nuevoCliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '', saldo: 0 };
   nroRepartos: number[] = [];
   nroReparto: number = 0;
 

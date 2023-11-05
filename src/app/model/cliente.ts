@@ -7,4 +7,5 @@ export interface Cliente {
   nroReparto: number;
   telefono: string;
   email: string;
+  saldo: number;
 }

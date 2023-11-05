@@ -2,15 +2,18 @@
   <mat-card-header>
     <mat-card-title>Cuenta</mat-card-title>
   </mat-card-header>
-  <mat-card-content class="custom-card-content">
-    <ng-container *ngIf="cuenta.id !== null; else cuentaSinId">
+  <mat-card-content class="custom-card-content" *ngIf="cliente && cliente.id!== 0">
+    <ng-container>
       <p> Saldo </p>
-      <p class="saldo"> {{ "$" + cuenta.saldo }}</p>
-      <button mat-button (click)="verCuenta(cuenta.id)">Ver detalles Cuenta</button>
+      <p class="saldo"> {{ "$" + cliente.saldo }}</p>
+      <button mat-button (click)="verCuenta(cliente.id)">Ver detalles Cuenta</button>
     </ng-container>
-    <ng-template #cuentaSinId>
-      <p>No tiene Cuenta.</p>
-      <button mat-button (click)="crearCuenta()">Crear Cuenta</button>
-    </ng-template>
+  </mat-card-content>
+  <mat-card-content class="custom-card-content" *ngIf="proveedor && proveedor.id !== 0">
+    <ng-container>
+      <p> Saldo </p>
+      <p class="saldo"> {{ "$" + proveedor.saldo }}</p>
+      <button mat-button (click)="verCuenta(proveedor.id)">Ver detalles Cuenta</button>
+    </ng-container>
   </mat-card-content>
 </mat-card>

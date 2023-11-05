@@ -67,6 +67,7 @@ export class ListaClienteComponent {
   }
 
   descargarPDF(): void {
+    console.log('llamo desc PDF');
     this.clienteService.downloadPDF(this.clientes).subscribe((pdfBlob: Blob) => {
       const blobURL = window.URL.createObjectURL(pdfBlob);
 

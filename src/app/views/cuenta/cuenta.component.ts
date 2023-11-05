@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Cuenta} from "../../model/cuenta";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CuentaService} from "../../service/cuenta.service";
+import {Cliente} from "../../model/cliente";
+import {Proveedor} from "../../model/proveedor";
+import {ClienteService} from "../../service/cliente.service";
+import {ProveedorService} from "../../service/proveedor.service";
 
 @Component({
   selector: 'app-cuenta',
@@ -11,13 +15,11 @@ import {CuentaService} from "../../service/cuenta.service";
 export class CuentaComponent implements OnInit{
 
   idUsuario: string = '';
-  idCuenta: string = '';
-  cuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
-  nuevaCuenta: Cuenta = {id: 0, idUsuario: "0", dniCliente: "", saldo: 0, pagos: [], gastos: []};
-  camposEditables = false;
-  valoresEditados: { [key: string]: any } = {};
+  cliente = {} as Cliente;
+  proveedor = {} as Proveedor;
 
-  constructor(private cuentaService: CuentaService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private clienteService: ClienteService, private proveedorService: ProveedorService,
+              private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -27,10 +29,10 @@ export class CuentaComponent implements OnInit{
   }
 
   getCuenta(): void {
-    this.cuentaService.getCuentaByIdUsuario(this.idUsuario)
-      .subscribe( cuenta => this.cuenta = cuenta);
+    this.clienteService.getCliente(this.idUsuario).subscribe(cliente => this.cliente = cliente);
+    this.proveedorService.getProveedor(this.idUsuario).subscribe( proveedor => this.proveedor = proveedor);
   }
-
+  /*
   crearCuenta() {
     // Enviar datos del nuevo cliente a la API
     this.nuevaCuenta.idUsuario = this.idUsuario;
@@ -52,6 +54,8 @@ export class CuentaComponent implements OnInit{
     this.camposEditables = false;
     this.valoresEditados = {};
   }
+
+   */
 
   verCuenta(id: number) : void {
     this.router.navigate(['/cuenta-detalles/'+id]);

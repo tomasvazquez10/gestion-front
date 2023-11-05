@@ -12,7 +12,7 @@ import {ProveedorService} from "../../service/proveedor.service";
 })
 export class AgregarArticuloComponent implements OnInit{
 
-  nuevoArticulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0 };
+  nuevoArticulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
   cuitsProveedores: string[] = [];
   sugerenciasFiltradas: string[] = [];
   cuitSelec: string = '';

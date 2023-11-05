@@ -4,6 +4,7 @@ import {RepartoService} from "../../service/reparto.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
 import {Location} from "@angular/common";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-reparto',
@@ -19,7 +20,7 @@ export class RepartoComponent implements OnInit{
   mostrarConfirmBorrar: boolean = false;
   idReparto: number = 0;
 
-  constructor(private service: RepartoService, private popupService: ConfirmPopupService,
+  constructor(private service: RepartoService, private borrarService: ConfirmarBorrarService,
               private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getRepartosByNro() {
@@ -53,7 +54,7 @@ export class RepartoComponent implements OnInit{
   confirmBorrar(reparto: Reparto): void {
     this.mostrarConfirmBorrar = true;
     this.idReparto = reparto.id;
-    this.popupService.setMensaje('Desea borrar el Reparto?');
+    this.borrarService.setMensaje('Desea borrar el Reparto?');
   }
 
   habilitarEdit(reparto: Reparto): void {

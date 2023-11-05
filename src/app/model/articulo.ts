@@ -1,3 +1,5 @@
+import {Proveedor} from "./proveedor";
+
 export interface Articulo {
   id: number;
   nroArticulo: number,
@@ -6,4 +8,5 @@ export interface Articulo {
   cuitProveedor: string;
   stock: number;
   precio: number;
+  ventasTotales: number;
 }

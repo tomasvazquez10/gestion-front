@@ -6,6 +6,8 @@ import {PrecioArticulo} from "../../model/precioArticulo";
 import {PrecioArticuloService} from "../../service/precio-articulo.service";
 import {ProveedorService} from "../../service/proveedor.service";
 import {Location} from "@angular/common";
+import {Proveedor} from "../../model/proveedor";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-articulo',
@@ -14,16 +16,17 @@ import {Location} from "@angular/common";
 })
 export class ArticuloComponent {
   articuloId: string = '';
-  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0 };
-  precioArticulo: PrecioArticulo = {idArticulo: 0, precio: 0, fecha: new Date(),};
-  articuloEditado: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, };
+  proveedor = {} as Proveedor;
+  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
+  precioArticulo: PrecioArticulo = {idArticulo: 0, precio: 0, fecha: new Date(), articulo: this.articulo};
+  articuloEditado: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0};
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService
-              , private route: ActivatedRoute, private router: Router, private location: Location) {}
+  constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService,
+              private borrarService: ConfirmarBorrarService, private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getArticulo(): void {
     this.service.getArticulo(this.articuloId)
@@ -51,6 +54,7 @@ export class ArticuloComponent {
   }
 
   mostrarConfirmPopup() {
+    this.borrarService.setMensaje('Desea borrar el Articulo?');
     this.mostrarConfirmBorrar = true;
   }
 
@@ -95,6 +99,7 @@ export class ArticuloComponent {
   actualizarPrecio() {
     console.log("precios distintos");
     this.precioArticulo.idArticulo = this.articulo.id;
+    this.precioArticulo.articulo = this.articulo;
     this.precioArticulo.precio = +this.valoresEditados['precio'];
     console.log(this.precioArticulo);
     this.precioService.crearPrecio(this.precioArticulo).subscribe(response => {

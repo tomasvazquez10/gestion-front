@@ -13,7 +13,7 @@ import {ArticuloService} from "../../service/articulo.service";
 })
 export class AgregarCompraComponent implements OnInit{
 
-  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0 };
+  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
   compra: Compra = { id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
   articulos: Articulo[] = [];
 

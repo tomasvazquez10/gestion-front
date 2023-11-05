@@ -1,4 +1,5 @@
 import {Pago} from "./pago";
+import {Compra} from "./compra";
 
 export interface Cuenta {
   id: number;
@@ -7,4 +8,5 @@ export interface Cuenta {
   saldo: number;
   pagos: Pago[];
   gastos: Pago[];
+  compras: Compra[];
 }

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
-import {ConfirmPopupService} from "../../service/confirm-popup.service";
 import {Location} from "@angular/common";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-pedido',
@@ -18,7 +18,7 @@ export class PedidoComponent {
   mostrarConfirmCancelar: boolean = false;
   mostrarConfirmEntrega: boolean = false;
 
-  constructor(private pedidoService: PedidoService, private popUpService: ConfirmPopupService,
+  constructor(private pedidoService: PedidoService, private borrarService: ConfirmarBorrarService,
               private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getPedido(): void {
@@ -40,12 +40,12 @@ export class PedidoComponent {
     console.log(this.pedido);
   }
   mostrarEntrega() {
-    this.popUpService.setMensaje('¿Desea marcar el Pedido como entregado?');
+    this.borrarService.setMensaje('¿Desea marcar el Pedido como entregado?');
     this.mostrarConfirmEntrega = true;
   }
 
   mostrarConfirmPopup() {
-    this.popUpService.setMensaje('¿Desea cancelar el Pedido?');
+    this.borrarService.setMensaje('¿Desea cancelar el Pedido?');
     this.mostrarConfirmCancelar = true;
   }
   ocultarConfirmPopup() {
@@ -60,31 +60,23 @@ export class PedidoComponent {
   }
 
   editarPedido() {
-    this.pedidoService.editarPedido(this.pedido).subscribe(
-      (respuesta) => {
-        console.log(respuesta);
-        console.log(respuesta.status);
-        if (respuesta.status == 200){
-          //mostrar mensaje de cliente borrado
-          //redigir a pantalla clientes
-          this.pedidoService.setMostrarMensaje(true);
-          this.pedidoService.setColorMensaje('red');
-          this.mostrarConfirmEntrega = false;
-          this.router.navigate(['/pedido/'+this.pedidoId]);
-        }
-      },
-      (error) => {
-        console.error('Error al eliminar el pedido:', error);
+    this.pedidoService.editarPedido(this.pedido).subscribe(response => {
+
+        //mostrar mensaje de cliente borrado
+        //redigir a pantalla clientes
+        this.pedidoService.setMostrarMensaje(true);
+        this.pedidoService.setColorMensaje('red');
+        this.mostrarConfirmEntrega = false;
+        this.mostrarConfirmCancelar = false;
+        this.router.navigate(['/pedido/' + this.pedidoId]);
+
       }
     );
   }
 
   cancelarPedido(){
-    if (this.pedido.estado == 0){
-      this.editarPedido();
-    }else {
-      alert("No se puede cancelar el pedido");
-    }
+    this.pedido.estadoTexto = 'CANCELADO';
+    this.editarPedido();
   }
 
   cambiarEstado(){

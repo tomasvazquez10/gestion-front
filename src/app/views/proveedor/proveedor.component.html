@@ -1,5 +1,5 @@
 <app-alert message="Proveedor creado" *ngIf="mostrarPopup"></app-alert>
-<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarProveedor()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
+<app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (acept)="borrarProveedor()" (cancel)="cancelarBorrado()"></app-confirmar-borrar>
 
 <mat-card class="custom-card">
   <mat-card-header>
@@ -15,8 +15,10 @@
       <p>Telefono: {{ proveedor.telefono }}</p>
       <p>Dirección: {{ proveedor.direccion }}</p>
       <div>
-        <button mat-button (click)="habilitarEdicion()">Editar</button>
-        <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        <div class="button-container">
+          <button mat-button (click)="habilitarEdicion()">Editar</button>
+          <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        </div>
       </div>
     </div>
 

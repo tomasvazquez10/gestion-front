@@ -48,4 +48,24 @@ export class ReporteService {
       headers: headers
     });
   }
+
+  downloadArticulosPDF(articulos: Articulo[]): Observable<Blob> {
+    const url = 'http://localhost:8080/reporte/articulos/pdf';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(url, articulos, {
+      responseType: 'blob',
+      headers: headers
+    });
+  }
+
+  downloadPedidosPDF(pedidos: Pedido[]): Observable<Blob> {
+    const url = 'http://localhost:8080/reporte/pedidos/pdf';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post(url, pedidos, {
+      responseType: 'blob',
+      headers: headers
+    });
+  }
 }

@@ -1,6 +1,6 @@
 <app-alert message="Pedido cancelado" *ngIf="mostrarPopup"></app-alert>
-<app-confirm-popup *ngIf="mostrarConfirmCancelar" (aceptar)="cancelarPedido()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
-<app-confirm-popup *ngIf="mostrarConfirmEntrega" (aceptar)="cambiarEstado()" (cancelar)="ocultarEntrega()"></app-confirm-popup>
+<app-confirmar-borrar *ngIf="mostrarConfirmCancelar" (acept)="cancelarPedido()" (cancel)="cancelarBorrado()"></app-confirmar-borrar>
+<app-confirmar-borrar *ngIf="mostrarConfirmEntrega" (acept)="cambiarEstado()" (cancel)="ocultarEntrega()"></app-confirmar-borrar>
 
 <mat-card class="custom-card">
   <mat-card-header>
@@ -31,8 +31,10 @@
       </table>
 
       <div>
-        <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar Pedido</button>
-        <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarEntrega()">Confirmar Entrega</button>
+        <div class="button-container">
+          <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarConfirmPopup()">Cancelar Pedido</button>
+          <button mat-button *ngIf="pedido.estadoTexto === 'PENDIENTE'" (click)="mostrarEntrega()">Confirmar Entrega</button>
+        </div>
       </div>
 
 

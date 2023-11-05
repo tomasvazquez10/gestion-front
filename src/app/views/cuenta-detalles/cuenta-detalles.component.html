@@ -8,7 +8,7 @@
     <div>
       <p>ID: {{ cuenta.id }}</p>
       <p>DNI / CUIT: {{ cuenta.dniCliente }}</p>
-      <p>Precio: ${{ cuenta.saldo }}</p>
+      <p>Saldo: ${{ cuenta.saldo }}</p>
     </div>
   </mat-card-content>
 
@@ -47,5 +47,26 @@
       </table>
     </div>
   </mat-card-content>
+
+  <mat-card-content class="custom-card-content" *ngIf="cuenta.compras && cuenta.compras.length > 0">
+    <div>
+      <h3>Compras</h3>
+      <table>
+        <tr>
+          <th>Fecha</th>
+          <th>ID Articulo</th>
+          <th>Cantidad</th>
+          <th>Precio Unidad</th>
+        </tr>
+        <tr *ngFor="let compra of cuenta.compras" (click)="verDetallesCompra(compra.id)">
+          <td>{{ compra.fecha | date:'dd/MM/yyyy'}}</td>
+          <td>{{ compra.articulo.nombre }}</td>
+          <td>{{ compra.cantidad }}</td>
+          <td>${{ compra.precioUnidad }}</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+
 </mat-card>
 </div>

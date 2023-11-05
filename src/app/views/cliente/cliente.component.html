@@ -1,6 +1,5 @@
 <app-alert message="Cliente creado" *ngIf="mostrarPopup"></app-alert>
-<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarCliente()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
-
+<app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (cancel)="cancelarBorrado()" (acept)="borrarCliente()"></app-confirmar-borrar>
 
 <mat-card class="custom-card">
   <mat-card-header>
@@ -17,8 +16,10 @@
       <p>Nro Reparto: {{ cliente.nroReparto }}</p>
       <p>Dirección: {{ cliente.direccion }}</p>
       <div>
-        <button mat-button (click)="habilitarEdicion()">Editar</button>
-        <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        <div class="button-container">
+          <button mat-button (click)="habilitarEdicion()">Editar</button>
+          <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        </div>
       </div>
     </div>
     <div *ngIf="camposEditables">

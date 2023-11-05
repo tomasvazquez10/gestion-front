@@ -1,5 +1,5 @@
 <app-alert message="Articulo creado" *ngIf="mostrarPopup"></app-alert>
-<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarArticulo()" (cancelar)="cancelarBorrado()"></app-confirm-popup>
+<app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (acept)="borrarArticulo()" (cancel)="cancelarBorrado()"></app-confirmar-borrar>
 
 <div class="card-container">
   <div>
@@ -18,8 +18,10 @@
       <p>Stock: {{ articulo.stock }}</p>
       <p>Precio: ${{ articulo.precio }}</p>
       <div>
-        <button mat-button (click)="habilitarEdicion()">Editar</button>
-        <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        <div class="button-container">
+          <button mat-button (click)="habilitarEdicion()">Editar</button>
+          <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+        </div>
       </div>
     </div>
     <div *ngIf="camposEditables">
@@ -65,3 +67,4 @@
   </div>
 
 </div>
+

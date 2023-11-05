@@ -23,7 +23,7 @@ export class AgregarPedidoComponent {
   dniCliente: string = '';
   sugerenciasFiltradas: string[] = [];
   dniClientes: string[] = [];
-  articuloSelec: Articulo = {id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0};
+  articuloSelec: Articulo = {id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0};
   cantidadSelec: number = 0;
   precioTotal: number = 0;
   venta: Venta = { id: 0, pedido: this.nuevoPedido, pagos: []};

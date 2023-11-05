@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProveedorService} from "../../service/proveedor.service";
 import {Proveedor} from "../../model/proveedor";
 import {Location} from "@angular/common";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-proveedor',
@@ -12,15 +13,15 @@ import {Location} from "@angular/common";
 export class ProveedorComponent implements OnInit{
 
   proveedorId: string = '';
-  proveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
-  proveedorEditado: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
+  proveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
+  proveedorEditado: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
   camposEditables: boolean = false;
   valoresEditados: { [key: string]: any } = {};
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router
-    , private location: Location) {}
+  constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router,
+              private borrarService: ConfirmarBorrarService, private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -74,6 +75,7 @@ export class ProveedorComponent implements OnInit{
   }
 
   mostrarConfirmPopup() {
+    this.borrarService.setMensaje('Desea borrar el Proveedor?');
     this.mostrarConfirmBorrar = true;
   }
 

@@ -15,7 +15,7 @@ export class ListaPedidosComponent {
 
   idCliente: string = '';
   pedidos: Pedido[] = [];
-  cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
+  cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '', saldo: 0 };
   estadoPedido: string = '';
 
   constructor(private pedidoService: PedidoService, private clienteService: ClienteService,

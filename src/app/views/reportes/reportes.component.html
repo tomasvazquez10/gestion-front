@@ -55,19 +55,21 @@
 
 <div *ngIf="pedidos && pedidos.length > 0" class="container" style="display: flex; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Pedidos</h2>
-  <button mat-button (click)="descargarFactura(textoBusqueda)" style="margin-left: auto;">Descargar Factura</button>
+  <button mat-button (click)="descargarPedidos()" style="margin-left: auto;">Descargar Listado</button>
 </div>
 <table *ngIf="pedidos && pedidos.length > 0">
   <tr>
     <th>Numero</th>
     <th>Fecha</th>
     <th>Estado</th>
+    <th>DNI</th>
     <th>Total</th>
   </tr>
   <tr *ngFor="let pedido of pedidos">
     <td>{{ pedido.id }}</td>
     <td>{{ pedido.fecha | date:'dd/MM/yyyy'}}</td>
     <td>{{ pedido.estadoTexto }}</td>
+    <td>{{ pedido.dniCliente }}</td>
     <td>${{ pedido.precioTotal }}</td>
   </tr>
 </table>
@@ -99,6 +101,31 @@
 </div>
 </mat-card-content>
 </mat-card>
+
+<div *ngIf="articulos && articulos.length > 0" class="container" style="display: flex; align-items: center; border-right: 200px solid transparent;">
+  <h2>Listado de Articulos</h2>
+  <button mat-button (click)="descargarArticulos()" style="margin-left: auto;">Descargar Listado</button>
+</div>
+<table *ngIf="(articulos && articulos.length >0)">
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Numero Articulo</th>
+    <th>Descripcion</th>
+    <th>CUIT Proveedor</th>
+    <th>Stock</th>
+    <th>Ventas</th>
+  </tr>
+  <tr *ngFor="let articulo of articulos">
+    <td>{{ articulo.id }}</td>
+    <td>{{ articulo.nombre }}</td>
+    <td>{{ articulo.nroArticulo }}</td>
+    <td>{{ articulo.descripcion }}</td>
+    <td>{{ articulo.cuitProveedor }}</td>
+    <td>{{ articulo.stock }}</td>
+    <td>{{ articulo.ventasTotales }}</td>
+  </tr>
+</table>
 
 <div class="container" *ngIf="mostrarSinResultados && !(pagos && pagos.length > 0) && !(pedidos && pedidos.length > 0)
                                         && !(articulos && articulos.length > 0) && (pedido.id ===0)">

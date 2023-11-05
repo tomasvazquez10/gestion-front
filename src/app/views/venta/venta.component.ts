@@ -6,6 +6,7 @@ import {Pedido} from "../../model/pedido";
 import {VentaService} from "../../service/venta.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PedidoService} from "../../service/pedido.service";
+import {PagoService} from "../../service/pago.service";
 
 @Component({
   selector: 'app-venta',
@@ -15,23 +16,23 @@ import {PedidoService} from "../../service/pedido.service";
 export class VentaComponent {
   pedidoId: string = '';
   pedido: Pedido = { id: 0, fecha: new Date(), dniCliente: '', fechaStr: '',estado: 0, precioTotal: 0, estadoTexto: '', productos: [] };
-  venta: Venta = { id: 0, pedido: this.pedido, pagos: [] };
+  pagos: Pago[] = [];
 
+  constructor(private service: PagoService, private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
 
-  constructor(private service: VentaService, private pedidoService: PedidoService, private route: ActivatedRoute, private router: Router) {}
-
-  getVenta(): void {
-    this.service.getVentaByPedidoId(this.pedidoId)
-      .subscribe( venta => this.venta = venta);
+  getPagos(): void {
+    this.service.getPagosByIdPedido(this.pedidoId)
+      .subscribe( pagos => this.pagos = pagos);
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.pedidoId = params['id'];
-      this.getVenta();
+      this.getPagos();
       this.getPedido();
     });
     console.log(this.pedido);
+
   }
 
   verDetalles(id: number) : void {

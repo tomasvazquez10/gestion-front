@@ -11,7 +11,7 @@ import {Location} from "@angular/common";
 })
 export class AgregarProveedorComponent {
 
-  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
+  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
 
   constructor(private service: ProveedorService, private router: Router, private location: Location) {}
 

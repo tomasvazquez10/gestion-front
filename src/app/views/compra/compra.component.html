@@ -1,5 +1,5 @@
 <app-alert message="Compra creada" *ngIf="mostrarPopup"></app-alert>
-<app-confirm-popup *ngIf="mostrarConfirmBorrar" (aceptar)="borrarCompra()" (cancelar)="ocultarConfirmPopup()"></app-confirm-popup>
+<app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (cancel)="ocultarConfirmPopup()" (acept)="borrarCompra()"></app-confirmar-borrar>
 <app-confirm-popup *ngIf="mostrarError" (aceptar)="mostrarError = false"></app-confirm-popup>
 <div class="card-container">
 

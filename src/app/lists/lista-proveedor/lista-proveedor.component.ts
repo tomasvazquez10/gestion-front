@@ -14,7 +14,7 @@ export class ListaProveedorComponent {
   constructor(private proveedorService: ProveedorService, private router: Router, private location: Location) {}
 
   proveedores: Proveedor[] = [];
-  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: ''};
+  nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
   valor: string = '';
   campoSelec: String = '';
   campos = new Map();

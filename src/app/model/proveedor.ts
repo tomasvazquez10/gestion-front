@@ -6,4 +6,5 @@ export interface Proveedor {
   cuit: string;
   telefono: string;
   email: string;
+  saldo: number;
 }

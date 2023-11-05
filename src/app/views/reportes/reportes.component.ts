@@ -77,6 +77,7 @@ export class ReportesComponent {
     this.pedido.id = 0;
     this.pedidos = [];
     this.pagos = [];
+    this.articulos = [];
     if(this.seleccionComboBox1 === 'Pago'){
       if(this.seleccionComboBox2 === 'Numero de reparto'){
         this.service.getPagosByNroReparto(this.textoBusqueda).subscribe( pagos => this.pagos = pagos);
@@ -87,7 +88,9 @@ export class ReportesComponent {
       if(this.seleccionComboBox2 === 'Fecha'){
         this.service.getPedidosByFecha(this.fecha1.toString()).subscribe( pedidos => this.pedidos = pedidos);
       } else if(this.seleccionComboBox2 === 'Entre dos fechas'){
-        this.service.getPedidosEntreFechas(this.fecha1.toString(), this.fecha2.toString()).subscribe( pedidos => this.pedidos = pedidos);
+        if (this.fechasValidas()){
+          this.service.getPedidosEntreFechas(this.fecha1.toString(), this.fecha2.toString()).subscribe( pedidos => this.pedidos = pedidos);
+        }
       }
     }else if(this.seleccionComboBox1 === 'Factura'){
       if(this.seleccionComboBox2 === 'Numero de pedido'){
@@ -103,11 +106,12 @@ export class ReportesComponent {
     }else if(this.seleccionComboBox1 === 'Articulo'){
       if(this.seleccionComboBox2 === 'Mas ventas'){
         this.service.getArticulosMasVendidos().subscribe( articulos => this.articulos = articulos);
-      }else if(this.seleccionComboBox2 === 'Mas ventas entre'){
+      }else if(this.seleccionComboBox2 === 'Mas ventas entre' && this.fechasValidas()){
         this.service.getArticulosMasVendidosEntre(this.fecha1.toString(), this.fecha2.toString()).subscribe( articulos => this.articulos = articulos);
       }
     }
     this.setMostrarSinResultados();
+    console.log(this.pedidos);
   }
 
   descargarPagos(): void {
@@ -124,8 +128,37 @@ export class ReportesComponent {
     });
   }
 
+  descargarArticulos(): void {
+    this.service.downloadArticulosPDF(this.articulos).subscribe((pdfBlob: Blob) => {
+      const blobURL = window.URL.createObjectURL(pdfBlob);
+
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'Listado_articulos.pdf';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobURL);
+    });
+  }
+
+  descargarPedidos(): void {
+    this.service.downloadPedidosPDF(this.pedidos).subscribe((pdfBlob: Blob) => {
+      const blobURL = window.URL.createObjectURL(pdfBlob);
+
+      const a = document.createElement('a');
+      a.href = blobURL;
+      a.download = 'Listado_pedidos.pdf';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(blobURL);
+    });
+  }
+
   descargarFactura(id: string): void {
     console.log('descargar factura');
+    console.log(id);
     this.pedidoService.descargarFacturaPDF(id).subscribe((pdfBlob: Blob) => {
       const blobURL = window.URL.createObjectURL(pdfBlob);
 
@@ -137,6 +170,17 @@ export class ReportesComponent {
       a.click();
       window.URL.revokeObjectURL(blobURL);
     });
+  }
+
+  fechasValidas() : boolean {
+    console.log(this.fecha1);
+    console.log(this.fecha2);
+    if (this.fecha1 > this.fecha2){
+      alert('El rango de fechas es incorrecto.');
+      return false;
+    }else {
+      return true;
+    }
   }
 
   volverAtras() {

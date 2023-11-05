@@ -4,6 +4,7 @@ import {Cliente} from "../../model/cliente";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PedidoService} from "../../service/pedido.service";
 import {Location} from "@angular/common";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-cliente',
@@ -13,14 +14,14 @@ import {Location} from "@angular/common";
 export class ClienteComponent implements OnInit{
 
   clienteId: string = '';
-  cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
-  clienteEditado: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '' };
+  cliente: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '', saldo: 0 };
+  clienteEditado: Cliente = {id: 0, nombre: '', nombreFantasia: '', dni: '', direccion: '', email: '', nroReparto: 0, telefono: '', saldo: 0 };
   camposEditables = false;
   valoresEditados: { [key: string]: any } = {};
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private clienteService: ClienteService, private pedidoService: PedidoService,
+  constructor(private clienteService: ClienteService, private pedidoService: PedidoService, private borrarService: ConfirmarBorrarService,
               private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCliente(): void {
@@ -49,6 +50,7 @@ export class ClienteComponent implements OnInit{
   }
 
   mostrarConfirmPopup() {
+    this.borrarService.setMensaje('Desea borrar el Cliente?');
     this.mostrarConfirmBorrar = true;
   }
 

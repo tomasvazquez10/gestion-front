@@ -17,6 +17,7 @@
     <th>CUIT Proveedor</th>
     <th>Stock</th>
     <th>Precio</th>
+    <th>Ventas</th>
   </tr>
   <tr *ngFor="let articulo of articulos" (click)="verDetalles(articulo.id)">
     <td>{{ articulo.id }}</td>
@@ -26,6 +27,7 @@
     <td>{{ articulo.cuitProveedor }}</td>
     <td>{{ articulo.stock }}</td>
     <td>${{ articulo.precio }}</td>
+    <td>{{ articulo.ventasTotales }}</td>
   </tr>
 </table>
 

@@ -5,6 +5,8 @@ import {CompraService} from "../../service/compra.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
 import {Location} from "@angular/common";
+import {Proveedor} from "../../model/proveedor";
+import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
 
 @Component({
   selector: 'app-compra',
@@ -14,13 +16,14 @@ import {Location} from "@angular/common";
 export class CompraComponent implements OnInit{
 
   compraId: string = '';
-  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0 };
+  proveedor = {} as Proveedor;
+  articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
   compra: Compra = {id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
   mostrarError: boolean = false;
 
-  constructor(private service: CompraService,private popUpService: ConfirmPopupService,
+  constructor(private service: CompraService,private popUpService: ConfirmPopupService, private borrarService: ConfirmarBorrarService,
               private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCompra(): void {
@@ -34,7 +37,7 @@ export class CompraComponent implements OnInit{
     });
   }
   mostrarConfirmPopup() {
-    this.popUpService.setMensaje('¿Desea borrar la compra?');
+    this.borrarService.setMensaje('¿Desea borrar la compra?');
     this.mostrarConfirmBorrar = true;
   }
 

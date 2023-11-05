@@ -1,15 +1,15 @@
 <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Pagos</h2>
-  <button *ngIf="pedido.estadoTexto !== 'PAGO'" (click)="agregarPago()">Agregar Pago</button>
+  <button *ngIf="(this.pedido.estadoTexto !=='PAGO') && (this.pedido.estadoTexto !== 'CANCELADO')" (click)="agregarPago()">Agregar Pago</button>
 </div>
 
-<table *ngIf="venta.pagos && venta.pagos.length > 0">
+<table *ngIf="pagos && pagos.length > 0">
   <tr>
     <th>Fecha</th>
     <th>Forma Pago</th>
     <th>Monto</th>
   </tr>
-  <tr *ngFor="let pago of venta.pagos" (click)="verDetalles(pago.id)">
+  <tr *ngFor="let pago of pagos" (click)="verDetalles(pago.id)">
     <td>{{ pago.fecha | date:'dd/MM/yyyy'}}</td>
     <td>{{ pago.formaPago }}</td>
     <td>${{ pago.monto }}</td>
