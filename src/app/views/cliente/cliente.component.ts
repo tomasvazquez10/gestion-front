@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PedidoService} from "../../service/pedido.service";
 import {Location} from "@angular/common";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-cliente',
@@ -22,7 +23,7 @@ export class ClienteComponent implements OnInit{
   mostrarConfirmBorrar: boolean = false;
 
   constructor(private clienteService: ClienteService, private pedidoService: PedidoService, private borrarService: ConfirmarBorrarService,
-              private route: ActivatedRoute, private router: Router, private location: Location) {}
+             private alertService: AlertService, private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCliente(): void {
     this.clienteService.getCliente(this.clienteId)
@@ -34,9 +35,10 @@ export class ClienteComponent implements OnInit{
       this.clienteId = params['id'];
       this.getCliente();
     });
-    this.mostrarPopup = this.clienteService.getMostrarMensaje();
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
     setTimeout(() => {
       this.mostrarPopup = false;
+      this.alertService.setMostrarMensaje(false);
     }, 1500);
   }
 
@@ -89,8 +91,8 @@ export class ClienteComponent implements OnInit{
         if (respuesta.status == 200){
           //mostrar mensaje de cliente borrado
           //redigir a pantalla clientes
-          this.clienteService.setMostrarMensaje(true);
-          this.clienteService.setColorMensaje('red');
+          this.alertService.setMostrarMensaje(true);
+          this.alertService.setColorMensaje('red');
           this.router.navigate(['/clientes']);
         }
       },

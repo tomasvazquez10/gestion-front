@@ -8,6 +8,7 @@ import {ProveedorService} from "../../service/proveedor.service";
 import {Location} from "@angular/common";
 import {Proveedor} from "../../model/proveedor";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-articulo',
@@ -26,7 +27,8 @@ export class ArticuloComponent {
   mostrarConfirmBorrar: boolean = false;
 
   constructor(private service: ArticuloService, private provService: ProveedorService, private precioService: PrecioArticuloService,
-              private borrarService: ConfirmarBorrarService, private route: ActivatedRoute, private router: Router, private location: Location) {}
+              private borrarService: ConfirmarBorrarService, private alertService: AlertService, private route: ActivatedRoute,
+              private router: Router, private location: Location) {}
 
   getArticulo(): void {
     this.service.getArticulo(this.articuloId)
@@ -38,9 +40,10 @@ export class ArticuloComponent {
       this.articuloId = params['id'];
       this.getArticulo();
     });
-    this.mostrarPopup = this.service.getMostrarMensaje();
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
     setTimeout(() => {
       this.mostrarPopup = false;
+      this.alertService.setMostrarMensaje(false);
     }, 1500);
   }
 
@@ -115,8 +118,8 @@ export class ArticuloComponent {
         console.log(respuesta);
         console.log(respuesta.status);
         if (respuesta.status == 200){
-          this.service.setMostrarMensaje(true);
-          this.service.setColorMensaje('red');
+          this.alertService.setMostrarMensaje(true);
+          this.alertService.setColorMensaje('red');
           this.router.navigate(['/articulos']);
         }
       },

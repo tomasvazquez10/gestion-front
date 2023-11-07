@@ -7,6 +7,7 @@ import {ConfirmPopupService} from "../../service/confirm-popup.service";
 import {Location} from "@angular/common";
 import {Proveedor} from "../../model/proveedor";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-compra',
@@ -24,7 +25,7 @@ export class CompraComponent implements OnInit{
   mostrarError: boolean = false;
 
   constructor(private service: CompraService,private popUpService: ConfirmPopupService, private borrarService: ConfirmarBorrarService,
-              private route: ActivatedRoute, private router: Router, private location: Location) {}
+              private alertService: AlertService, private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getCompra(): void {
     this.service.getCompra(this.compraId)
@@ -34,6 +35,7 @@ export class CompraComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.compraId = params['id'];
       this.getCompra();
+      this.setMostrarMensaje();
     });
   }
   mostrarConfirmPopup() {
@@ -51,8 +53,8 @@ export class CompraComponent implements OnInit{
         console.log(respuesta);
         console.log(respuesta.status);
         if (respuesta.status == 200){
-          this.service.setMostrarMensaje(true);
-          this.service.setColorMensaje('red');
+          this.alertService.setMostrarMensaje(true);
+          this.alertService.setColorMensaje('red');
           this.router.navigate(['/compras']);
         }
         if (respuesta.status == 204){
@@ -73,4 +75,15 @@ export class CompraComponent implements OnInit{
     this.location.back();
   }
 
+  setMostrarMensaje() : void{
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
+    if(this.mostrarPopup){
+
+      setTimeout(() => {
+        this.mostrarPopup = false;
+        this.alertService.setMostrarMensaje(false);
+      }, 1500);
+    }
+    this.alertService.setMostrarMensaje(false);
+  }
 }

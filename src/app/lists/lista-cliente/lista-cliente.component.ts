@@ -3,6 +3,7 @@ import {Cliente} from "../../model/cliente";
 import {ClienteService} from "../../service/cliente.service";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-lista-cliente',
@@ -11,7 +12,8 @@ import {Location} from "@angular/common";
 })
 export class ListaClienteComponent {
 
-  constructor(private clienteService: ClienteService, private router: Router, private location: Location) {}
+  constructor(private clienteService: ClienteService, private router: Router, private location: Location,
+              private alertService: AlertService) {}
 
   clientes: Cliente[] = [];
   mostrarPopup = false;
@@ -49,14 +51,15 @@ export class ListaClienteComponent {
   }
 
   setMostrarMensaje() : void{
-    this.mostrarPopup = this.clienteService.getMostrarMensaje();
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
     if(this.mostrarPopup){
 
       setTimeout(() => {
         this.mostrarPopup = false;
+        this.alertService.setMostrarMensaje(false);
       }, 1500);
     }
-    this.clienteService.setMostrarMensaje(false);
+    this.alertService.setMostrarMensaje(false);
   }
 
   setCampos() : void {

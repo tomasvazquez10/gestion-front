@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import {Articulo} from "../../model/articulo";
 import {Router} from "@angular/router";
 import {ArticuloService} from "../../service/articulo.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-lista-articulos',
@@ -14,9 +15,11 @@ export class ListaArticulosComponent {
   articulos: Articulo[] = [];
   valor: string = '';
   campoSelec: String = '';
+  mostrarPopup: boolean = false;
   campos = new Map();
 
-  constructor(private service: ArticuloService, private router: Router, private location: Location) {}
+  constructor(private service: ArticuloService, private alertService: AlertService, private router: Router,
+              private location: Location) {}
 
   getArticulos(): void {
     this.service.getArticulos()
@@ -37,6 +40,7 @@ export class ListaArticulosComponent {
     }else{
       this.buscarClientes();
     }
+    this.setMostrarMensaje();
   }
 
   verDetalles(id: number) : void {
@@ -64,5 +68,17 @@ export class ListaArticulosComponent {
 
   volverAtras() {
     this.location.back();
+  }
+
+  setMostrarMensaje() : void{
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
+    if(this.mostrarPopup){
+
+      setTimeout(() => {
+        this.mostrarPopup = false;
+        this.alertService.setMostrarMensaje(false);
+      }, 1500);
+    }
+    this.alertService.setMostrarMensaje(false);
   }
 }

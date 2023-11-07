@@ -4,6 +4,7 @@ import {Articulo} from "../../model/articulo";
 import {Router} from "@angular/router";
 import {ArticuloService} from "../../service/articulo.service";
 import {ProveedorService} from "../../service/proveedor.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-articulo',
@@ -17,7 +18,8 @@ export class AgregarArticuloComponent implements OnInit{
   sugerenciasFiltradas: string[] = [];
   cuitSelec: string = '';
 
-  constructor(private service: ArticuloService, private proveedorService: ProveedorService, private router: Router, private location: Location) {}
+  constructor(private service: ArticuloService, private proveedorService: ProveedorService, private alertService: AlertService,
+              private router: Router, private location: Location) {}
 
   getProveedores(): void {
     this.proveedorService.getProveedores()
@@ -35,7 +37,8 @@ export class AgregarArticuloComponent implements OnInit{
               this.service.crearArticulo(this.nuevoArticulo).subscribe(response => {
 
                 console.log('Articulo creado:', response);
-                this.service.setMostrarMensaje(true);
+                this.alertService.setMostrarMensaje(true);
+                this.alertService.setColorMensaje('green');
                 this.router.navigate(['/articulo/'+response.id]);
               });
             } else {

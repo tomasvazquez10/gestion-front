@@ -5,6 +5,7 @@ import {CompraService} from "../../service/compra.service";
 import {Router} from "@angular/router";
 import {Articulo} from "../../model/articulo";
 import {ArticuloService} from "../../service/articulo.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-compra',
@@ -15,9 +16,11 @@ export class AgregarCompraComponent implements OnInit{
 
   articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
   compra: Compra = { id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
+  fecha: Date = new Date();
   articulos: Articulo[] = [];
 
-  constructor(private service: CompraService, private articuloService: ArticuloService, private router: Router, private location: Location) {}
+  constructor(private service: CompraService, private articuloService: ArticuloService, private alertService: AlertService,
+              private router: Router, private location: Location) {}
 
   ngOnInit(): void {
     this.getArticulos();
@@ -37,7 +40,9 @@ export class AgregarCompraComponent implements OnInit{
       this.service.crearCompra(this.compra).subscribe(response => {
 
         console.log('Compra creada:', response);
-        this.router.navigate(['/compras']);
+        this.alertService.setColorMensaje('green');
+        this.alertService.setMostrarMensaje(true);
+        this.router.navigate(['/compra/'+response.id]);
       });
     }
   }
@@ -50,6 +55,9 @@ export class AgregarCompraComponent implements OnInit{
     console.log(this.compra.fecha);
     if (this.articulo.nombre === ''){
       alert('Debe seleccionar un Articulo');
+      return false;
+    }else if (this.validarFecha(this.compra.fecha)){
+      alert('Debe ingresar una fecha correcta.');
       return false;
     }else if (!this.validarNumero(this.compra.precioUnidad)){
       alert('Debe ingresar un valor en Precio Unidad');
@@ -64,6 +72,13 @@ export class AgregarCompraComponent implements OnInit{
 
   validarNumero(numero: number) : boolean {
     return numero > 0;
+  }
+
+  validarFecha(fecha: Date) : boolean{
+    const fechaHoy = new Date();
+    const [year, month, day] = fecha.toString().split('-').map(Number);
+    const fechaFormat = new Date(year, month - 1, day);
+    return (fechaFormat > fechaHoy);
   }
 
   volverAtras() {

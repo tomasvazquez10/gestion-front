@@ -5,6 +5,7 @@ import {Cliente} from "../../model/cliente";
 import { Router } from '@angular/router';
 import {RepartoService} from "../../service/reparto.service";
 import {Reparto} from "../../model/reparto";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -18,7 +19,8 @@ export class AgregarClienteComponent implements OnInit{
   nroRepartos: number[] = [];
   nroReparto: number = 0;
 
-  constructor(private clientesService: ClienteService,private repartoService: RepartoService, private router: Router, private location: Location) {}
+  constructor(private clientesService: ClienteService,private repartoService: RepartoService, private alertService: AlertService,
+              private router: Router, private location: Location) {}
 
   crearNuevoCliente() {
     this.nuevoCliente.nroReparto = this.nroReparto;
@@ -28,7 +30,7 @@ export class AgregarClienteComponent implements OnInit{
           this.clientesService.crearCliente(this.nuevoCliente).subscribe(response => {
 
             console.log('Cliente creado:', response);
-            this.clientesService.setMostrarMensaje(true);
+            this.alertService.setMostrarMensaje(true);
             this.router.navigate(['/cliente/'+response.id]);
           });
         } else {
