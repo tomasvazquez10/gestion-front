@@ -3,6 +3,7 @@ import {Reparto} from "../../model/reparto";
 import {RepartoService} from "../../service/reparto.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-dia-reparto',
@@ -15,7 +16,8 @@ export class AgregarDiaRepartoComponent implements OnInit{
   diasSemana: String[] = [];
   diaSemanaSelec = '';
 
-  constructor(private service: RepartoService, private router: Router, private route: ActivatedRoute, private location: Location) {}
+  constructor(private service: RepartoService, private router: Router, private route: ActivatedRoute,
+              private alertService: AlertService, private location: Location) {}
 
   getDiasSemanaDisp() {
     this.service.getDiasSemanaDisponibles(this.nuevoReparto.nroReparto)
@@ -27,6 +29,8 @@ export class AgregarDiaRepartoComponent implements OnInit{
       this.nuevoReparto.diaSemana = this.diaSemanaSelec;
       this.service.crearReparto(this.nuevoReparto).subscribe(response => {
         console.log('Reparto creado:', response);
+        this.alertService.setMostrarMensaje(true);
+        this.alertService.setColorMensaje('green');
         this.router.navigate(['/reparto/'+response.nroReparto]);
       });
     }

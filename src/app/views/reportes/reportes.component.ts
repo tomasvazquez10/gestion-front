@@ -32,7 +32,8 @@ export class ReportesComponent {
   mostrarFecha2: boolean = false;
   mostrarSinResultados: boolean = false;
 
-  constructor(private service: ReporteService, private pedidoService: PedidoService, private location: Location) {}
+  constructor(private service: ReporteService, private pedidoService: PedidoService, private location: Location,
+              private router: Router) {}
 
   onComboBox1Change() {
     if (this.seleccionComboBox1 === 'Pedido') {
@@ -185,6 +186,10 @@ export class ReportesComponent {
 
   volverAtras() {
     this.location.back();
+  }
+
+  verDetallePedido(id: number) : void {
+    this.router.navigate(['/pedido/'+id]);
   }
 
 }

@@ -6,6 +6,7 @@ import {Venta} from "../../model/venta";
 import {Location} from "@angular/common";
 import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-pago',
@@ -21,8 +22,8 @@ export class AgregarPagoComponent implements OnInit{
   formaPagoSelec: string = '';
   saldoPendiente: number = 0;
 
-  constructor(private service: PagoService, private pedidoService: PedidoService, private router: Router,
-              private route: ActivatedRoute, private location: Location) {}
+  constructor(private service: PagoService, private pedidoService: PedidoService, private alertService: AlertService,
+              private router: Router, private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -37,7 +38,8 @@ export class AgregarPagoComponent implements OnInit{
       this.nuevoPago.formaPago = this.formaPagoSelec;
       this.service.crearPago(this.nuevoPago).subscribe(response => {
         console.log('Pago creado:', response);
-        //this.clientesService.setMostrarMensaje(true);
+        this.alertService.setColorMensaje('green');
+        this.alertService.setMostrarMensaje(true);
         this.router.navigate(['/pedido/'+this.pedidoId]);
       });
     }

@@ -26,7 +26,6 @@ export class AgregarPedidoComponent {
   articuloSelec: Articulo = {id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0};
   cantidadSelec: number = 0;
   precioTotal: number = 0;
-  venta: Venta = { id: 0, pedido: this.nuevoPedido, pagos: []};
 
   constructor(private service: PedidoService, private productoService: ProductoService, private clienteService: ClienteService
               , private ventaService: VentaService, private router: Router, private location: Location) {}
@@ -54,11 +53,7 @@ export class AgregarPedidoComponent {
             console.log(response.body);
               //creo venta vinculada al pedido
               this.nuevoPedido.id = response.id;
-              this.venta.pedido = response;
-              console.log(this.venta);
-              this.ventaService.crearVenta(this.venta).subscribe(response2 => {
-                this.router.navigate(['/pedido/'+response.id]);
-              });
+              this.router.navigate(['/pedido/'+response.id]);
           });
               } else {
                 alert('El DNI ingresado no existe');
@@ -77,7 +72,10 @@ export class AgregarPedidoComponent {
     }else if (!this.validarDNI((this.dniCliente).toString().length)){
       alert('Debe ingresar un formato correcto de DNI');
       return false;
-    }else if (this.productosSelec.length === 0){
+    }else if(this.validarFecha(this.nuevoPedido.fecha)){
+      alert('Debe ingresar una fecha correcta.');
+      return false;
+    } else if (this.productosSelec.length === 0){
       alert('Debe ingresar al menos un Producto');
       return false;
     }else {
@@ -87,6 +85,13 @@ export class AgregarPedidoComponent {
 
   validarDNI(dni: number): boolean {
     return dni >= 7 && dni <= 8;
+  }
+
+  validarFecha(fecha: Date) : boolean{
+    const fechaHoy = new Date();
+    const [year, month, day] = fecha.toString().split('-').map(Number);
+    const fechaFormat = new Date(year, month - 1, day);
+    return (fechaFormat > fechaHoy);
   }
 
   volverPedidos(){
@@ -106,7 +111,7 @@ export class AgregarPedidoComponent {
         precio: this.articuloSelec.precio,
         cantidad: this.cantidadSelec});
 
-      this.articuloSelec.nombre = '';
+      //this.articuloSelec.nombre = '';
       this.precioTotal += (this.articuloSelec.precio * this.cantidadSelec);
       this.cantidadSelec = 0;
       console.log(this.productosSelec);
@@ -138,9 +143,10 @@ export class AgregarPedidoComponent {
   }
 
   filtrarSugerencias() {
+    const max = 5;
     this.sugerenciasFiltradas = this.dniClientes.filter(sugerencia =>
-      sugerencia.toLowerCase().includes(this.dniCliente)
-    );
+      sugerencia.toLowerCase().startsWith(this.dniCliente)
+      ).slice(0,max);
   }
 
   seleccionarSugerencia(sugerencia: string) {

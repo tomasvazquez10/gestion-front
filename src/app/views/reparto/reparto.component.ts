@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ConfirmPopupService} from "../../service/confirm-popup.service";
 import {Location} from "@angular/common";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-reparto',
@@ -17,11 +18,13 @@ export class RepartoComponent implements OnInit{
   repartos: Reparto[] = [];
   diasSemanaDisp: String[] = [];
   mostrarPopup: boolean = false;
+  mostrarEliminado: boolean = false;
   mostrarConfirmBorrar: boolean = false;
   idReparto: number = 0;
 
   constructor(private service: RepartoService, private borrarService: ConfirmarBorrarService,
-              private route: ActivatedRoute, private router: Router, private location: Location) {}
+              private alertService: AlertService, private route: ActivatedRoute, private router: Router,
+              private location: Location) {}
 
   getRepartosByNro() {
     this.service.getRepartosByNro(this.nroReparto)
@@ -39,6 +42,16 @@ export class RepartoComponent implements OnInit{
       this.getRepartosByNro();
       this.getDiasSemanaDisp();
     });
+    const mostrar = this.alertService.getMostrarMensaje();
+    if(mostrar){
+      this.mostrarPopup = (this.alertService.getColorMensaje() === 'green');
+      this.mostrarEliminado = (this.alertService.getColorMensaje() === 'red');
+    }
+    setTimeout(() => {
+      this.mostrarPopup = false;
+      this.mostrarEliminado = false;
+      this.alertService.setMostrarMensaje(false);
+    }, 1500);
   }
 
   guardarCambios(reparto: Reparto): void {
@@ -73,10 +86,20 @@ export class RepartoComponent implements OnInit{
         console.log(respuesta);
         console.log(respuesta.status);
         if (respuesta.status == 200){
-          this.service.setMostrarMensaje(true);
-          this.service.setColorMensaje('red');
+          this.alertService.setMostrarMensaje(true);
+          this.alertService.setColorMensaje('red');
           this.mostrarConfirmBorrar = false;
           this.repartos = this.repartos.filter(reparto => reparto.id !== this.idReparto);
+          if(this.repartos.length === 0){
+            this.router.navigate(['/repartos']);
+          }else{
+            this.mostrarEliminado = true;
+            setTimeout(() => {
+              this.mostrarPopup = false;
+              this.mostrarEliminado = false;
+              this.alertService.setMostrarMensaje(false);
+            }, 1500);
+          }
         }
       },
       (error) => {

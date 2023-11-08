@@ -65,7 +65,7 @@
     <th>DNI</th>
     <th>Total</th>
   </tr>
-  <tr *ngFor="let pedido of pedidos">
+  <tr *ngFor="let pedido of pedidos" (click)="verDetallePedido(pedido.id)">
     <td>{{ pedido.id }}</td>
     <td>{{ pedido.fecha | date:'dd/MM/yyyy'}}</td>
     <td>{{ pedido.estadoTexto }}</td>

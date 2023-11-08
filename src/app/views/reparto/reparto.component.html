@@ -1,5 +1,6 @@
 <app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (acept)="borrarReparto()" (cancel)="cancelarBorrado()"></app-confirmar-borrar>
-
+<app-alert message="Reparto creado" *ngIf="mostrarPopup"></app-alert>
+<app-alert message="Reparto eliminado" *ngIf="mostrarEliminado"></app-alert>
 <div class="container" style="display: flex; justify-content: space-between; align-items: center; border-right: 200px solid transparent;">
   <h2>Listado de Repartos</h2>
   <button mat-button (click)="crearDiaReparto()">Agregar Dia Semana</button>

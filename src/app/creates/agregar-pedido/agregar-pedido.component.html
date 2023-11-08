@@ -5,7 +5,7 @@
     <div class="form-box">
       <!-- Contenido del formulario -->
       <label>Cliente:</label>
-      <input type="text" [(ngModel)]="dniCliente" (input)="filtrarSugerencias()" placeholder="DNI cliente">
+      <input type="number" [(ngModel)]="dniCliente" (input)="filtrarSugerencias()" placeholder="DNI cliente">
       <ul *ngIf="sugerenciasFiltradas.length > 0">
         <li *ngFor="let sugerencia of sugerenciasFiltradas" (click)="seleccionarSugerencia(sugerencia)">{{ sugerencia }}</li>
       </ul>

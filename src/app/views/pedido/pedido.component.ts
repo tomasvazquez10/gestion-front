@@ -4,6 +4,7 @@ import {Pedido} from "../../model/pedido";
 import {PedidoService} from "../../service/pedido.service";
 import {Location} from "@angular/common";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-pedido',
@@ -15,10 +16,12 @@ export class PedidoComponent {
   pedidoId: string = '';
   pedido: Pedido ={ id: 0, fecha: new Date(), dniCliente: '', fechaStr: '', estado: 0, precioTotal: 0, estadoTexto: '', productos: [] }
   mostrarPopup: boolean = false;
+  mostrarCancel: boolean = false;
+  mostrarEntregado: boolean = false;
   mostrarConfirmCancelar: boolean = false;
   mostrarConfirmEntrega: boolean = false;
 
-  constructor(private pedidoService: PedidoService, private borrarService: ConfirmarBorrarService,
+  constructor(private pedidoService: PedidoService, private borrarService: ConfirmarBorrarService, private alertService: AlertService,
               private route: ActivatedRoute, private router: Router, private location: Location) {}
 
   getPedido(): void {
@@ -31,12 +34,11 @@ export class PedidoComponent {
       this.pedidoId = params['id'];
       this.getPedido();
     });
-    /*
-    this.mostrarPopup = this.clienteService.getMostrarMensaje();
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
     setTimeout(() => {
       this.mostrarPopup = false;
+      this.alertService.setMostrarMensaje(false);
     }, 1500);
-     */
     console.log(this.pedido);
   }
   mostrarEntrega() {
@@ -68,7 +70,7 @@ export class PedidoComponent {
         this.pedidoService.setColorMensaje('red');
         this.mostrarConfirmEntrega = false;
         this.mostrarConfirmCancelar = false;
-        this.router.navigate(['/pedido/' + this.pedidoId]);
+        //this.router.navigate(['/pedido/' + this.pedidoId]);
 
       }
     );
@@ -77,12 +79,24 @@ export class PedidoComponent {
   cancelarPedido(){
     this.pedido.estadoTexto = 'CANCELADO';
     this.editarPedido();
+    this.mostrarCancel = true;
+    this.alertService.setColorMensaje('red');
+    setTimeout(() => {
+      this.mostrarCancel = false;
+      this.alertService.setMostrarMensaje(false);
+    }, 1500);
   }
 
   cambiarEstado(){
     this.pedido.estado = 1;
     this.pedido.estadoTexto = 'ENTREGADO';
     this.editarPedido();
+    this.mostrarEntregado = true;
+    this.alertService.setColorMensaje('green')
+    setTimeout(() => {
+      this.mostrarEntregado = false;
+      this.alertService.setMostrarMensaje(false);
+    }, 1500);
   }
 
   volverAtras() {

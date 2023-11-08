@@ -1,4 +1,6 @@
-<app-alert message="Pedido cancelado" *ngIf="mostrarPopup"></app-alert>
+<app-alert message="Pedido cancelado" *ngIf="mostrarCancel"></app-alert>
+<app-alert message="Pago agregado" *ngIf="mostrarPopup"></app-alert>
+<app-alert message="Pedido entregado" *ngIf="mostrarEntregado"></app-alert>
 <app-confirmar-borrar *ngIf="mostrarConfirmCancelar" (acept)="cancelarPedido()" (cancel)="cancelarBorrado()"></app-confirmar-borrar>
 <app-confirmar-borrar *ngIf="mostrarConfirmEntrega" (acept)="cambiarEstado()" (cancel)="ocultarEntrega()"></app-confirmar-borrar>
 

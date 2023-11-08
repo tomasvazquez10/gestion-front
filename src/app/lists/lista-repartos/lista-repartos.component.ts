@@ -3,6 +3,7 @@ import {Reparto} from "../../model/reparto";
 import {Router} from "@angular/router";
 import {RepartoService} from "../../service/reparto.service";
 import {Location} from "@angular/common";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-lista-repartos',
@@ -15,8 +16,10 @@ export class ListaRepartosComponent {
   valor: string = '';
   campoSelec: string = '';
   campos: string[] = [];
+  mostrarPopup: boolean = false;
 
-  constructor(private service: RepartoService, private router: Router, private location: Location) {}
+  constructor(private service: RepartoService, private alertService: AlertService,
+              private router: Router, private location: Location) {}
 
   getRepartos(): void {
     this.service.getRepartos()
@@ -38,6 +41,11 @@ export class ListaRepartosComponent {
     }else{
       this.buscarRepartos();
     }
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
+    setTimeout(() => {
+      this.mostrarPopup = false;
+      this.alertService.setMostrarMensaje(false);
+    }, 1500);
   }
 
   verDetalles(nroReparto: number) : void {
