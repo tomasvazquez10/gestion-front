@@ -5,7 +5,7 @@
     <div class="form-box">
 
       <label>Nro Pedido:</label>
-      <input type="number" [(ngModel)]="pedidoId" readonly>
+      <input type="number" [(ngModel)]="pedidoId" [attr.disabled]="pedidoId !== 0 ? true : null">
 
       <label>Fecha:</label>
       <input type="date" [(ngModel)]="nuevoPago.fecha">

@@ -3,6 +3,7 @@ import {ProveedorService} from "../../service/proveedor.service";
 import {Proveedor} from "../../model/proveedor";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-lista-proveedor',
@@ -11,11 +12,13 @@ import {Location} from "@angular/common";
 })
 export class ListaProveedorComponent {
 
-  constructor(private proveedorService: ProveedorService, private router: Router, private location: Location) {}
+  constructor(private proveedorService: ProveedorService, private  alertService: AlertService, private router: Router
+              , private location: Location) {}
 
   proveedores: Proveedor[] = [];
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
   valor: string = '';
+  mostrarPopup: boolean = false;
   campoSelec: String = '';
   campos = new Map();
 
@@ -40,6 +43,7 @@ export class ListaProveedorComponent {
     }else{
       this.buscarProveedores()
     }
+    this.setMostrarMensaje();
   }
 
   verDetalles(id: number) : void {
@@ -54,5 +58,17 @@ export class ListaProveedorComponent {
 
   volverAtras() {
     this.location.back();
+  }
+
+  setMostrarMensaje() : void{
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
+    if(this.mostrarPopup){
+
+      setTimeout(() => {
+        this.mostrarPopup = false;
+        this.alertService.setMostrarMensaje(false);
+      }, 1500);
+    }
+    this.alertService.setMostrarMensaje(false);
   }
 }

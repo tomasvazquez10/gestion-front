@@ -4,6 +4,7 @@ import {ProveedorService} from "../../service/proveedor.service";
 import {Proveedor} from "../../model/proveedor";
 import {Location} from "@angular/common";
 import {ConfirmarBorrarService} from "../../service/confirmar-borrar.service";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-proveedor',
@@ -20,14 +21,19 @@ export class ProveedorComponent implements OnInit{
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
 
-  constructor(private service: ProveedorService, private route: ActivatedRoute, private router: Router,
-              private borrarService: ConfirmarBorrarService, private location: Location) {}
+  constructor(private service: ProveedorService, private alertService: AlertService, private route: ActivatedRoute,
+              private router: Router, private borrarService: ConfirmarBorrarService, private location: Location) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.proveedorId = params['id'];
       this.getProveedor();
     });
+    this.mostrarPopup = this.alertService.getMostrarMensaje();
+    setTimeout(() => {
+      this.mostrarPopup = false;
+      this.alertService.setMostrarMensaje(false);
+    }, 1500);
   }
 
   getProveedor(): void {
@@ -95,8 +101,8 @@ export class ProveedorComponent implements OnInit{
         if (respuesta.status == 200){
           //mostrar mensaje de cliente borrado
           //redigir a pantalla clientes
-          this.service.setMostrarMensaje(true);
-          this.service.setColorMensaje('red');
+          this.alertService.setMostrarMensaje(true);
+          this.alertService.setColorMensaje('red');
           this.router.navigate(['/proveedores']);
         }
       },

@@ -3,6 +3,7 @@ import {Proveedor} from "../../model/proveedor";
 import {Router} from "@angular/router";
 import {ProveedorService} from "../../service/proveedor.service";
 import {Location} from "@angular/common";
+import {AlertService} from "../../service/alert.service";
 
 @Component({
   selector: 'app-agregar-proveedor',
@@ -13,7 +14,8 @@ export class AgregarProveedorComponent {
 
   nuevoProveedor: Proveedor = {id: 0, nombre: '', nombreFantasia: '', direccion: '', cuit: '', telefono: '', email: '', saldo: 0};
 
-  constructor(private service: ProveedorService, private router: Router, private location: Location) {}
+  constructor(private service: ProveedorService, private alertService: AlertService,
+              private router: Router, private location: Location) {}
 
 
   crearNuevoProveedor() {
@@ -22,6 +24,8 @@ export class AgregarProveedorComponent {
         if (!existe) {
           this.service.crearProveedor(this.nuevoProveedor).subscribe((response) => {
             console.log('Proveedor creado:', response);
+            this.alertService.setMostrarMensaje(true);
+            this.alertService.setColorMensaje('green');
             this.router.navigate(['/proveedor/' + response.id]);
           });
         } else {

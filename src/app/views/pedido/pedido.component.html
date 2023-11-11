@@ -15,6 +15,7 @@
   <mat-card-content class="custom-card-content">
     <div>
       <p>Numero: {{ pedido.id }}</p>
+      <p>DNI Cliente: {{pedido.dniCliente}}</p>
       <p>Fecha: {{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
       <p>Total: ${{ pedido.precioTotal }}</p>
       <p>Estado: {{ pedido.estadoTexto }}</p>

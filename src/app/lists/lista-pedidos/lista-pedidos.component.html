@@ -13,12 +13,14 @@
     <table *ngIf="pedidos && pedidos.length > 0">
       <tr>
         <th>Numero</th>
+        <th>DNI Cliente</th>
         <th>Fecha</th>
         <th>Estado</th>
         <th>Total</th>
       </tr>
       <tr *ngFor="let pedido of pedidos" (click)="verDetalles(pedido.id)">
         <td>{{ pedido.id}}</td>
+        <td>{{ pedido.dniCliente}}</td>
         <td>{{ pedido.fecha | date:'dd/MM/yyyy'}}</td>
         <td>{{ pedido.estadoTexto }}</td>
         <td>${{ pedido.precioTotal }}</td>
