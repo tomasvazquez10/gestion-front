@@ -61,9 +61,10 @@ export class AgregarArticuloComponent implements OnInit{
   }
 
   filtrarSugerencias() {
+    const max = 5;
     this.sugerenciasFiltradas = this.cuitsProveedores.filter(sugerencia =>
-      sugerencia.toLowerCase().includes(this.nuevoArticulo.cuitProveedor.toLowerCase())
-    );
+      sugerencia.toLowerCase().startsWith(this.nuevoArticulo.cuitProveedor.toLowerCase())
+    ).slice(0, max);
   }
 
   seleccionarSugerencia(sugerencia: string) {

@@ -58,7 +58,7 @@
           <th>Cantidad</th>
           <th>Precio Unidad</th>
         </tr>
-        <tr *ngFor="let compra of cuenta.compras" (click)="verDetallesCompra(compra.id)">
+        <tr *ngFor="let compra of cuenta.compras" (click)="verDetallesCompra(compra.idCompra)">
           <td>{{ compra.fecha | date:'dd/MM/yyyy'}}</td>
           <td>{{ compra.articulo.nombre }}</td>
           <td>{{ compra.cantidad }}</td>

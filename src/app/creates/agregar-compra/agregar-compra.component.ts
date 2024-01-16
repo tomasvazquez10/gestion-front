@@ -15,7 +15,7 @@ import {AlertService} from "../../service/alert.service";
 export class AgregarCompraComponent implements OnInit{
 
   articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
-  compra: Compra = { id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
+  compra: Compra = { idCompra: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0, pago: false, cuitProveedor: '' };
   fecha: Date = new Date();
   articulos: Articulo[] = [];
 
@@ -36,13 +36,14 @@ export class AgregarCompraComponent implements OnInit{
   crearNuevaCompra() {
     if (this.datosCorrectos()){
       this.compra.articulo = this.articulo;
+      this.compra.cuitProveedor = this.articulo.cuitProveedor;
       console.log(this.compra);
       this.service.crearCompra(this.compra).subscribe(response => {
 
         console.log('Compra creada:', response);
         this.alertService.setColorMensaje('green');
         this.alertService.setMostrarMensaje(true);
-        this.router.navigate(['/compra/'+response.id]);
+        this.router.navigate(['/compra/'+response.idCompra]);
       });
     }
   }

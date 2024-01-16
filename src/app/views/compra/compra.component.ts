@@ -19,7 +19,7 @@ export class CompraComponent implements OnInit{
   compraId: string = '';
   proveedor = {} as Proveedor;
   articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
-  compra: Compra = {id: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0 };
+  compra: Compra = {idCompra: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0, pago: false, cuitProveedor: '' };
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
   mostrarError: boolean = false;
