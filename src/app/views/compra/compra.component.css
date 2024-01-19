@@ -40,3 +40,8 @@
   max-width: calc(50% - 10px); /* Asegura que haya espacio entre las columnas */
   margin-bottom: 20px; /* Espacio entre las filas */
 }
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+}

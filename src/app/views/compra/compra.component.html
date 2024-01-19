@@ -1,5 +1,7 @@
 <app-alert message="Compra creada" *ngIf="mostrarPopup"></app-alert>
+<app-alert message="Compra pagada" *ngIf="mostrarEntregado"></app-alert>
 <app-confirmar-borrar *ngIf="mostrarConfirmBorrar" (cancel)="ocultarConfirmPopup()" (acept)="borrarCompra()"></app-confirmar-borrar>
+<app-confirmar-borrar *ngIf="mostrarConfirmEntrega" (cancel)="ocultarEntrega()" (acept)="pagarCompra()"></app-confirmar-borrar>
 <app-confirm-popup *ngIf="mostrarError" (aceptar)="mostrarError = false"></app-confirm-popup>
 <div class="card-container">
 
@@ -15,8 +17,13 @@
           <p>Fecha: {{ compra.fecha | date:'dd/MM/yyyy' }}</p>
           <p>Cantidad: {{ compra.cantidad }}</p>
           <p>Precio Unitario: {{ compra.precioUnidad }}</p>
-        <div>
-          <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+          <p>Esta Pago: {{ compra.pago? 'SI' : 'NO' }}</p>
+
+          <div>
+            <div class="button-container">
+              <button mat-button (click)="mostrarConfirmPopup()">Borrar</button>
+              <button mat-button *ngIf="!compra.pago" (click)="mostrarEntrega()">Pagar</button>
+            </div>
         </div>
         </div>
       </mat-card-content>

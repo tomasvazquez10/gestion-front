@@ -34,6 +34,10 @@ export class CompraService {
     return  this.http.get(this.apiUrl+"/delete/"+id, {observe: 'response'});
   }
 
+  pagarCompra(id: string) : Observable<HttpResponse<any>> {
+    return  this.http.get(this.apiUrl+"/pagar/"+id, {observe: 'response'});
+  }
+
   setColorMensaje(color: string) : void {
     this.colorMensaje = color;
   }

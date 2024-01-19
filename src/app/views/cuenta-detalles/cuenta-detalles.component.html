@@ -57,12 +57,14 @@
           <th>ID Articulo</th>
           <th>Cantidad</th>
           <th>Precio Unidad</th>
+          <th>Esta Pago</th>
         </tr>
         <tr *ngFor="let compra of cuenta.compras" (click)="verDetallesCompra(compra.idCompra)">
           <td>{{ compra.fecha | date:'dd/MM/yyyy'}}</td>
           <td>{{ compra.articulo.nombre }}</td>
           <td>{{ compra.cantidad }}</td>
           <td>${{ compra.precioUnidad }}</td>
+          <td>{{ compra.pago? 'SI' : 'NO' }}</td>
         </tr>
       </table>
     </div>

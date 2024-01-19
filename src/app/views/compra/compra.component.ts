@@ -21,7 +21,9 @@ export class CompraComponent implements OnInit{
   articulo: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0 };
   compra: Compra = {idCompra: 0, articulo: this.articulo, fecha: new Date(), cantidad: 0, precioUnidad: 0, pago: false, cuitProveedor: '' };
   mostrarPopup: boolean = false;
+  mostrarEntregado: boolean = false;
   mostrarConfirmBorrar: boolean = false;
+  mostrarConfirmEntrega: boolean = false;
   mostrarError: boolean = false;
 
   constructor(private service: CompraService,private popUpService: ConfirmPopupService, private borrarService: ConfirmarBorrarService,
@@ -43,8 +45,50 @@ export class CompraComponent implements OnInit{
     this.mostrarConfirmBorrar = true;
   }
 
+  mostrarEntrega() {
+    this.borrarService.setMensaje('¿Desea marcar la Compra como pagada?');
+    this.mostrarConfirmEntrega = true;
+  }
+
   ocultarConfirmPopup() {
     this.mostrarConfirmBorrar = false;
+  }
+
+  ocultarEntrega() {
+    this.mostrarConfirmEntrega = false;
+  }
+
+  pagarCompra() {
+    this.mostrarConfirmEntrega = false;
+    this.service.pagarCompra(this.compraId).subscribe(
+      (respuesta) => {
+        console.log(respuesta);
+        console.log(respuesta.status);
+        if (respuesta.status == 200){
+          this.mostrarEntregado = true;
+          this.compra.pago = true;
+          this.alertService.setColorMensaje('green')
+          setTimeout(() => {
+            this.mostrarEntregado = false;
+            this.alertService.setMostrarMensaje(false);
+          }, 1500);
+        }
+        if (respuesta.status == 204){
+          this.mostrarConfirmBorrar = false;
+          this.popUpService.setMensaje('Error al pagar compra.');
+          this.popUpService.setMostrarCancelar(false);
+          this.mostrarError = true;
+
+        }
+      },
+      (error) => {
+        console.error('Error al eliminar el compra:', error);
+      }
+    );
+  }
+
+  volverAtras() {
+    this.location.back();
   }
 
   borrarCompra() {
@@ -54,7 +98,7 @@ export class CompraComponent implements OnInit{
         console.log(respuesta.status);
         if (respuesta.status == 200){
           this.alertService.setMostrarMensaje(true);
-          this.alertService.setColorMensaje('red');
+          this.alertService.setColorMensaje('green');
           this.router.navigate(['/compras']);
         }
         if (respuesta.status == 204){
@@ -66,13 +110,9 @@ export class CompraComponent implements OnInit{
         }
       },
       (error) => {
-        console.error('Error al eliminar el articulo:', error);
+        console.error('Error al eliminar la compra:', error);
       }
     );
-  }
-
-  volverAtras() {
-    this.location.back();
   }
 
   setMostrarMensaje() : void{
