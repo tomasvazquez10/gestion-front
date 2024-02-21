@@ -26,6 +26,7 @@ export class AgregarProveedorComponent {
             console.log('Proveedor creado:', response);
             this.alertService.setMostrarMensaje(true);
             this.alertService.setColorMensaje('green');
+            console.log('Proveedor id:', response.id);
             this.router.navigate(['/proveedor/' + response.id]);
           });
         } else {

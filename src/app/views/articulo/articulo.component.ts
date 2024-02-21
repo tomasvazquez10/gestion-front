@@ -22,6 +22,7 @@ export class ArticuloComponent {
   precioArticulo: PrecioArticulo = {idArticulo: 0, precio: 0, fecha: new Date(), articulo: this.articulo};
   articuloEditado: Articulo = { id: 0, nroArticulo: 0, nombre: '', descripcion: '', cuitProveedor: '', stock: 0, precio: 0, ventasTotales: 0};
   camposEditables = false;
+  actualizar : boolean = false;
   valoresEditados: { [key: string]: any } = {};
   mostrarPopup: boolean = false;
   mostrarConfirmBorrar: boolean = false;
@@ -77,12 +78,16 @@ export class ArticuloComponent {
             if (existe) {
               if (this.articulo.precio !== this.articuloEditado.precio && this.articuloEditado.precio !== 0){
                 this.actualizarPrecio();
+                this.actualizar = true;
               }
               this.service.editarArticulo(this.articuloEditado).subscribe(response => {
-                console.log('Cliente editado:', response);
+                console.log('Articulo editado:', response);
                 this.camposEditables = false;
                 this.valoresEditados = {};
                 this.getArticulo();
+                if (this.actualizar){
+                  this.router.navigate(['/articulo/'+this.articuloId]);
+                }
               });
             } else {
               alert('El CUIT no existe, debe dar de alta el Proveedor');

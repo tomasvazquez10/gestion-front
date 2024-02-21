@@ -27,10 +27,11 @@ export class AgregarClienteComponent implements OnInit{
     if(this.clientesService.datosCorrectos(this.nuevoCliente)){
       this.clientesService.existeDNI(this.nuevoCliente.dni).then((existe) => {
         if (!existe) {
-          this.clientesService.crearCliente(this.nuevoCliente).subscribe(response => {
+          this.clientesService.crearCliente(this.nuevoCliente).subscribe((response) => {
 
             console.log('Cliente creado:', response);
             this.alertService.setMostrarMensaje(true);
+            console.log('Cliente id:', response.id);
             this.router.navigate(['/cliente/'+response.id]);
           });
         } else {

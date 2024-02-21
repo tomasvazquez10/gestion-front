@@ -29,6 +29,7 @@ export class RepartoComponent implements OnInit{
   getRepartosByNro() {
     this.service.getRepartosByNro(this.nroReparto)
       .subscribe( repartos => this.repartos = repartos);
+
   }
 
   getDiasSemanaDisp() {
@@ -66,6 +67,7 @@ export class RepartoComponent implements OnInit{
 
   confirmBorrar(reparto: Reparto): void {
     this.mostrarConfirmBorrar = true;
+    console.log(reparto.id);
     this.idReparto = reparto.id;
     this.borrarService.setMensaje('Desea borrar el Reparto?');
   }
